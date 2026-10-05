@@ -97,9 +97,11 @@
             </label>
             <label class="field pw">
               <span>Password</span>
-              <input type="password" name="password" id="loginPassword" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password" required>
-              <i class="field__line"></i>
-              <button type="button" class="pw__toggle" data-for="loginPassword" aria-label="Show password">Show</button>
+              <span class="pw__box">
+                <input type="password" name="password" id="loginPassword" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password" required>
+                <i class="field__line"></i>
+                <button type="button" class="pw__toggle" data-for="loginPassword" aria-label="Show password">Show</button>
+              </span>
               <div class="pw__meter" data-pw-meter hidden aria-hidden="true">
                 <span class="pw__bars"><i></i><i></i><i></i><i></i></span>
                 <span class="pw__label" data-pw-label></span>

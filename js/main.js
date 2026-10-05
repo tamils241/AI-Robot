@@ -828,6 +828,11 @@
         var show = input.type === 'password';
         input.type = show ? 'text' : 'password';
         btn.textContent = show ? 'Hide' : 'Show';
+        /* keep the accessible name in step with the visible label, otherwise a
+           screen reader still announces "Show password" once the value is
+           visible */
+        btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+        btn.setAttribute('aria-pressed', String(show));
       });
     });
 

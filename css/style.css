@@ -1452,7 +1452,13 @@ body.nav-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-
   font-family:var(--f-mono); font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:var(--txt-3);
 }
 
-/* ---- data rows (table that reflows to label/value stacks on mobile) ---- */
+/* ---- data rows (table that reflows to label/value stacks on mobile) ----
+   The column template is declared ONCE on .rows, not on each .row. Every row
+   used to be its own grid container, so a trailing `auto` track sized itself to
+   the widest pill in THAT row: `Info` gave a narrow column, `Recovered` a wide
+   one, and every other column in the row shifted sideways with it. Hoisting the
+   template to .rows and letting each row subgrid it means one set of tracks for
+   the whole table, so the columns line up down the page. */
 .rows{ width:100%; }
 .row{
   display:grid; gap:.45rem 1.1rem; grid-template-columns:minmax(0,1fr);
@@ -1468,9 +1474,25 @@ body.nav-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-
   text-transform:uppercase; color:var(--txt-3);
 }
 @media (min-width:860px){
-  .row{ grid-template-columns:var(--cols,1.4fr 1fr .9fr .8fr auto); align-items:center; gap:1.1rem; }
+  .rows{
+    display:grid;
+    grid-template-columns:var(--cols,1.4fr 1fr .9fr .8fr auto);
+  }
+  .row{
+    grid-column:1 / -1;
+    grid-template-columns:subgrid;
+    align-items:center; gap:1.1rem;
+  }
   .row--head{ display:grid; }
   .row--head + .row{ border-top:0; }
+}
+/* Subgrid is the load-bearing part above. Where it is missing, fall back to
+   laying each row out independently so the table still reads correctly. */
+@supports not (grid-template-columns:subgrid){
+  @media (min-width:860px){
+    .rows{ display:block; }
+    .row{ grid-template-columns:var(--cols,1.4fr 1fr .9fr .8fr auto); }
+  }
 }
 .row__cell{ min-width:0; font-size:.88rem; color:var(--txt-2); }
 .row__cell b{ display:block; color:var(--txt); font-size:.9rem; font-weight:600; }
@@ -1482,13 +1504,160 @@ body.nav-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-
   font-family:var(--f-mono); font-size:.56rem; letter-spacing:.16em;
   text-transform:uppercase; color:var(--txt-3);
 }
-.row__cell b,.row__cell small{ display:inline; }
-.row__cell > *{ text-align:right; }
+/* .row__cell is a flex row, so `b` and `small` are separate flex items and
+   space-between flings them to opposite edges. Wrapping them is not an option
+   (the markup is shared with the desktop table), so pin them together instead
+   and push only the LAST child to the right edge. */
+.row__cell b{ margin-right:auto; }
+.row__cell b + small{ margin-left:.5rem; }
+.row__cell > :last-child{ text-align:right; }
 @media (min-width:860px){
   .row__cell{ display:block; }
   .row__cell::before{ display:none; }
-  .row__cell > *{ text-align:left; }
-  .row__cell b,.row__cell small{ display:block; }
+  .row__cell > :last-child{ text-align:left; }
+  .row__cell b{ margin-right:0; }
+  .row__cell b + small{ margin-left:0; }
+}
+
+/* ---- per-table column tuning (see admin-models.html) ----
+   `.row__cell` already sets min-width:0 and `.row` already centres on the
+   cross axis at 860px+, so these only need to cover what is genuinely
+   table-specific: letting a long chip wrap inside its own track instead of
+   pushing the track wider, and pinning short codes/dates to one line. */
+.registry-rows .row__cell[data-label="Chips"] .chip{
+  max-width:100%;
+  line-height:1.5;
+}
+.registry-rows .row__cell[data-label="Version"],
+.registry-rows .row__cell[data-label="Accuracy"],
+.channel-rows .row__cell[data-label="Version"],
+.channel-rows .row__cell[data-label="Updated"]{
+  white-space:nowrap;
+}
+
+/* ---- Plan mix chips (admin-billing.html) ----
+   The container is already .chips.chips--start (flex-wrap, flex-start), so only
+   the density needed changing: at .45rem/.45rem a wrapped row of chips reads as
+   one block. Wider column/row gaps separate the rows. */
+.plan-chips{ gap:.6rem .7rem; }
+.plan-chips .chip{ white-space:nowrap; }
+
+/* ---- Recent invoices (admin-billing.html) ----
+   Six columns were sitting in the NARROW right column of .dash__grid--2 while
+   "Plan mix" -- five single-column meter bars with no .rows at all -- occupied
+   the wide left one. The table needs ~35rem of track (Account 9.5 / Invoice 6.5 /
+   Issued 5.5 / Plan 5.2 / Status 5.0 / Amount 3.8) against ~24rem available, so
+   every column was starved: INV-2026-1042 wrapped mid-code and the status pill
+   overflowed its track into the gap, which reads as the header running together.
+   Panels are swapped and the template is now 1.1 1.6 .9 .65 .85 .9. The head row
+   gets its tracks from subgrid, so it needs no --cols of its own. */
+.invoice-rows .row--head .row__cell,
+.invoice-rows .row__cell[data-label="Invoice"] b,
+.invoice-rows .row__cell[data-label="Amount"],
+.invoice-rows .row__cell[data-label="Issued"]{
+  white-space:nowrap;
+}
+.invoice-rows .row__cell[data-label="Account"]{ line-height:1.45; }
+
+/* ---- Rollback history (admin-deployments.html) ----
+   This 5-column table used to sit in the NARROW right column of
+   .dash__grid--2 while the single-column Deployment log feed took the wide
+   left one -- the two panels were swapped for what each actually needs. Even
+   so the template needs ~32rem of track (Release 5.2 / Site 8.5 / Rolled back
+   6.3 / State 6.9, plus wrapping prose) which the old 1.1 1.1 1.5 .9 .8 could
+   not deliver at ~24rem: State at .8fr overflowed the nowrap "Monitoring" pill
+   into the gap, and the timestamp split across two lines. No head row here,
+   so nothing to keep in step. */
+.rollback-rows .row__cell[data-label="Release"] b,
+.rollback-rows .row__cell[data-label="Rolled back"]{
+  white-space:nowrap;
+}
+.rollback-rows .row__cell[data-label="Reason"]{ line-height:1.45; }
+
+/* ---- Fleet table (admin-fleets.html) ----
+   Status was 1fr, too narrow for the MAINTENANCE pill. Because .row__cell is
+   min-width:0 the track cannot be inflated by the pill's min-content, so the
+   nowrap pill OVERFLOWED its track into the 1.1rem gap and butted up against the
+   uptime figure -- which is what read as a collision. Template is now
+   1.25fr 1.45fr 1fr 1.25fr .65fr. The head row needs no --cols of its own:
+   it is a .row inside the same .rows, so subgrid hands it identical tracks.
+   Below, only what subgrid does not cover -- short cells held to one line. */
+.fleet-table .row--head .row__cell,
+.fleet-table .row__cell[data-label="Model"],
+.fleet-table .row__cell[data-label="Uptime"],
+.fleet-table .row__cell[data-label="Unit"] b{
+  white-space:nowrap;
+}
+.fleet-table .row__cell[data-label="Site"]{ line-height:1.45; }
+
+/* ---- Fleet status (admin-dashboard.html) ----
+   The header row needs no --cols of its own: .row--head is a .row inside the
+   same .rows, so subgrid hands it the identical tracks and head/data alignment
+   cannot drift. What was genuinely tight was the trailing `auto` track eating
+   slack from Status, which pushed the Operational pill up against Uptime.
+   Template is now 1.35fr 1.45fr 1.15fr .75fr .85fr. Below, only the things
+   subgrid does not solve: keeping short numeric/date cells on one line. */
+.fleet-status-rows .row--head .row__cell,
+.fleet-status-rows .row__cell[data-label="Uptime"],
+.fleet-status-rows .row__cell[data-label="Check-in"]{
+  white-space:nowrap;
+}
+.fleet-status-rows .row__cell[data-label="Site"]{ line-height:1.45; }
+
+/* ---- Settings (admin-settings.html) ----
+   All four tables on this page were moved out of .dash__grid--2 and
+   .dash__grid--3 into single-column grids, because their nowrap columns need
+   more than those tracks can give: API Keys wants ~611px of track but the 1fr
+   column offered 192-383px between 1120 and 1600px, and Access & Roles wanted
+   ~487px inside a --3 column that offered 149-307px.
+
+   The inline --cols on each .rows is left alone deliberately: an inline custom
+   property outranks any stylesheet rule, so `#platform .rows{--cols:...}` would
+   silently do nothing without also editing the HTML attribute.
+
+   Only the Endpoint column still needs help. It holds bare hostnames with no
+   spaces, which browsers will not wrap by default, and at 1120px the table is
+   ~41px short of its content minimum. Wrapping a hostname is preferable to
+   clipping a webhook secret next to it, so this is scoped to Endpoint alone -
+   Prefix, Secret and Last delivery stay on one line. */
+#webhooks .row__cell[data-label="Endpoint"]{
+  overflow-wrap:anywhere;
+  line-height:1.4;
+}
+
+/* ---- API Keys Scope (admin-settings.html) ----
+   "Fleet:write" + "Telemetry" is the only Scope cell holding two chips, and it
+   is the only reason that column ever looked crowded. Measured at .chip--sm
+   metrics the pair needs 255px side by side, so the inline --cols on that .rows
+   gives Scope a 255px floor - above that floor one line is guaranteed, and
+   between 1120 and ~1280 the five columns cannot all hold their floors, so the
+   pair wraps to a second line inside its own column instead.
+
+   flex-wrap:wrap is kept deliberately. With nowrap plus overflow:hidden the
+   second chip would be clipped by ~45px, which is worse than wrapping: wrapping
+   shows both chips, clipping silently loses one. Last used and Status cannot
+   drift - subgrid puts every row on the same tracks and min-width:0 stops
+   content inflating them. */
+#api-keys .row__cell[data-label="Scope"] .chip{
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+
+/* ---- Active rollouts (admin-deployments.html) ----
+   Five real content columns share the left panel of .dash__grid--2, so the
+   table is width-starved rather than mis-aligned: with .row on subgrid the
+   Stage pill and the Progress bar are separate grid items in separate tracks
+   and physically cannot overlap. What did happen is "02 Oct . 08:40" wrapping
+   in its track and the bar stretching to fill whatever was left. So: pin the
+   date to one line, and give the bar bounds so it reads as a bar. `.pill`
+   already carries white-space:nowrap globally, and `.meter__track` is already
+   display:block, so neither needs restating here. */
+.rollout-rows .row__cell[data-label="Started"]{
+  white-space:nowrap;
+}
+.rollout-rows .row__cell[data-label="Progress"] .meter__track{
+  min-width:64px;
+  max-width:100%;
 }
 
 /* ---- status pills ---- */
@@ -1535,7 +1704,9 @@ body.nav-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-
 .meter__top{ display:flex; align-items:baseline; justify-content:space-between; gap:1rem; }
 .meter__name{ font-size:.88rem; }
 .meter__val{ font-family:var(--f-mono); font-size:.76rem; color:var(--cyan); }
-.meter__track{ height:5px; border-radius:99px; overflow:hidden; background:rgba(255,255,255,.07); }
+/* block, not the default inline: these tracks are also used inside .row__cell,
+   and an inline box ignores height, so the bar collapsed to nothing there */
+.meter__track{ display:block; height:5px; border-radius:99px; overflow:hidden; background:rgba(255,255,255,.07); }
 .meter__fill{
   display:block; height:100%; width:0; border-radius:99px;
   background:linear-gradient(90deg,var(--cyan),var(--violet));
@@ -1596,6 +1767,18 @@ body.nav-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-
 .err__links a:hover{ color:var(--cyan); }
 .pw{ position:relative; }
 .pw input{ padding-right:2.6rem; }
+/* The input, its focus line and the Show/Hide toggle are boxed together so they
+   stay glued to the input. They used to be absolutely positioned against .pw,
+   which is a flex column that GROWS when the strength meter un-hides -- so on the
+   first keystroke the toggle slid down onto the meter and the focus underline
+   dropped below it, and the button read as missing. */
+.pw__box{ position:relative; display:block; }
+/* neutralises the `.field > span` label styling, which would otherwise shrink and
+   uppercase the box itself */
+.field > .pw__box{
+  font-family:inherit; font-size:inherit; letter-spacing:normal;
+  text-transform:none; color:inherit;
+}
 .pw__toggle{
   position:absolute; right:.2rem; bottom:.35rem;
   font-family:var(--f-mono); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
@@ -1886,4 +2069,28 @@ body.nav-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-
   }
   [data-reveal]{ opacity:1 !important; transform:none !important; clip-path:none !important; }
   .fx__net,.fx__orb,.fx__scan{ display:none; }
+}
+
+/* =========================================================
+   USERS - USER DIRECTORY ALIGNMENT
+   Panel is full width; these rules only cover the range
+   where five columns cannot hold their widest value.
+   ========================================================= */
+
+/* >=1200: header labels and "Last seen" fit on one line */
+@media (min-width:1200px){
+  #directory .row--head .row__cell{ white-space:nowrap; }
+  #directory .rows .row__cell[data-label="Last seen"]{ white-space:nowrap; }
+}
+
+/* 860-1279: wrap the pill/chip columns instead of clipping,
+   and ellipsis the email so it cannot push other columns. */
+@media (min-width:860px) and (max-width:1279px){
+  #directory .rows .row{ column-gap:.75rem; }
+  #directory .rows .row__cell[data-label="Role"] .chip,
+  #directory .rows .row__cell[data-label="Status"] .pill{ white-space:normal; }
+  #directory .rows .row__cell[data-label="Person"] b,
+  #directory .rows .row__cell[data-label="Person"] small{
+    display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
 }

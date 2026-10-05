@@ -151,6 +151,93 @@
         </div>
       </section>
 
+      <div class="dash__grid">
+
+        <!-- ============ RECENT INVOICES ============ -->
+        <section class="panel" id="invoices">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Recent invoices</h2>
+              <span class="panel__sub">Last six billing events</span>
+            </div>
+            <span class="pill pill--warn">$26,480 open</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows invoice-rows" style="--cols:1.1fr 1.6fr .9fr .65fr .85fr .9fr">
+              <div class="row row--head" aria-hidden="true">
+                <span class="row__cell">Invoice</span>
+                <span class="row__cell">Account</span>
+                <span class="row__cell">Plan</span>
+                <span class="row__cell">Amount</span>
+                <span class="row__cell">Status</span>
+                <span class="row__cell">Issued</span>
+              </div>
+
+              <div class="row">
+                <span class="row__cell" data-label="Invoice"><b>INV-2026-1042</b><small>annual</small></span>
+                <span class="row__cell" data-label="Account">Helios Manufacturing</span>
+                <span class="row__cell" data-label="Plan">Enterprise</span>
+                <span class="row__cell" data-label="Amount">$18,400</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Paid</span></span>
+                <span class="row__cell" data-label="Issued">01 Oct 2026</span>
+              </div>
+
+              <div class="row">
+                <span class="row__cell" data-label="Invoice"><b>INV-2026-1041</b><small>monthly</small></span>
+                <span class="row__cell" data-label="Account">Kanto Logistics</span>
+                <span class="row__cell" data-label="Plan">Scale</span>
+                <span class="row__cell" data-label="Amount">$7,850</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Paid</span></span>
+                <span class="row__cell" data-label="Issued">01 Oct 2026</span>
+              </div>
+
+              <div class="row">
+                <span class="row__cell" data-label="Invoice"><b>INV-2026-1040</b><small>monthly</small></span>
+                <span class="row__cell" data-label="Account">Nordkapp Energy</span>
+                <span class="row__cell" data-label="Plan">Growth</span>
+                <span class="row__cell" data-label="Amount">$4,120</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--warn">Overdue</span></span>
+                <span class="row__cell" data-label="Issued">28 Sep 2026</span>
+              </div>
+
+              <div class="row">
+                <span class="row__cell" data-label="Invoice"><b>INV-2026-1039</b><small>monthly</small></span>
+                <span class="row__cell" data-label="Account">Verdant Agritech</span>
+                <span class="row__cell" data-label="Plan">Growth</span>
+                <span class="row__cell" data-label="Amount">$3,940</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Paid</span></span>
+                <span class="row__cell" data-label="Issued">27 Sep 2026</span>
+              </div>
+
+              <div class="row">
+                <span class="row__cell" data-label="Invoice"><b>INV-2026-1038</b><small>monthly</small></span>
+                <span class="row__cell" data-label="Account">Meridian Ports</span>
+                <span class="row__cell" data-label="Plan">Starter</span>
+                <span class="row__cell" data-label="Amount">$1,290</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--bad">Failed</span></span>
+                <span class="row__cell" data-label="Issued">26 Sep 2026</span>
+              </div>
+
+              <div class="row">
+                <span class="row__cell" data-label="Invoice"><b>INV-2026-1037</b><small>quarterly</small></span>
+                <span class="row__cell" data-label="Account">Delta Foods</span>
+                <span class="row__cell" data-label="Plan">Scale</span>
+                <span class="row__cell" data-label="Amount">$6,720</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Paid</span></span>
+                <span class="row__cell" data-label="Issued">25 Sep 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>3 invoices overdue &middot; oldest 8 days</span>
+            <a href="#invoices" class="link-quiet">Send statement</a>
+          </footer>
+        </section>
+
+      </div>
+
       <div class="dash__grid dash__grid--2">
 
         <!-- ============ PLAN MIX ============ -->
@@ -204,7 +291,7 @@
               <span class="meter__track"><i class="meter__fill" data-fill="57"></i></span>
             </div>
 
-            <div class="chips chips--start">
+            <div class="chips chips--start plan-chips">
               <span class="chip chip--sm"><span class="chip__dot"></span>Annual prepay</span>
               <span class="chip chip--sm"><span class="chip__dot"></span>Monthly billing</span>
               <span class="chip chip--sm"><span class="chip__dot"></span>Purchase order</span>
@@ -218,144 +305,6 @@
           <footer class="panel__foot">
             <span>338 organisations &middot; 1,284 licensed seats</span>
             <a href="#plans" class="link-quiet">Plan settings</a>
-          </footer>
-        </section>
-
-        <!-- ============ RECENT INVOICES ============ -->
-        <section class="panel" id="invoices">
-          <header class="panel__head">
-            <div>
-              <h2 class="panel__title">Recent invoices</h2>
-              <span class="panel__sub">Last six billing events</span>
-            </div>
-            <span class="pill pill--warn">$26,480 open</span>
-          </header>
-
-          <div class="panel__body panel__body--flush">
-            <div class="rows">
-              <div class="row row--head" aria-hidden="true" style="--cols:1fr 1.3fr .8fr .8fr .9fr .8fr">
-                <span class="row__cell">Invoice</span>
-                <span class="row__cell">Account</span>
-                <span class="row__cell">Plan</span>
-                <span class="row__cell">Amount</span>
-                <span class="row__cell">Status</span>
-                <span class="row__cell">Issued</span>
-              </div>
-
-              <div class="row" style="--cols:1fr 1.3fr .8fr .8fr .9fr .8fr">
-                <span class="row__cell" data-label="Invoice"><b>INV-2026-1042</b><small>annual</small></span>
-                <span class="row__cell" data-label="Account">Helios Manufacturing</span>
-                <span class="row__cell" data-label="Plan">Enterprise</span>
-                <span class="row__cell" data-label="Amount">$18,400</span>
-                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Paid</span></span>
-                <span class="row__cell" data-label="Issued">01 Oct 2026</span>
-              </div>
-
-              <div class="row" style="--cols:1fr 1.3fr .8fr .8fr .9fr .8fr">
-                <span class="row__cell" data-label="Invoice"><b>INV-2026-1041</b><small>monthly</small></span>
-                <span class="row__cell" data-label="Account">Kanto Logistics</span>
-                <span class="row__cell" data-label="Plan">Scale</span>
-                <span class="row__cell" data-label="Amount">$7,850</span>
-                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Paid</span></span>
-                <span class="row__cell" data-label="Issued">01 Oct 2026</span>
-              </div>
-
-              <div class="row" style="--cols:1fr 1.3fr .8fr .8fr .9fr .8fr">
-                <span class="row__cell" data-label="Invoice"><b>INV-2026-1040</b><small>monthly</small></span>
-                <span class="row__cell" data-label="Account">Nordkapp Energy</span>
-                <span class="row__cell" data-label="Plan">Growth</span>
-                <span class="row__cell" data-label="Amount">$4,120</span>
-                <span class="row__cell" data-label="Status"><span class="pill pill--warn">Overdue</span></span>
-                <span class="row__cell" data-label="Issued">28 Sep 2026</span>
-              </div>
-
-              <div class="row" style="--cols:1fr 1.3fr .8fr .8fr .9fr .8fr">
-                <span class="row__cell" data-label="Invoice"><b>INV-2026-1039</b><small>monthly</small></span>
-                <span class="row__cell" data-label="Account">Verdant Agritech</span>
-                <span class="row__cell" data-label="Plan">Growth</span>
-                <span class="row__cell" data-label="Amount">$3,940</span>
-                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Paid</span></span>
-                <span class="row__cell" data-label="Issued">27 Sep 2026</span>
-              </div>
-
-              <div class="row" style="--cols:1fr 1.3fr .8fr .8fr .9fr .8fr">
-                <span class="row__cell" data-label="Invoice"><b>INV-2026-1038</b><small>monthly</small></span>
-                <span class="row__cell" data-label="Account">Meridian Ports</span>
-                <span class="row__cell" data-label="Plan">Starter</span>
-                <span class="row__cell" data-label="Amount">$1,290</span>
-                <span class="row__cell" data-label="Status"><span class="pill pill--bad">Failed</span></span>
-                <span class="row__cell" data-label="Issued">26 Sep 2026</span>
-              </div>
-
-              <div class="row" style="--cols:1fr 1.3fr .8fr .8fr .9fr .8fr">
-                <span class="row__cell" data-label="Invoice"><b>INV-2026-1037</b><small>quarterly</small></span>
-                <span class="row__cell" data-label="Account">Delta Foods</span>
-                <span class="row__cell" data-label="Plan">Scale</span>
-                <span class="row__cell" data-label="Amount">$6,720</span>
-                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Paid</span></span>
-                <span class="row__cell" data-label="Issued">25 Sep 2026</span>
-              </div>
-            </div>
-          </div>
-
-          <footer class="panel__foot">
-            <span>3 invoices overdue &middot; oldest 8 days</span>
-            <a href="#invoices" class="link-quiet">Send statement</a>
-          </footer>
-        </section>
-
-      </div>
-
-      <div class="dash__grid dash__grid--2">
-
-        <!-- ============ PAYMENT METHODS ============ -->
-        <section class="panel" id="methods">
-          <header class="panel__head">
-            <div>
-              <h2 class="panel__title">Payment methods</h2>
-              <span class="panel__sub">Cards and terms on file</span>
-            </div>
-          </header>
-
-          <div class="panel__body panel__body--flush">
-            <div class="rows">
-              <div class="row" style="--cols:1.3fr 1.1fr .9fr .9fr auto">
-                <span class="row__cell" data-label="Account"><b>Helios Manufacturing</b><small>Enterprise</small></span>
-                <span class="row__cell" data-label="Method">Corporate Visa</span>
-                <span class="row__cell" data-label="Last 4">&bull;&bull;&bull;&bull; 4242</span>
-                <span class="row__cell" data-label="Renewal">01 Nov 2026</span>
-                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Primary</span></span>
-              </div>
-
-              <div class="row" style="--cols:1.3fr 1.1fr .9fr .9fr auto">
-                <span class="row__cell" data-label="Account"><b>Kanto Logistics</b><small>Scale</small></span>
-                <span class="row__cell" data-label="Method">SEPA direct debit</span>
-                <span class="row__cell" data-label="Last 4">&bull;&bull;&bull;&bull; 1187</span>
-                <span class="row__cell" data-label="Renewal">15 Nov 2026</span>
-                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Verified</span></span>
-              </div>
-
-              <div class="row" style="--cols:1.3fr 1.1fr .9fr .9fr auto">
-                <span class="row__cell" data-label="Account"><b>Delta Foods</b><small>Scale</small></span>
-                <span class="row__cell" data-label="Method">Purchase order</span>
-                <span class="row__cell" data-label="Last 4">&bull;&bull;&bull;&bull; 9032</span>
-                <span class="row__cell" data-label="Renewal">01 Dec 2026</span>
-                <span class="row__cell" data-label="Status"><span class="pill pill--warn">Terms review</span></span>
-              </div>
-
-              <div class="row" style="--cols:1.3fr 1.1fr .9fr .9fr auto">
-                <span class="row__cell" data-label="Account"><b>Nordkapp Energy</b><small>Growth</small></span>
-                <span class="row__cell" data-label="Method">Corporate Amex</span>
-                <span class="row__cell" data-label="Last 4">&bull;&bull;&bull;&bull; 5510</span>
-                <span class="row__cell" data-label="Renewal">20 Oct 2026</span>
-                <span class="row__cell" data-label="Status"><span class="pill pill--bad">Past due</span></span>
-              </div>
-            </div>
-          </div>
-
-          <footer class="panel__foot">
-            <span>2 accounts need attention before renewal</span>
-            <a href="#methods" class="link-quiet">Update methods</a>
           </footer>
         </section>
 
@@ -405,6 +354,61 @@
           <footer class="panel__foot">
             <span>Next retry sweep &middot; 03 Oct 02:00</span>
             <a href="#dunning" class="link-quiet">Dunning rules</a>
+          </footer>
+        </section>
+
+      </div>
+
+      <div class="dash__grid">
+
+        <!-- ============ PAYMENT METHODS ============ -->
+        <section class="panel" id="methods">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Payment methods</h2>
+              <span class="panel__sub">Cards and terms on file</span>
+            </div>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows" style="--cols:1.3fr 1.1fr .9fr .9fr auto">
+              <div class="row">
+                <span class="row__cell" data-label="Account"><b>Helios Manufacturing</b><small>Enterprise</small></span>
+                <span class="row__cell" data-label="Method">Corporate Visa</span>
+                <span class="row__cell" data-label="Last 4">&bull;&bull;&bull;&bull; 4242</span>
+                <span class="row__cell" data-label="Renewal">01 Nov 2026</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Primary</span></span>
+              </div>
+
+              <div class="row">
+                <span class="row__cell" data-label="Account"><b>Kanto Logistics</b><small>Scale</small></span>
+                <span class="row__cell" data-label="Method">SEPA direct debit</span>
+                <span class="row__cell" data-label="Last 4">&bull;&bull;&bull;&bull; 1187</span>
+                <span class="row__cell" data-label="Renewal">15 Nov 2026</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Verified</span></span>
+              </div>
+
+              <div class="row">
+                <span class="row__cell" data-label="Account"><b>Delta Foods</b><small>Scale</small></span>
+                <span class="row__cell" data-label="Method">Purchase order</span>
+                <span class="row__cell" data-label="Last 4">&bull;&bull;&bull;&bull; 9032</span>
+                <span class="row__cell" data-label="Renewal">01 Dec 2026</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--warn">Terms review</span></span>
+              </div>
+
+              <div class="row">
+                <span class="row__cell" data-label="Account"><b>Nordkapp Energy</b><small>Growth</small></span>
+                <span class="row__cell" data-label="Method">Corporate Amex</span>
+                <span class="row__cell" data-label="Last 4">&bull;&bull;&bull;&bull; 5510</span>
+                <span class="row__cell" data-label="Renewal">20 Oct 2026</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--bad">Past due</span></span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>2 accounts need attention before renewal</span>
+            <a href="#methods" class="link-quiet">Update methods</a>
           </footer>
         </section>
 

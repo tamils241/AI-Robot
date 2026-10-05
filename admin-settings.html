@@ -151,7 +151,7 @@
         </div>
       </section>
 
-      <div class="dash__grid dash__grid--2">
+      <div class="dash__grid">
 
         <!-- ============ PLATFORM CONFIGURATION ============ -->
         <section class="panel" id="platform">
@@ -164,7 +164,7 @@
           </header>
 
           <div class="panel__body panel__body--flush">
-            <div class="rows">
+            <div class="rows" style="--cols:1.4fr 1.1fr .9fr .8fr">
               <div class="row row--head" aria-hidden="true">
                 <span class="row__cell">Setting</span>
                 <span class="row__cell">Value</span>
@@ -172,49 +172,49 @@
                 <span class="row__cell">Updated</span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.1fr .9fr .8fr">
+              <div class="row">
                 <span class="row__cell" data-label="Setting"><b>Default fleet quota</b><small>Units per site</small></span>
                 <span class="row__cell" data-label="Value">60 units</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">Global</span></span>
                 <span class="row__cell" data-label="Updated">02 Oct</span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.1fr .9fr .8fr">
+              <div class="row">
                 <span class="row__cell" data-label="Setting"><b>Telemetry retention</b><small>Raw signal window</small></span>
                 <span class="row__cell" data-label="Value">90 days</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">Global</span></span>
                 <span class="row__cell" data-label="Updated">28 Sep</span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.1fr .9fr .8fr">
+              <div class="row">
                 <span class="row__cell" data-label="Setting"><b>Check-in interval</b><small>Unit heartbeat</small></span>
                 <span class="row__cell" data-label="Value">60 s</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">Per fleet</span></span>
                 <span class="row__cell" data-label="Updated">21 Sep</span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.1fr .9fr .8fr">
+              <div class="row">
                 <span class="row__cell" data-label="Setting"><b>Maintenance window</b><small>Rolling upgrades</small></span>
                 <span class="row__cell" data-label="Value">02:00 &mdash; 04:00 UTC</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">All sites</span></span>
                 <span class="row__cell" data-label="Updated">14 Sep</span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.1fr .9fr .8fr">
+              <div class="row">
                 <span class="row__cell" data-label="Setting"><b>Data residency</b><small>Primary storage region</small></span>
                 <span class="row__cell" data-label="Value">EU &middot; Frankfurt</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">EU tenants</span></span>
                 <span class="row__cell" data-label="Updated">30 Aug</span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.1fr .9fr .8fr">
+              <div class="row">
                 <span class="row__cell" data-label="Setting"><b>Rate limit</b><small>Burst ceiling</small></span>
                 <span class="row__cell" data-label="Value">1,200 req/min</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">Per key</span></span>
                 <span class="row__cell" data-label="Updated">19 Aug</span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.1fr .9fr .8fr">
+              <div class="row">
                 <span class="row__cell" data-label="Setting"><b>Feature flags</b><small>Gradual rollout</small></span>
                 <span class="row__cell" data-label="Value">4 active</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">Beta cohort</span></span>
@@ -240,7 +240,7 @@
           </header>
 
           <div class="panel__body panel__body--flush">
-            <div class="rows">
+            <div class="rows" style="--cols:minmax(140px,1.2fr) minmax(150px,1.1fr) minmax(255px,1.5fr) minmax(105px,.9fr) minmax(90px,.8fr)">
               <div class="row row--head" aria-hidden="true">
                 <span class="row__cell">Key</span>
                 <span class="row__cell">Prefix</span>
@@ -249,7 +249,7 @@
                 <span class="row__cell">Status</span>
               </div>
 
-              <div class="row" style="--cols:1.3fr 1fr 1.1fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Key"><b>Fleet control</b><small>Platform service</small></span>
                 <span class="row__cell" data-label="Prefix">sk_live_&bull;&bull;&bull;&bull;7f2a</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">Fleet:write</span> <span class="chip chip--sm">Telemetry</span></span>
@@ -257,7 +257,7 @@
                 <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
               </div>
 
-              <div class="row" style="--cols:1.3fr 1fr 1.1fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Key"><b>Telemetry ingest</b><small>Edge collector</small></span>
                 <span class="row__cell" data-label="Prefix">sk_live_&bull;&bull;&bull;&bull;c18d</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">Read</span></span>
@@ -265,7 +265,7 @@
                 <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
               </div>
 
-              <div class="row" style="--cols:1.3fr 1fr 1.1fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Key"><b>Billing sync</b><small>Finance connector</small></span>
                 <span class="row__cell" data-label="Prefix">sk_live_&bull;&bull;&bull;&bull;4a90</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">Billing:read</span></span>
@@ -273,7 +273,7 @@
                 <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
               </div>
 
-              <div class="row" style="--cols:1.3fr 1fr 1.1fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Key"><b>Sandbox trials</b><small>Evaluation tenant</small></span>
                 <span class="row__cell" data-label="Prefix">sk_test_&bull;&bull;&bull;&bull;0e77</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">Sandbox</span></span>
@@ -281,7 +281,7 @@
                 <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
               </div>
 
-              <div class="row" style="--cols:1.3fr 1fr 1.1fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Key"><b>Legacy partner</b><small>Third-party bridge</small></span>
                 <span class="row__cell" data-label="Prefix">sk_live_&bull;&bull;&bull;&bull;bb21</span>
                 <span class="row__cell" data-label="Scope"><span class="chip chip--sm">Fleet:read</span></span>
@@ -299,7 +299,7 @@
 
       </div>
 
-      <div class="dash__grid dash__grid--2">
+      <div class="dash__grid">
 
         <!-- ============ WEBHOOKS ============ -->
         <section class="panel" id="webhooks">
@@ -312,7 +312,7 @@
           </header>
 
           <div class="panel__body panel__body--flush">
-            <div class="rows">
+            <div class="rows" style="--cols:1.3fr 1fr 1.1fr .8fr auto">
               <div class="row row--head" aria-hidden="true">
                 <span class="row__cell">Endpoint</span>
                 <span class="row__cell">Events</span>
@@ -321,7 +321,7 @@
                 <span class="row__cell">Status</span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.2fr 1fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Endpoint"><b>hooks.helios.example</b><small>/stackly</small></span>
                 <span class="row__cell" data-label="Events"><span class="chip chip--sm">unit.checkin</span></span>
                 <span class="row__cell" data-label="Secret">whsec_&bull;&bull;&bull;&bull;91cd</span>
@@ -329,7 +329,7 @@
                 <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.2fr 1fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Endpoint"><b>api.kanto-logistics.example</b><small>/hooks</small></span>
                 <span class="row__cell" data-label="Events"><span class="chip chip--sm">deployment.completed</span></span>
                 <span class="row__cell" data-label="Secret">whsec_&bull;&bull;&bull;&bull;4e70</span>
@@ -337,7 +337,7 @@
                 <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.2fr 1fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Endpoint"><b>billing.verdant.example</b><small>/webhooks</small></span>
                 <span class="row__cell" data-label="Events"><span class="chip chip--sm">invoice.paid</span></span>
                 <span class="row__cell" data-label="Secret">whsec_&bull;&bull;&bull;&bull;a3f5</span>
@@ -345,7 +345,7 @@
                 <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.2fr 1fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Endpoint"><b>ops.nordkapp.example</b><small>/stackly</small></span>
                 <span class="row__cell" data-label="Events"><span class="chip chip--sm">unit.offline</span></span>
                 <span class="row__cell" data-label="Secret">whsec_&bull;&bull;&bull;&bull;22b8</span>
@@ -353,7 +353,7 @@
                 <span class="row__cell" data-label="Status"><span class="pill pill--warn">Retrying</span></span>
               </div>
 
-              <div class="row" style="--cols:1.4fr 1.2fr 1fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Endpoint"><b>archive.delta-foods.example</b><small>/ingest</small></span>
                 <span class="row__cell" data-label="Events"><span class="chip chip--sm">telemetry.bulk</span></span>
                 <span class="row__cell" data-label="Secret">whsec_&bull;&bull;&bull;&bull;6c40</span>
@@ -434,7 +434,7 @@
 
       </div>
 
-      <div class="dash__grid dash__grid--3">
+      <div class="dash__grid">
 
         <!-- ============ STORAGE & RETENTION ============ -->
         <section class="panel" id="storage">
@@ -487,7 +487,7 @@
           </header>
 
           <div class="panel__body panel__body--flush">
-            <div class="rows">
+            <div class="rows" style="--cols:1.2fr .7fr 1fr auto">
               <div class="row row--head" aria-hidden="true">
                 <span class="row__cell">Role</span>
                 <span class="row__cell">Members</span>
@@ -495,28 +495,28 @@
                 <span class="row__cell">State</span>
               </div>
 
-              <div class="row" style="--cols:1.2fr .7fr 1fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Role"><b>Owner</b><small>Founding team</small></span>
                 <span class="row__cell" data-label="Members">2</span>
                 <span class="row__cell" data-label="Scope">All tenants</span>
                 <span class="row__cell" data-label="State"><span class="pill pill--ok">Active</span></span>
               </div>
 
-              <div class="row" style="--cols:1.2fr .7fr 1fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Role"><b>Administrator</b><small>Console ops</small></span>
                 <span class="row__cell" data-label="Members">6</span>
                 <span class="row__cell" data-label="Scope">All tenants</span>
                 <span class="row__cell" data-label="State"><span class="pill pill--ok">Active</span></span>
               </div>
 
-              <div class="row" style="--cols:1.2fr .7fr 1fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Role"><b>Operator</b><small>Site engineers</small></span>
                 <span class="row__cell" data-label="Members">24</span>
                 <span class="row__cell" data-label="Scope">Assigned fleets</span>
                 <span class="row__cell" data-label="State"><span class="pill pill--ok">Active</span></span>
               </div>
 
-              <div class="row" style="--cols:1.2fr .7fr 1fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Role"><b>Contractor</b><small>External &middot; expiring</small></span>
                 <span class="row__cell" data-label="Members">7</span>
                 <span class="row__cell" data-label="Scope">Single site</span>

@@ -151,8 +151,8 @@
           </header>
 
           <div class="panel__body panel__body--flush">
-            <div class="rows">
-              <div class="row row--head" style="--cols:1.5fr 1fr 1fr 1.2fr auto" aria-hidden="true">
+            <div class="rows" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+              <div class="row row--head" aria-hidden="true">
                 <span class="row__cell">Signal</span>
                 <span class="row__cell">Unit</span>
                 <span class="row__cell">Value</span>
@@ -160,7 +160,7 @@
                 <span class="row__cell">Updated</span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Signal"><b>Cycle time</b><small>grip &rarr; release</small></span>
                 <span class="row__cell" data-label="Unit">HL-114</span>
                 <span class="row__cell" data-label="Value">4.1 s</span>
@@ -168,7 +168,7 @@
                 <span class="row__cell" data-label="Updated">12 s ago</span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Signal"><b>Gripper torque</b><small>jaw closing force</small></span>
                 <span class="row__cell" data-label="Unit">HL-117</span>
                 <span class="row__cell" data-label="Value">42 N&middot;m</span>
@@ -176,7 +176,7 @@
                 <span class="row__cell" data-label="Updated">18 s ago</span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Signal"><b>Battery level</b><small>state of charge</small></span>
                 <span class="row__cell" data-label="Unit">HL-121</span>
                 <span class="row__cell" data-label="Value">64%</span>
@@ -184,7 +184,7 @@
                 <span class="row__cell" data-label="Updated">21 s ago</span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Signal"><b>Wheel torque</b><small>drive current</small></span>
                 <span class="row__cell" data-label="Unit">HL-138</span>
                 <span class="row__cell" data-label="Value">118 N&middot;m</span>
@@ -192,7 +192,7 @@
                 <span class="row__cell" data-label="Updated">27 s ago</span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Signal"><b>Motor temperature</b><small>joint 3 housing</small></span>
                 <span class="row__cell" data-label="Unit">HL-142</span>
                 <span class="row__cell" data-label="Value">41 &deg;C</span>
@@ -200,7 +200,7 @@
                 <span class="row__cell" data-label="Updated">31 s ago</span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Signal"><b>Path deviation</b><small>from planned lane</small></span>
                 <span class="row__cell" data-label="Unit">HL-126</span>
                 <span class="row__cell" data-label="Value">12 mm</span>
@@ -288,8 +288,8 @@
           </header>
 
           <div class="panel__body panel__body--flush">
-            <div class="rows">
-              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+            <div class="rows" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Event"><b>Gap detected</b><small>aggregator &middot; Line 1</small></span>
                 <span class="row__cell" data-label="Unit">HL-114</span>
                 <span class="row__cell" data-label="Signal">Cycle time</span>
@@ -297,7 +297,7 @@
                 <span class="row__cell" data-label="Severity"><span class="pill pill--warn">Warning</span></span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Event"><b>Stream reconnect</b><small>edge node &middot; Bay A</small></span>
                 <span class="row__cell" data-label="Unit">HL-138</span>
                 <span class="row__cell" data-label="Signal">Wheel torque</span>
@@ -305,7 +305,7 @@
                 <span class="row__cell" data-label="Severity"><span class="pill pill--info">Info</span></span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Event"><b>Threshold crossed</b><small>battery service limit</small></span>
                 <span class="row__cell" data-label="Unit">HL-121</span>
                 <span class="row__cell" data-label="Signal">Battery level</span>
@@ -313,7 +313,7 @@
                 <span class="row__cell" data-label="Severity"><span class="pill pill--warn">Warning</span></span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Event"><b>Stream resumed</b><small>after planned failover</small></span>
                 <span class="row__cell" data-label="Unit">HL-126</span>
                 <span class="row__cell" data-label="Signal">Path deviation</span>
@@ -321,7 +321,7 @@
                 <span class="row__cell" data-label="Severity"><span class="pill pill--ok">Recovered</span></span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Event"><b>Echo mismatch</b><small>firmware handshake</small></span>
                 <span class="row__cell" data-label="Unit">HL-142</span>
                 <span class="row__cell" data-label="Signal">Firmware</span>
@@ -329,7 +329,7 @@
                 <span class="row__cell" data-label="Severity"><span class="pill pill--bad">Critical</span></span>
               </div>
 
-              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+              <div class="row">
                 <span class="row__cell" data-label="Event"><b>Sensor recalibrated</b><small>technician on site</small></span>
                 <span class="row__cell" data-label="Unit">HL-117</span>
                 <span class="row__cell" data-label="Signal">Gripper torque</span>
