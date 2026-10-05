@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Stackly client console &mdash; fleet reports, scheduled exports and sharing.">
+<title>Reports &mdash; Stackly client</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body class="page-bare">
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--c"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<main id="main" class="dash">
+
+  <!-- ============ RAIL ============ -->
+  <aside class="dash__rail">
+    <div class="dash-mobile-head">
+      <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo__mark">
+          <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+        </span>
+      </a>
+      <button class="dash-mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="dashboardNavigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="dash__nav" id="dashboardNavigation" aria-label="Your fleet">
+      <span class="dash__nav-label">Your fleet</span>
+      <ul class="dash__nav-list">
+        <li>
+          <a class="dash__link" href="client-dashboard.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="11" width="7" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-units.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.4-3 8-7.5 9-4.5-1-7.5-4.6-7.5-9V6z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            My units
+            <b>44</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-telemetry.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16l4-6 4 3 4-7 6 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Telemetry
+          </a>
+        </li>
+        <li>
+          <a class="dash__link is-active" href="client-reports.html" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            Reports
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-support.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.2.9c0 1.8-2.6 2.3-2.6 3.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 17.2v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Support
+            <b>2</b>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="dash__rail-foot">
+      <a href="admin-dashboard.html" class="btn btn--ghost btn--sm">
+        <span>View as admin</span>
+      </a>
+      <a href="index.html" class="link-quiet">Back to site</a>
+    </div>
+  </aside>
+
+  <!-- ============ BODY ============ -->
+  <div class="dash__body">
+
+    <header class="dash__top">
+      <div>
+        <p class="dash__crumb">Helios Manufacturing / Reports</p>
+        <h1 class="dash__title">Reports</h1>
+      </div>
+
+      <div class="dash__tools">
+        <label class="dash__search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.2-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search reports, exports" aria-label="Search reports">
+        </label>
+        <span class="pill pill--info">6 ready</span>
+        <span class="dash__who">
+          <span class="avatar" aria-hidden="true">EV</span>
+          <span class="dash__who-txt"><b>Elin Vikstr&ouml;m</b><span>Client</span></span>
+        </span>
+      </div>
+    </header>
+
+    <div class="dash__content">
+
+      <!-- ============ KPI ============ -->
+      <section class="kpis" aria-label="Key figures">
+        <div class="kpi" data-reveal="fade-up">
+          <span class="kpi__label">Units covered</span>
+          <span class="kpi__val"><span class="count" data-count="42">0</span> <small>/ 44</small></span>
+          <span class="kpi__delta is-flat">2 in service</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.06s">
+          <span class="kpi__label">Reports ready</span>
+          <span class="kpi__val"><span class="count" data-count="18">0</span> <small>files</small></span>
+          <span class="kpi__delta is-up">+4 this quarter</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.12s">
+          <span class="kpi__label">Next export</span>
+          <span class="kpi__val">18 min</span>
+          <span class="kpi__delta is-flat">Nightly pack &middot; 02:00</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.18s">
+          <span class="kpi__label">Shared with team</span>
+          <span class="kpi__val"><span class="count" data-count="9">0</span> <small>people</small></span>
+          <span class="kpi__delta is-down">2 fewer than September</span>
+        </div>
+      </section>
+
+      <div class="dash__grid dash__grid--2">
+
+        <!-- ============ REPORT LIBRARY ============ -->
+        <section class="panel" id="report-library">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Report library</h2>
+              <span class="panel__sub">Helios Manufacturing &middot; 44 units</span>
+            </div>
+            <span class="pill pill--ok">Ready</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row row--head" aria-hidden="true" style="--cols:1.7fr .9fr .6fr .9fr .6fr .8fr">
+                <span class="row__cell">Report</span>
+                <span class="row__cell">Period</span>
+                <span class="row__cell">Format</span>
+                <span class="row__cell">Generated</span>
+                <span class="row__cell">Size</span>
+                <span class="row__cell">Status</span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .9fr .6fr .9fr .6fr .8fr">
+                <span class="row__cell" data-label="Report"><b>Fleet uptime &amp; yield</b><small>All 44 units</small></span>
+                <span class="row__cell" data-label="Period">Jul&ndash;Sep 2026</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">PDF</span></span>
+                <span class="row__cell" data-label="Generated">02 Oct 2026</span>
+                <span class="row__cell" data-label="Size">2.1 MB</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Ready</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .9fr .6fr .9fr .6fr .8fr">
+                <span class="row__cell" data-label="Report"><b>Cycle time by line</b><small>Line 1 to Line 3</small></span>
+                <span class="row__cell" data-label="Period">Jul&ndash;Sep 2026</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">CSV</span></span>
+                <span class="row__cell" data-label="Generated">02 Oct 2026</span>
+                <span class="row__cell" data-label="Size">96 KB</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Ready</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .9fr .6fr .9fr .6fr .8fr">
+                <span class="row__cell" data-label="Report"><b>Energy &amp; emissions</b><small>Metered at the mains</small></span>
+                <span class="row__cell" data-label="Period">Sep 2026</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">CSV</span></span>
+                <span class="row__cell" data-label="Generated">01 Oct 2026</span>
+                <span class="row__cell" data-label="Size">74 KB</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Ready</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .9fr .6fr .9fr .6fr .8fr">
+                <span class="row__cell" data-label="Report"><b>Service &amp; parts log</b><small>Technician sign-off</small></span>
+                <span class="row__cell" data-label="Period">Oct 2025 &ndash; Sep 2026</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">XLSX</span></span>
+                <span class="row__cell" data-label="Generated">30 Sep 2026</span>
+                <span class="row__cell" data-label="Size">310 KB</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--info">Building</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .9fr .6fr .9fr .6fr .8fr">
+                <span class="row__cell" data-label="Report"><b>Downtime root-cause</b><small>Unplanned stops only</small></span>
+                <span class="row__cell" data-label="Period">Sep 2026</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">PDF</span></span>
+                <span class="row__cell" data-label="Generated">29 Sep 2026</span>
+                <span class="row__cell" data-label="Size">1.4 MB</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Ready</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .9fr .6fr .9fr .6fr .8fr">
+                <span class="row__cell" data-label="Report"><b>Picker cell throughput</b><small>HL-114 to HL-131</small></span>
+                <span class="row__cell" data-label="Period">Week 39</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">CSV</span></span>
+                <span class="row__cell" data-label="Generated">28 Sep 2026</span>
+                <span class="row__cell" data-label="Size">58 KB</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--idle">Archived</span></span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>18 reports &middot; 4 added this quarter</span>
+            <a href="#report-library" class="link-quiet">All reports</a>
+          </footer>
+        </section>
+
+        <!-- ============ SCHEDULED REPORTS ============ -->
+        <section class="panel" id="scheduled-reports">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Scheduled reports</h2>
+              <span class="panel__sub">Automatic delivery &middot; CET</span>
+            </div>
+            <span class="pill pill--info">5 schedules</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row" style="--cols:1.6fr .8fr .9fr 1.1fr .7fr">
+                <span class="row__cell" data-label="Report"><b>Nightly fleet digest</b><small>Email at 06:00</small></span>
+                <span class="row__cell" data-label="Frequency"><span class="chip chip--sm">Daily</span></span>
+                <span class="row__cell" data-label="Next run">03 Oct, 06:00</span>
+                <span class="row__cell" data-label="Recipients">ops@helios-mfg.eu</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.6fr .8fr .9fr 1.1fr .7fr">
+                <span class="row__cell" data-label="Report"><b>Weekly uptime summary</b><small>PDF, Monday 07:00</small></span>
+                <span class="row__cell" data-label="Frequency"><span class="chip chip--sm">Weekly</span></span>
+                <span class="row__cell" data-label="Next run">05 Oct, 07:00</span>
+                <span class="row__cell" data-label="Recipients">Elin Vikstr&ouml;m</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.6fr .8fr .9fr 1.1fr .7fr">
+                <span class="row__cell" data-label="Report"><b>Downtime exception log</b><small>Only when stops exceed 30 min</small></span>
+                <span class="row__cell" data-label="Frequency"><span class="chip chip--sm">On event</span></span>
+                <span class="row__cell" data-label="Next run">On next stop</span>
+                <span class="row__cell" data-label="Recipients">Line leads (5)</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--live">Watching</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.6fr .8fr .9fr 1.1fr .7fr">
+                <span class="row__cell" data-label="Report"><b>Monthly service pack</b><small>PDF and parts log, 1st</small></span>
+                <span class="row__cell" data-label="Frequency"><span class="chip chip--sm">Monthly</span></span>
+                <span class="row__cell" data-label="Next run">01 Nov, 08:00</span>
+                <span class="row__cell" data-label="Recipients">facilities@helios-mfg.eu</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.6fr .8fr .9fr 1.1fr .7fr">
+                <span class="row__cell" data-label="Report"><b>Quarterly business review</b><small>Slides and yield data</small></span>
+                <span class="row__cell" data-label="Frequency"><span class="chip chip--sm">Quarterly</span></span>
+                <span class="row__cell" data-label="Next run">14 Nov, 09:00</span>
+                <span class="row__cell" data-label="Recipients">Board share (9)</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--idle">Draft</span></span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>3 of 5 run automatically</span>
+            <a href="#scheduled-reports" class="link-quiet">Schedule detail</a>
+          </footer>
+        </section>
+
+      </div>
+
+      <div class="dash__grid dash__grid--2">
+
+        <!-- ============ EXPORT HISTORY ============ -->
+        <section class="panel" id="export-history">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Export history</h2>
+              <span class="panel__sub">Last 30 days</span>
+            </div>
+            <span class="pill pill--warn">1 failed</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row" style="--cols:1.6fr 1fr .6fr .9fr .8fr">
+                <span class="row__cell" data-label="Export"><b>Q3 uptime &amp; yield summary</b><small>Range Jul&ndash;Sep</small></span>
+                <span class="row__cell" data-label="Requested by">Elin Vikstr&ouml;m</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">PDF</span></span>
+                <span class="row__cell" data-label="Delivered">02 Oct, 10:18</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Delivered</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.6fr 1fr .6fr .9fr .8fr">
+                <span class="row__cell" data-label="Export"><b>Cycle time by line</b><small>All zones</small></span>
+                <span class="row__cell" data-label="Requested by">Marek Osei</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">CSV</span></span>
+                <span class="row__cell" data-label="Delivered">02 Oct, 09:41</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Delivered</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.6fr 1fr .6fr .9fr .8fr">
+                <span class="row__cell" data-label="Export"><b>HL-121 changeover trace</b><small>Single unit</small></span>
+                <span class="row__cell" data-label="Requested by">Elin Vikstr&ouml;m</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">CSV</span></span>
+                <span class="row__cell" data-label="Delivered">01 Oct, 16:05</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Delivered</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.6fr 1fr .6fr .9fr .8fr">
+                <span class="row__cell" data-label="Export"><b>Parts consumption, 12 months</b><small>Line 1 to Outbound</small></span>
+                <span class="row__cell" data-label="Requested by">Ines Duarte</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">XLSX</span></span>
+                <span class="row__cell" data-label="Delivered">01 Oct, 11:52</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--warn">Retrying</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.6fr 1fr .6fr .9fr .8fr">
+                <span class="row__cell" data-label="Export"><b>Energy &amp; emissions</b><small>Bay A and Outbound</small></span>
+                <span class="row__cell" data-label="Requested by">Tomas Berg</span>
+                <span class="row__cell" data-label="Format"><span class="chip chip--sm">PDF</span></span>
+                <span class="row__cell" data-label="Delivered">30 Sep, 08:30</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--bad">Failed</span></span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>21 exports this quarter</span>
+            <a href="#export-history" class="link-quiet">Delivery log</a>
+          </footer>
+        </section>
+
+        <!-- ============ REPORT NOTES ============ -->
+        <section class="panel" id="report-notes">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Report notes</h2>
+              <span class="panel__sub">From your analyst</span>
+            </div>
+            <span class="pill pill--info">Monthly digest</span>
+          </header>
+
+          <div class="panel__body">
+            <ul class="feed">
+              <li>
+                <span class="feed__dot feed__dot--lime" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Q3 pack is complete: uptime held at <b>99.2%</b> and first-pass yield at 99.1% across all three lines.</p>
+                  <time datetime="2026-10-02T09:14">12 min ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--violet" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Cycle time on <b>Line 2</b> is the one to watch &mdash; 4.6 s against 4.0 s elsewhere. Flagged for the review.</p>
+                  <time datetime="2026-10-02T08:05">3 h ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--magenta" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Parts consumption for <b>HL-131</b> did not send. Re-running it now, so expect a second copy.</p>
+                  <time datetime="2026-10-01T14:02">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Scheduled exports now bundle the emissions sheet, so your monthly pack is a single download.</p>
+                  <time datetime="2026-10-01T08:20">Yesterday</time>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Reports refresh nightly at 02:00</span>
+            <a href="#report-notes" class="link-quiet">All notes</a>
+          </footer>
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

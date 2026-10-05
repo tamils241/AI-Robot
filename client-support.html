@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Stackly client console &mdash; open tickets, contacts and service commitments.">
+<title>Support &mdash; Stackly client</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body class="page-bare">
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--c"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<main id="main" class="dash">
+
+  <!-- ============ RAIL ============ -->
+  <aside class="dash__rail">
+    <div class="dash-mobile-head">
+      <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo__mark">
+          <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+        </span>
+      </a>
+      <button class="dash-mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="dashboardNavigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="dash__nav" id="dashboardNavigation" aria-label="Your fleet">
+      <span class="dash__nav-label">Your fleet</span>
+      <ul class="dash__nav-list">
+        <li>
+          <a class="dash__link" href="client-dashboard.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="11" width="7" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-units.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.4-3 8-7.5 9-4.5-1-7.5-4.6-7.5-9V6z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            My units
+            <b>44</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-telemetry.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16l4-6 4 3 4-7 6 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Telemetry
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-reports.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            Reports
+          </a>
+        </li>
+        <li>
+          <a class="dash__link is-active" href="client-support.html" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.2.9c0 1.8-2.6 2.3-2.6 3.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 17.2v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Support
+            <b>2</b>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="dash__rail-foot">
+      <a href="admin-dashboard.html" class="btn btn--ghost btn--sm">
+        <span>View as admin</span>
+      </a>
+      <a href="index.html" class="link-quiet">Back to site</a>
+    </div>
+  </aside>
+
+  <!-- ============ BODY ============ -->
+  <div class="dash__body">
+
+    <header class="dash__top">
+      <div>
+        <p class="dash__crumb">Helios Manufacturing / Support</p>
+        <h1 class="dash__title">Support</h1>
+      </div>
+
+      <div class="dash__tools">
+        <label class="dash__search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.2-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search tickets, articles" aria-label="Search support">
+        </label>
+        <span class="pill pill--warn">2 open tickets</span>
+        <span class="dash__who">
+          <span class="avatar" aria-hidden="true">EV</span>
+          <span class="dash__who-txt"><b>Elin Vikstr&ouml;m</b><span>Client</span></span>
+        </span>
+      </div>
+    </header>
+
+    <div class="dash__content">
+
+      <!-- ============ KPI ============ -->
+      <section class="kpis" aria-label="Key figures">
+        <div class="kpi" data-reveal="fade-up">
+          <span class="kpi__label">Units covered</span>
+          <span class="kpi__val"><span class="count" data-count="42">0</span> <small>/ 44</small></span>
+          <span class="kpi__delta is-flat">2 in service</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.06s">
+          <span class="kpi__label">Median first reply</span>
+          <span class="kpi__val">18 min</span>
+          <span class="kpi__delta is-up">4 min faster</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.12s">
+          <span class="kpi__label">SLA met</span>
+          <span class="kpi__val"><span class="count" data-count="96">0</span> <small>%</small></span>
+          <span class="kpi__delta is-up">+3 pts vs Q2</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.18s">
+          <span class="kpi__label">Tickets open</span>
+          <span class="kpi__val"><span class="count" data-count="2">0</span> <small>open</small></span>
+          <span class="kpi__delta is-down">1 closed this week</span>
+        </div>
+      </section>
+
+      <div class="dash__grid dash__grid--2">
+
+        <!-- ============ OPEN TICKETS ============ -->
+        <section class="panel" id="open-tickets">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Open tickets</h2>
+              <span class="panel__sub">Helios Manufacturing &middot; read-only</span>
+            </div>
+            <span class="pill pill--warn">2 open</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row row--head" aria-hidden="true" style="--cols:1.7fr .8fr .7fr 1fr .6fr .8fr">
+                <span class="row__cell">Ticket</span>
+                <span class="row__cell">Subject</span>
+                <span class="row__cell">Unit</span>
+                <span class="row__cell">Priority</span>
+                <span class="row__cell">Opened</span>
+                <span class="row__cell">Status</span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .8fr .7fr 1fr .6fr .8fr">
+                <span class="row__cell" data-label="Ticket"><b>SUP-4821</b><small>Opened by Elin Vikstr&ouml;m</small></span>
+                <span class="row__cell" data-label="Subject">Gripper slips on HL-121 at changeover</span>
+                <span class="row__cell" data-label="Unit">HL-121</span>
+                <span class="row__cell" data-label="Priority"><span class="chip chip--sm">High</span></span>
+                <span class="row__cell" data-label="Opened">02 Oct</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--warn">In progress</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .8fr .7fr 1fr .6fr .8fr">
+                <span class="row__cell" data-label="Ticket"><b>SUP-4818</b><small>Opened by Marek Osei</small></span>
+                <span class="row__cell" data-label="Subject">Outbound cell wakes at odd intervals</span>
+                <span class="row__cell" data-label="Unit">HL-133</span>
+                <span class="row__cell" data-label="Priority"><span class="chip chip--sm">Medium</span></span>
+                <span class="row__cell" data-label="Opened">01 Oct</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--warn">In progress</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .8fr .7fr 1fr .6fr .8fr">
+                <span class="row__cell" data-label="Ticket"><b>SUP-4809</b><small>Opened by Tomas Berg</small></span>
+                <span class="row__cell" data-label="Subject">Cycle alarm on Line 2 after 4 hours run</span>
+                <span class="row__cell" data-label="Unit">HL-108</span>
+                <span class="row__cell" data-label="Priority"><span class="chip chip--sm">High</span></span>
+                <span class="row__cell" data-label="Opened">29 Sep</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--info">Waiting on you</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .8fr .7fr 1fr .6fr .8fr">
+                <span class="row__cell" data-label="Ticket"><b>SUP-4796</b><small>Opened by Elin Vikstr&ouml;m</small></span>
+                <span class="row__cell" data-label="Subject">Request: monthly pack as PDF only</span>
+                <span class="row__cell" data-label="Unit">All 44</span>
+                <span class="row__cell" data-label="Priority"><span class="chip chip--sm">Low</span></span>
+                <span class="row__cell" data-label="Opened">26 Sep</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Resolved</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.7fr .8fr .7fr 1fr .6fr .8fr">
+                <span class="row__cell" data-label="Ticket"><b>SUP-4780</b><small>Opened by Ines Duarte</small></span>
+                <span class="row__cell" data-label="Subject">Firmware 4.2.1 rollout confirmation</span>
+                <span class="row__cell" data-label="Unit">All 44</span>
+                <span class="row__cell" data-label="Priority"><span class="chip chip--sm">Medium</span></span>
+                <span class="row__cell" data-label="Opened">22 Sep</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Resolved</span></span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Oldest open ticket is 3 days old</span>
+            <a href="#open-tickets" class="link-quiet">All tickets</a>
+          </footer>
+        </section>
+
+        <!-- ============ RESPONSE PERFORMANCE ============ -->
+        <section class="panel" id="response-performance">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Response performance</h2>
+              <span class="panel__sub">Rolling 90 days</span>
+            </div>
+            <span class="pill pill--ok">Within SLA</span>
+          </header>
+
+          <div class="panel__body">
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">First response within 15 min</span>
+                <span class="meter__val">44 / 60</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="73"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Resolved within 4 hours</span>
+                <span class="meter__val">52 / 60</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="87"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Fixed on first contact</span>
+                <span class="meter__val">29 / 33</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="88"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Reopened within 7 days</span>
+                <span class="meter__val">1 / 33</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="3"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Engineer on site within 48 h</span>
+                <span class="meter__val">11 / 12</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="92"></i></span>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>33 tickets handled &middot; 18 min median reply</span>
+            <a href="#response-performance" class="link-quiet">How we measure</a>
+          </footer>
+        </section>
+
+      </div>
+
+      <div class="dash__grid dash__grid--2">
+
+        <!-- ============ SERVICE CONTACTS ============ -->
+        <section class="panel" id="service-contacts">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Service contacts</h2>
+              <span class="panel__sub">Who to call at Helios Manufacturing</span>
+            </div>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row" style="--cols:1.2fr 1fr 1.4fr .8fr">
+                <span class="row__cell" data-label="Contact"><b>Elin Vikstr&ouml;m</b><small>Rotterdam site</small></span>
+                <span class="row__cell" data-label="Role">Operations lead</span>
+                <span class="row__cell" data-label="Email">elin.vikstrom@helios-mfg.eu</span>
+                <span class="row__cell" data-label="Response time">12 min</span>
+              </div>
+
+              <div class="row" style="--cols:1.2fr 1fr 1.4fr .8fr">
+                <span class="row__cell" data-label="Contact"><b>Marek Osei</b><small>Rotterdam site</small></span>
+                <span class="row__cell" data-label="Role">Line supervisor</span>
+                <span class="row__cell" data-label="Email">marek.osei@helios-mfg.eu</span>
+                <span class="row__cell" data-label="Response time">41 min</span>
+              </div>
+
+              <div class="row" style="--cols:1.2fr 1fr 1.4fr .8fr">
+                <span class="row__cell" data-label="Contact"><b>Ines Duarte</b><small>Named field engineer</small></span>
+                <span class="row__cell" data-label="Role">Service engineer, North</span>
+                <span class="row__cell" data-label="Email">ines.duarte@stackly.io</span>
+                <span class="row__cell" data-label="Response time">8 min</span>
+              </div>
+
+              <div class="row" style="--cols:1.2fr 1fr 1.4fr .8fr">
+                <span class="row__cell" data-label="Contact"><b>Tomas Berg</b><small>Eindhoven site</small></span>
+                <span class="row__cell" data-label="Role">Maintenance planner</span>
+                <span class="row__cell" data-label="Email">tomas.berg@helios-mfg.eu</span>
+                <span class="row__cell" data-label="Response time">1 h 20</span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Support included until 30 Apr 2027</span>
+            <a href="#service-contacts" class="link-quiet">Escalation path</a>
+          </footer>
+        </section>
+
+        <!-- ============ CHANNELS ============ -->
+        <section class="panel" id="channels">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Where to reach us</h2>
+              <span class="panel__sub">All routes land in the same queue</span>
+            </div>
+            <span class="pill pill--live">Monitoring</span>
+          </header>
+
+          <div class="panel__body">
+            <div class="chips chips--start">
+              <span class="chip chip--sm"><span class="chip__dot"></span>Console tickets</span>
+              <span class="chip chip--sm"><span class="chip__dot"></span>Email &middot; 24/7</span>
+              <span class="chip chip--sm"><span class="chip__dot"></span>Phone &middot; 07:00&ndash;19:00 CET</span>
+              <span class="chip chip--sm"><span class="chip__dot"></span>On-site engineer visits</span>
+              <span class="chip chip--sm"><span class="chip__dot"></span>Knowledge base</span>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Median first reply 18 min, last 90 days</span>
+            <a href="#channels" class="link-quiet">Channel detail</a>
+          </footer>
+        </section>
+
+      </div>
+
+      <div class="dash__grid dash__grid--2">
+
+        <!-- ============ TICKET ACTIVITY ============ -->
+        <section class="panel" id="ticket-activity">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Ticket activity</h2>
+              <span class="panel__sub">Latest updates from your engineers</span>
+            </div>
+          </header>
+
+          <div class="panel__body">
+            <ul class="feed">
+              <li>
+                <span class="feed__dot feed__dot--lime" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>Ines Duarte</b> picked up SUP-4821 and is booking a gripper inspection for Thursday morning.</p>
+                  <time datetime="2026-10-02T10:40">1 h ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--violet" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>SUP-4809 needs a photo of the <b>Line 2</b> guard before it can move to the workshop.</p>
+                  <time datetime="2026-10-02T08:05">3 h ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--magenta" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>SUP-4796 closed &mdash; the monthly pack now generates as a single PDF.</p>
+                  <time datetime="2026-10-01T16:30">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Firmware 4.2.1 confirmed on all <b>44 units</b> after the overnight rollout.</p>
+                  <time datetime="2026-10-01T11:15">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--lime" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Quarterly service plan drafted for your review ahead of the meeting on the 14th.</p>
+                  <time datetime="2026-10-01T09:50">Yesterday</time>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <footer class="panel__foot">
+            <span>2 open tickets &middot; nothing waiting on us</span>
+            <a href="#ticket-activity" class="link-quiet">Full history</a>
+          </footer>
+        </section>
+
+        <!-- ============ COVERAGE ============ -->
+        <section class="panel" id="coverage">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Service commitments</h2>
+              <span class="panel__sub">What your plan covers today</span>
+            </div>
+            <span class="pill pill--ok">Active</span>
+          </header>
+
+          <div class="panel__body">
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Support window remaining</span>
+                <span class="meter__val">7 months</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="58"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">On-site visits used, this quarter</span>
+                <span class="meter__val">6 / 8</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="75"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Critical spares held on site</span>
+                <span class="meter__val">12 / 20</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="60"></i></span>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Renewal quote due 31 Mar 2027</span>
+            <a href="#coverage" class="link-quiet">Coverage detail</a>
+          </footer>
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

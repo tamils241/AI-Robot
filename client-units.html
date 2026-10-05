@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Stackly client console &mdash; your units, service schedule and health.">
+<title>My units &mdash; Stackly client</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body class="page-bare">
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--c"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<main id="main" class="dash">
+
+  <!-- ============ RAIL ============ -->
+  <aside class="dash__rail">
+    <div class="dash-mobile-head">
+      <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo__mark">
+          <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+        </span>
+      </a>
+      <button class="dash-mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="dashboardNavigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="dash__nav" id="dashboardNavigation" aria-label="Your fleet">
+      <span class="dash__nav-label">Your fleet</span>
+      <ul class="dash__nav-list">
+        <li>
+          <a class="dash__link" href="client-dashboard.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="11" width="7" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a class="dash__link is-active" href="client-units.html" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.4-3 8-7.5 9-4.5-1-7.5-4.6-7.5-9V6z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            My units
+            <b>44</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-telemetry.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16l4-6 4 3 4-7 6 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Telemetry
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-reports.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            Reports
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-support.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.2.9c0 1.8-2.6 2.3-2.6 3.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 17.2v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Support
+            <b>2</b>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="dash__rail-foot">
+      <a href="admin-dashboard.html" class="btn btn--ghost btn--sm">
+        <span>View as admin</span>
+      </a>
+      <a href="index.html" class="link-quiet">Back to site</a>
+    </div>
+  </aside>
+
+  <!-- ============ BODY ============ -->
+  <div class="dash__body">
+
+    <header class="dash__top">
+      <div>
+        <p class="dash__crumb">Helios Manufacturing / My units</p>
+        <h1 class="dash__title">My units</h1>
+      </div>
+
+      <div class="dash__tools">
+        <label class="dash__search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.2-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search your units" aria-label="Search your units">
+        </label>
+        <span class="pill pill--ok pill--live">42 of 44 online</span>
+        <span class="dash__who">
+          <span class="avatar" aria-hidden="true">EV</span>
+          <span class="dash__who-txt"><b>Elin Vikstr&ouml;m</b><span>Client</span></span>
+        </span>
+      </div>
+    </header>
+
+    <div class="dash__content">
+
+      <!-- ============ KPI ============ -->
+      <section class="kpis" aria-label="Key figures">
+        <div class="kpi" data-reveal="fade-up">
+          <span class="kpi__label">Units online</span>
+          <span class="kpi__val"><span class="count" data-count="42">0</span> <small>/ 44</small></span>
+          <span class="kpi__delta is-flat">2 in service</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.06s">
+          <span class="kpi__label">Uptime 30 days</span>
+          <span class="kpi__val"><span class="count" data-count="99.2" data-decimals="1">0</span> <small>%</small></span>
+          <span class="kpi__delta is-up">+0.8 vs September</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.12s">
+          <span class="kpi__label">Tasks completed, 7 days</span>
+          <span class="kpi__val"><span class="count" data-count="1284">0</span> <small>moves</small></span>
+          <span class="kpi__delta is-up">+18% week on week</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.18s">
+          <span class="kpi__label">Mean cycle time</span>
+          <span class="kpi__val"><span class="count" data-count="4.0" data-decimals="1">0</span> <small>s</small></span>
+          <span class="kpi__delta is-down">-0.2 s vs target</span>
+        </div>
+      </section>
+
+      <!-- ============ REGISTRY + CAPACITY ============ -->
+      <div class="dash__grid dash__grid--2">
+
+        <section class="panel" id="unit-registry">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Unit registry</h2>
+              <span class="panel__sub">Every unit you own</span>
+            </div>
+            <span class="pill pill--ok">44 units</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row row--head" style="--cols:1.4fr .9fr 1.1fr .9fr .7fr" aria-hidden="true">
+                <span class="row__cell">Unit</span>
+                <span class="row__cell">Zone</span>
+                <span class="row__cell">Model</span>
+                <span class="row__cell">Status</span>
+                <span class="row__cell">Uptime 30d</span>
+              </div>
+
+              <div class="row" style="--cols:1.4fr .9fr 1.1fr .9fr .7fr">
+                <span class="row__cell" data-label="Unit"><b>HL-114</b><small>6-axis picker</small></span>
+                <span class="row__cell" data-label="Zone">Line 1</span>
+                <span class="row__cell" data-label="Model">6-axis picker</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Operational</span></span>
+                <span class="row__cell" data-label="Uptime 30d">99.6%</span>
+              </div>
+
+              <div class="row" style="--cols:1.4fr .9fr 1.1fr .9fr .7fr">
+                <span class="row__cell" data-label="Unit"><b>HL-117</b><small>6-axis picker</small></span>
+                <span class="row__cell" data-label="Zone">Line 1</span>
+                <span class="row__cell" data-label="Model">6-axis picker</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Operational</span></span>
+                <span class="row__cell" data-label="Uptime 30d">99.4%</span>
+              </div>
+
+              <div class="row" style="--cols:1.4fr .9fr 1.1fr .9fr .7fr">
+                <span class="row__cell" data-label="Unit"><b>HL-121</b><small>6-axis picker</small></span>
+                <span class="row__cell" data-label="Zone">Line 2</span>
+                <span class="row__cell" data-label="Model">6-axis picker</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--info">Charging</span></span>
+                <span class="row__cell" data-label="Uptime 30d">98.9%</span>
+              </div>
+
+              <div class="row" style="--cols:1.4fr .9fr 1.1fr .9fr .7fr">
+                <span class="row__cell" data-label="Unit"><b>HL-126</b><small>AMR tugger</small></span>
+                <span class="row__cell" data-label="Zone">Line 2</span>
+                <span class="row__cell" data-label="Model">AMR tugger</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Operational</span></span>
+                <span class="row__cell" data-label="Uptime 30d">99.1%</span>
+              </div>
+
+              <div class="row" style="--cols:1.4fr .9fr 1.1fr .9fr .7fr">
+                <span class="row__cell" data-label="Unit"><b>HL-133</b><small>6-axis picker</small></span>
+                <span class="row__cell" data-label="Zone">Line 3</span>
+                <span class="row__cell" data-label="Model">6-axis picker</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--warn">Service</span></span>
+                <span class="row__cell" data-label="Uptime 30d">97.8%</span>
+              </div>
+
+              <div class="row" style="--cols:1.4fr .9fr 1.1fr .9fr .7fr">
+                <span class="row__cell" data-label="Unit"><b>HL-138</b><small>AMR pallet mover</small></span>
+                <span class="row__cell" data-label="Zone">Bay A</span>
+                <span class="row__cell" data-label="Model">AMR pallet mover</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--info">Charging</span></span>
+                <span class="row__cell" data-label="Uptime 30d">99.2%</span>
+              </div>
+
+              <div class="row" style="--cols:1.4fr .9fr 1.1fr .9fr .7fr">
+                <span class="row__cell" data-label="Unit"><b>HL-142</b><small>6-axis picker</small></span>
+                <span class="row__cell" data-label="Zone">Outbound</span>
+                <span class="row__cell" data-label="Model">6-axis picker</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Operational</span></span>
+                <span class="row__cell" data-label="Uptime 30d">99.7%</span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Showing 7 of 44 units &middot; updated 12 min ago</span>
+            <a href="#unit-registry" class="link-quiet">View full registry</a>
+          </footer>
+        </section>
+
+        <section class="panel" id="capacity">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Capacity by zone</h2>
+              <span class="panel__sub">Units deployed vs planned</span>
+            </div>
+            <span class="pill pill--ok">Within plan</span>
+          </header>
+
+          <div class="panel__body">
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Line 1</span>
+                <span class="meter__val">11 / 12</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="92"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Line 2</span>
+                <span class="meter__val">10 / 12</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="83"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Line 3</span>
+                <span class="meter__val">9 / 12</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="75"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Bay A</span>
+                <span class="meter__val">6 / 8</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="75"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Outbound</span>
+                <span class="meter__val">8 / 12</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="67"></i></span>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>44 units deployed across 5 zones</span>
+            <a href="#capacity" class="link-quiet">Zone detail</a>
+          </footer>
+        </section>
+
+      </div>
+
+      <!-- ============ SERVICE + ALERTS ============ -->
+      <div class="dash__grid dash__grid--2">
+
+        <section class="panel" id="service-schedule">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Service schedule</h2>
+              <span class="panel__sub">Next visits, booked with you</span>
+            </div>
+            <span class="pill pill--info">5 planned</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row" style="--cols:1.2fr 1.6fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Unit"><b>HL-133</b><small>Line 3</small></span>
+                <span class="row__cell" data-label="Task">Gripper calibration</span>
+                <span class="row__cell" data-label="Due">12 Oct 2026</span>
+                <span class="row__cell" data-label="Technician"><span class="chip chip--sm"><span class="chip__dot"></span>R. Bakker</span></span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--warn">Due</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.2fr 1.6fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Unit"><b>HL-121</b><small>Line 2</small></span>
+                <span class="row__cell" data-label="Task">Battery cell swap</span>
+                <span class="row__cell" data-label="Due">19 Oct 2026</span>
+                <span class="row__cell" data-label="Technician"><span class="chip chip--sm"><span class="chip__dot"></span>S. Oduya</span></span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--info">Scheduled</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.2fr 1.6fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Unit"><b>HL-114</b><small>Line 1</small></span>
+                <span class="row__cell" data-label="Task">Firmware 4.2.1 rollout</span>
+                <span class="row__cell" data-label="Due">26 Oct 2026</span>
+                <span class="row__cell" data-label="Technician"><span class="chip chip--sm"><span class="chip__dot"></span>R. Bakker</span></span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--info">Scheduled</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.2fr 1.6fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Unit"><b>HL-138</b><small>Bay A</small></span>
+                <span class="row__cell" data-label="Task">Wheel set inspection</span>
+                <span class="row__cell" data-label="Due">02 Nov 2026</span>
+                <span class="row__cell" data-label="Technician"><span class="chip chip--sm"><span class="chip__dot"></span>M. Larsen</span></span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--idle">Planned</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.2fr 1.6fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Unit"><b>HL-126</b><small>Line 2</small></span>
+                <span class="row__cell" data-label="Task">Safety scanner calibration</span>
+                <span class="row__cell" data-label="Due">09 Nov 2026</span>
+                <span class="row__cell" data-label="Technician"><span class="chip chip--sm"><span class="chip__dot"></span>S. Oduya</span></span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--idle">Planned</span></span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Visits run outside your production window</span>
+            <a href="#service-schedule" class="link-quiet">Reschedule a visit</a>
+          </footer>
+        </section>
+
+        <section class="panel" id="unit-alerts">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Unit alerts</h2>
+              <span class="panel__sub">Read-only event stream</span>
+            </div>
+            <span class="pill pill--warn">1 needs review</span>
+          </header>
+
+          <div class="panel__body">
+            <ul class="feed">
+              <li>
+                <span class="feed__dot feed__dot--lime" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>HL-133</b> moved to service for gripper calibration. It rejoins Line 3 within the hour.</p>
+                  <time datetime="2026-10-02T09:14">12 min ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--violet" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>HL-121</b> finished charging and returned to Line 2 picking at 64% battery.</p>
+                  <time datetime="2026-10-02T07:52">1 h ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--magenta" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Battery health on <b>HL-138</b> fell below the 80% service threshold. A cell swap is proposed.</p>
+                  <time datetime="2026-10-01T16:30">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Firmware 4.2.1 is staged for 12 units. Rollout starts after tonight's shift change.</p>
+                  <time datetime="2026-10-01T11:05">Yesterday</time>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <footer class="panel__foot">
+            <span>4 open alerts &middot; oldest is 18 hours</span>
+            <a href="#unit-alerts" class="link-quiet">Alert history</a>
+          </footer>
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

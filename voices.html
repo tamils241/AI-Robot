@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="What operators, engineers and plant managers say about working with Stackly.">
+<title>Voices &mdash; Stackly</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--b"></div>
+  <div class="fx__orb fx__orb--c"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+  <div class="fx__cursor" id="cursor"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<!-- shared icon sprite: rating stars are referenced with <use href="#star"> -->
+<svg class="sprite" aria-hidden="true" focusable="false"><symbol id="star" viewBox="0 0 24 24"><path d="m12 2.6 2.7 5.9 6.4.7-4.8 4.4 1.3 6.3L12 16.8l-5.6 3.1 1.3-6.3-4.8-4.4 6.4-.7z"/></symbol></svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__core">
+    <div class="loader__hex"></div>
+    <span class="loader__pct" id="loaderPct">00</span>
+  </div>
+  <p class="loader__txt">INITIALISING STACKLY CORE</p>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo" aria-label="Stackly home">
+      <span class="logo__mark">
+        <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html"><span>01</span>Home</a></li>
+        <li><a class="nav__link" href="capabilities.html"><span>02</span>Capabilities</a></li>
+        <li><a class="nav__link" href="solutions.html"><span>03</span>Solutions</a></li>
+        <li><a class="nav__link" href="technology.html"><span>04</span>Technology</a></li>
+        <li><a class="nav__link" href="process.html"><span>05</span>Process</a></li>
+        <li><a class="nav__link is-active" href="voices.html"><span>06</span>Voices</a></li>
+        <li><a class="nav__link" href="contact.html"><span>07</span>Contact</a></li>
+      </ul>
+      <div class="header__auth">
+        <a href="login.html" class="header__auth-link">Log in</a>
+        <a href="register.html" class="btn btn--sm btn--primary header__auth-cta">Register</a>
+      </div>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <span class="header__beam" aria-hidden="true"></span>
+</header>
+
+<main id="main">
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero page-hero--photo">
+    <div class="container page-hero__inner">
+      <nav class="crumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> / <span aria-current="page">Voices</span>
+      </nav>
+      <p class="sec-head__kicker" data-reveal="fade-up"> VOICES </p>
+      <h1 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+        Trusted by teams who <span class="grad-text">ship</span>
+      </h1>
+      <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+        Operators, engineers and plant managers &mdash; the people who have to live with
+        the system on shift.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ CLIENT TICKER ============ -->
+  <div class="ticker ticker--flush" aria-label="Clients who have taken a Stackly system live">
+    <div class="ticker__row">
+      <span>Helios Manufacturing</span><span>Kanto Logistics</span><span>Verdant Agritech</span><span>Nordklinik</span><span>Nordkapp Energy</span><span>Delta Foods</span><span>Meridian Ports</span><span>Vantage Pharma</span>
+      <span>Helios Manufacturing</span><span>Kanto Logistics</span><span>Verdant Agritech</span><span>Nordklinik</span><span>Nordkapp Energy</span><span>Delta Foods</span><span>Meridian Ports</span><span>Vantage Pharma</span>
+    </div>
+  </div>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="section" id="quotes-section">
+    <div class="container">
+      <div class="quotes" id="quotes">
+        <blockquote class="quote is-active" data-reveal="fade-up">
+          <p>&ldquo;Stackly rebuilt our pick line in nine weeks. Throughput is up 42% and the changeover now takes four minutes instead of a shift.&rdquo;</p>
+          <footer><b>Dr. Amara Reyes</b><span>VP Operations, Helios Manufacturing</span></footer>
+        </blockquote>
+        <blockquote class="quote" data-reveal="fade-up">
+          <p>&ldquo;Their digital twin let us validate the whole facility before we bought a single robot. That saved us seven figures.&rdquo;</p>
+          <footer><b>Kenji Watanabe</b><span>Director of Engineering, Kanto Logistics</span></footer>
+        </blockquote>
+        <blockquote class="quote" data-reveal="fade-up">
+          <p>&ldquo;The only robotics partner that treated our field data as seriously as their own models. Our yield is up 31% season over season.&rdquo;</p>
+          <footer><b>Elena Marchetti</b><span>COO, Verdant Agritech</span></footer>
+        </blockquote>
+        <blockquote class="quote" data-reveal="fade-up">
+          <p>&ldquo;Safety audit went through without a single finding. That has never happened with a robotics vendor before.&rdquo;</p>
+          <footer><b>Dr. Yusuf Demir</b><span>Head of Clinical Engineering, Nordklinik</span></footer>
+        </blockquote>
+<blockquote class="quote" data-reveal="fade-up">
+          <p>&ldquo;We handed them a 200-unit fleet and a twelve-week deadline. They did not blink, and neither did the robots.&rdquo;</p>
+          <footer><b>Sofia Lindqvist</b><span>CIO, Nordkapp Energy</span></footer>
+        </blockquote>
+        <blockquote class="quote" data-reveal="fade-up">
+          <p>&ldquo;Two years in, the line has not missed a shift for a robot fault. The uptime figure is the whole reason we signed.&rdquo;</p>
+          <footer><b>Priya Raghavan</b><span>Plant Manager, Delta Foods</span></footer>
+        </blockquote>
+        <blockquote class="quote" data-reveal="fade-up">
+          <p>&ldquo;They handed us the model weights and the training pipeline. Our own data science team picked it up in an afternoon.&rdquo;</p>
+          <footer><b>Tom Okonkwo</b><span>Head of Automation, Meridian Ports</span></footer>
+        </blockquote>
+        <blockquote class="quote" data-reveal="fade-up">
+          <p>&ldquo;No jargon, no theatre. Every claim on the proposal was something we measured ourselves a fortnight later.&rdquo;</p>
+          <footer><b>Marta Kowalczyk</b><span>Director of Engineering, Vantage Pharma</span></footer>
+        </blockquote>
+</div>
+
+      <div class="quotes__dots" id="quoteDots" role="tablist" aria-label="Testimonials"></div>
+    </div>
+  </section>
+
+  <!-- ============ MEASURED OUTCOMES ============ -->
+  <section class="section" id="outcomes">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> MEASURED OUTCOMES </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Numbers the client<br><span class="grad-text">signed off</span>
+        </h2>
+        <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+          Baselines taken by the customer's own team ninety days after handover.
+          No projections, no pilot figures, no best-case cell in the corner.
+        </p>
+      </header>
+
+      <div class="scores" data-reveal="fade-up" style="--d:.18s">
+        <div class="scores__cell">
+          <b class="count" data-count="42" data-suffix="+%">0</b>
+          <em>Pick-line throughput</em>
+          <span>Helios Manufacturing</span>
+        </div>
+        <div class="scores__cell">
+          <b class="count" data-count="9" data-suffix=" wks">0</b>
+          <em>Brief to production line</em>
+          <span>Helios Manufacturing</span>
+        </div>
+        <div class="scores__cell">
+          <b class="count" data-count="31" data-suffix="+%">0</b>
+          <em>Yield, season over season</em>
+          <span>Verdant Agritech</span>
+        </div>
+        <div class="scores__cell">
+          <b class="count" data-count="4" data-suffix=" min">0</b>
+          <em>Changeover, down from a shift</em>
+          <span>Helios Manufacturing</span>
+        </div>
+        <div class="scores__cell">
+          <b class="count" data-count="200" data-suffix="">0</b>
+          <em>Units commissioned in 12 weeks</em>
+          <span>Nordkapp Energy</span>
+        </div>
+        <div class="scores__cell">
+          <b class="count" data-count="0" data-suffix="">0</b>
+          <em>Findings at safety audit</em>
+          <span>Nordklinik</span>
+        </div>
+        <div class="scores__cell">
+          <b class="count" data-count="7" data-suffix=" figures">0</b>
+          <em>Capex avoided via digital twin</em>
+          <span>Kanto Logistics</span>
+        </div>
+        <div class="scores__cell">
+          <b class="count" data-count="97" data-suffix="%">0</b>
+          <em>Handovers on the agreed date</em>
+          <span>Portfolio average</span>
+        </div>
+      </div>
+
+      <p class="scores__note" data-reveal="fade-up" style="--d:.24s">
+        // 34 programmes completed since 2023 &middot; full case pack available under NDA
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ CASE STORIES ============ -->
+  <section class="section section--alt" id="cases">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> IN FULL </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Three programmes,<br><span class="grad-text">start to shift</span>
+        </h2>
+        <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+          The short version of what was scoped, what went wrong, and what the line
+          looks like now that the engineers have gone home.
+        </p>
+      </header>
+
+      <div class="grid grid--3">
+
+        <article class="card tilt" data-reveal="fade-up" style="--d:.05s">
+          <div class="card__shine" aria-hidden="true"></div>
+          <figure class="card__media">
+            <img src="assets/images/vision-800.webp" srcset="assets/images/vision-400.webp 400w, assets/images/vision-800.webp 800w, assets/images/vision-1200.webp 1200w" sizes="(min-width:1080px) 31vw, (min-width:680px) 46vw, 90vw" width="1200" height="675" alt="Robotic pickers running along a rebuilt production line" loading="lazy" decoding="async">
+          </figure>
+          <span class="chip chip--sm">MANUFACTURING</span>
+          <h3>Helios: nine weeks to a live pick line</h3>
+          <p>A 400-metre pick line with a 90-minute changeover. We modelled it in the twin first, rebuilt the tooling in three shutdown weekends, and handed the operators a runbook they actually kept.</p>
+          <ul class="card__list">
+            <li>+42% throughput</li>
+            <li>4-minute changeover</li>
+            <li>Zero unplanned stops since week one</li>
+          </ul>
+        </article>
+
+        <article class="card tilt" data-reveal="fade-up" style="--d:.12s">
+          <div class="card__shine" aria-hidden="true"></div>
+          <figure class="card__media">
+            <img src="assets/images/twin-800.webp" srcset="assets/images/twin-400.webp 400w, assets/images/twin-800.webp 800w, assets/images/twin-1200.webp 1200w" sizes="(min-width:1080px) 31vw, (min-width:680px) 46vw, 90vw" width="1200" height="675" alt="Simulation of a logistics facility used to validate the layout" loading="lazy" decoding="async">
+          </figure>
+          <span class="chip chip--sm">LOGISTICS</span>
+          <h3>Kanto: buying nothing until it worked</h3>
+          <p>They had a capital approval meeting and a robot vendor quoting them hardware. We rebuilt the facility as a digital twin instead, proved two layouts, and they approved half the robots they had budgeted.</p>
+          <ul class="card__list">
+            <li>Seven figures avoided</li>
+            <li>2 layouts validated pre-purchase</li>
+            <li>52% fewer units ordered</li>
+          </ul>
+        </article>
+
+        <article class="card tilt" data-reveal="fade-up" style="--d:.19s">
+          <div class="card__shine" aria-hidden="true"></div>
+          <figure class="card__media">
+            <img src="assets/images/fleet-800.webp" srcset="assets/images/fleet-400.webp 400w, assets/images/fleet-800.webp 800w, assets/images/fleet-1200.webp 1200w" sizes="(min-width:1080px) 31vw, (min-width:680px) 46vw, 90vw" width="1200" height="675" alt="Fleet of autonomous warehouse units moving goods in a fulfilment centre" loading="lazy" decoding="async">
+          </figure>
+          <span class="chip chip--sm">ENERGY</span>
+          <h3>Nordkapp: 200 units, twelve weeks, one site</h3>
+          <p>Sub-sea inspection units for an offshore platform, commissioned in one maintenance window. Fleet software staged the rollout 20 units at a time so no part of the platform was ever without coverage.</p>
+          <ul class="card__list">
+            <li>200 units live</li>
+            <li>One maintenance window</li>
+            <li>99.4% mission completion</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VOICE WALL ============ -->
+  <section class="section" id="wall">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> WIDER TEAM </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Shift leads, maintenance techs<br><span class="grad-text">and plant managers</span>
+        </h2>
+        <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+          The people who inherited the system after we left. They are the least
+          promotional witnesses we have, and the hardest to impress.
+        </p>
+      </header>
+
+      <div class="wall">
+
+        <figure class="wall__item" data-reveal="fade-up" style="--d:.05s">
+          <span class="wall__stars" role="img" aria-label="Rated 5 out of 5"><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg></span>
+          <blockquote><p>&ldquo;I run the night shift. The difference is that I do not walk the cell with a torch any more, because I can see exactly which arm has stopped and why.&rdquo;</p></blockquote>
+          <figcaption class="wall__who">
+            <span class="wall__av" aria-hidden="true">LO</span>
+            <span class="wall__id"><b>Lars Oduya</b><span>Shift Lead, Delta Foods</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="wall__item" data-reveal="fade-up" style="--d:.12s">
+          <span class="wall__stars" role="img" aria-label="Rated 5 out of 5"><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg></span>
+          <blockquote><p>&ldquo;First month after handover I found two things I would have changed. They were on site within a week, fixed both, and did not bill a single hour.&rdquo;</p></blockquote>
+          <figcaption class="wall__who">
+            <span class="wall__av" aria-hidden="true">RB</span>
+            <span class="wall__id"><b>Rosa Beltran</b><span>Maintenance Supervisor, Kanto Logistics</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="wall__item" data-reveal="fade-up" style="--d:.19s">
+          <span class="wall__stars" role="img" aria-label="Rated 4 out of 5"><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg class="is-dim" aria-hidden="true"><use href="#star"></use></svg></span>
+          <blockquote><p>&ldquo;Commissioning slipped by three weeks because our floor was not ready. That was our fault, they said so in writing, and they still turned up every day we asked them to.&rdquo;</p></blockquote>
+          <figcaption class="wall__who">
+            <span class="wall__av" aria-hidden="true">HN</span>
+            <span class="wall__id"><b>Hana Nakamura</b><span>Project Manager, Nordklinik</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="wall__item" data-reveal="fade-up" style="--d:.05s">
+          <span class="wall__stars" role="img" aria-label="Rated 5 out of 5"><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg></span>
+          <blockquote><p>&ldquo;Our season is eight weeks of harvest and zero slack. Their yield model showed us a nine per cent gain we had not budgeted for.&rdquo;</p></blockquote>
+          <figcaption class="wall__who">
+            <span class="wall__av" aria-hidden="true">DB</span>
+            <span class="wall__id"><b>Diego Balmori</b><span>Field Operations, Verdant Agritech</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="wall__item" data-reveal="fade-up" style="--d:.12s">
+          <span class="wall__stars" role="img" aria-label="Rated 5 out of 5"><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg></span>
+          <blockquote><p>&ldquo;Procurement wanted three reference calls before signing. They gave us four, including one about the project that went badly. That is why we signed with them.&rdquo;</p></blockquote>
+          <figcaption class="wall__who">
+            <span class="wall__av" aria-hidden="true">AK</span>
+            <span class="wall__id"><b>Aisha Khan</b><span>Supply Chain Director, Meridian Ports</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="wall__item" data-reveal="fade-up" style="--d:.19s">
+          <span class="wall__stars" role="img" aria-label="Rated 5 out of 5"><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg></span>
+          <blockquote><p>&ldquo;They trained our technicians instead of hoarding the knowledge. My team now services the fleet themselves, which was never on the original quote.&rdquo;</p></blockquote>
+          <figcaption class="wall__who">
+            <span class="wall__av" aria-hidden="true">JM</span>
+            <span class="wall__id"><b>Jonas Meyer</b><span>Reliability Engineer, Vantage Pharma</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="wall__item" data-reveal="fade-up" style="--d:.05s">
+          <span class="wall__stars" role="img" aria-label="Rated 5 out of 5"><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg></span>
+          <blockquote><p>&ldquo;Audit day was the part I dreaded. Their documentation was already in the inspector's inbox. Four hours and no findings &mdash; it has never gone like that for us.&rdquo;</p></blockquote>
+          <figcaption class="wall__who">
+            <span class="wall__av" aria-hidden="true">SC</span>
+            <span class="wall__id"><b>Sofia Cruz</b><span>Quality Lead, Aster Metals</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="wall__item" data-reveal="fade-up" style="--d:.12s">
+          <span class="wall__stars" role="img" aria-label="Rated 5 out of 5"><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg></span>
+          <blockquote><p>&ldquo;They killed one of our own ideas in week two because the data said it would not hold. We still hired them for the rest of the programme.&rdquo;</p></blockquote>
+          <figcaption class="wall__who">
+            <span class="wall__av" aria-hidden="true">OT</span>
+            <span class="wall__id"><b>Owen Traoré</b><span>Operations Manager, Brightline Warehousing</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="wall__item" data-reveal="fade-up" style="--d:.19s">
+          <span class="wall__stars" role="img" aria-label="Rated 5 out of 5"><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg><svg aria-hidden="true"><use href="#star"></use></svg></span>
+          <blockquote><p>&ldquo;Two years on, the software has been updated four times and nothing broke. That boring reliability is the entire reason we expanded the scope twice.&rdquo;</p></blockquote>
+          <figcaption class="wall__who">
+            <span class="wall__av" aria-hidden="true">EV</span>
+            <span class="wall__id"><b>Elin Vikström</b><span>Production Lead, Helios Manufacturing</span></span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POST-PROJECT SCORES ============ -->
+  <section class="section section--alt" id="scores">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> POST-PROJECT SCORES </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          What clients score us<br><span class="grad-text">after go-live</span>
+        </h2>
+        <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+          Collected by an independent survey at ninety days, not by the account manager
+          who wants the renewal.
+        </p>
+      </header>
+
+      <ul class="bars bars--center" data-reveal="fade-up" style="--d:.18s">
+        <li>
+          <span class="bars__name">Would recommend Stackly to a peer</span>
+          <span class="bars__val" data-count="99" data-suffix="%">0%</span>
+          <span class="bars__track"><i class="bars__fill" data-fill="99"></i></span>
+        </li>
+        <li>
+          <span class="bars__name">Delivered on the agreed handover date</span>
+          <span class="bars__val" data-count="97" data-suffix="%">0%</span>
+          <span class="bars__track"><i class="bars__fill" data-fill="97"></i></span>
+        </li>
+        <li>
+          <span class="bars__name">Passed safety certification first time</span>
+          <span class="bars__val" data-count="100" data-suffix="%">0%</span>
+          <span class="bars__track"><i class="bars__fill" data-fill="100"></i></span>
+        </li>
+        <li>
+          <span class="bars__name">Support requests resolved same day</span>
+          <span class="bars__val" data-count="94" data-suffix="%">0%</span>
+          <span class="bars__track"><i class="bars__fill" data-fill="94"></i></span>
+        </li>
+        <li>
+          <span class="bars__name">Extended or repeated the scope</span>
+          <span class="bars__val" data-count="91" data-suffix="%">0%</span>
+          <span class="bars__track"><i class="bars__fill" data-fill="91"></i></span>
+        </li>
+      </ul>
+
+      <p class="scores__note" data-reveal="fade-up" style="--d:.24s">
+        // 118 responses across 34 programmes &middot; full summary available on request
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ REFERENCES FAQ ============ -->
+  <section class="section" id="reference-faq">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> REFERENCES </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Check us, <span class="grad-text">properly</span>
+        </h2>
+        <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+          Most vendors offer a happy customer. We would rather you spoke to the
+          project where something went wrong.
+        </p>
+      </header>
+
+      <div class="faq faq--center" data-reveal="fade-up" style="--d:.18s">
+
+        <details>
+          <summary>Can we speak to a reference customer before we sign?</summary>
+          <p>Yes, and we suggest you do it early. You get three calls at proposal stage, chosen by sector rather than by friendliness, plus a site visit to a system that has been running for at least six months.</p>
+        </details>
+
+        <details>
+          <summary>Can we talk to a project that went badly?</summary>
+          <p>We will give you that reference too. One pilot in 2024 missed its cycle-time target by 18% and we rewrote the programme rather than the claim; the customer speaks freely about both.</p>
+        </details>
+
+        <details>
+          <summary>Are these results audited or self-reported?</summary>
+          <p>The outcome figures are measured by the customer's own team against a baseline we agree in writing during discovery. Where a third-party audit exists, such as the Nordklinik safety case, we publish the certification reference.</p>
+        </details>
+
+        <details>
+          <summary>Who from your team actually does the work?</summary>
+          <p>The engineers named in your proposal. You meet them before you sign, they stay through handover, and their names appear on every weekly status report &mdash; no account manager relaying someone else's news.</p>
+        </details>
+
+        <details>
+          <summary>What if the system misses the numbers in the proposal?</summary>
+          <p>Then we have not delivered and you do not pay the final milestone. The targets, the baseline and the measurement method are written into stage one, so the argument is about data rather than memory.</p>
+        </details>
+
+        <details>
+          <summary>Do you still support us after the contract ends?</summary>
+          <p>Every system ships with a year of support, and about two thirds of clients extend it. The model, the simulator and the telemetry history are yours, so leaving us is a decision rather than a cliff.</p>
+        </details>
+
+      </div>
+    </div>
+</section>
+
+  <!-- ============ NUMBERS ============ -->
+  <section class="band">
+    <div class="container band__grid">
+      <div class="band__item" data-reveal="zoom-in"><b class="count" data-count="240">0</b><span>Robots in the field</span></div>
+      <div class="band__item" data-reveal="zoom-in" style="--d:.08s"><b class="count" data-count="38">0</b><span>Countries served</span></div>
+      <div class="band__item" data-reveal="zoom-in" style="--d:.16s"><b class="count" data-count="112">0</b><span>Robotics engineers</span></div>
+      <div class="band__item" data-reveal="zoom-in" style="--d:.24s"><b class="count" data-count="19">0</b><span>Active patents</span></div>
+    </div>
+  </section>
+  <!-- ============ CTA ============ -->
+  <section class="section section--cta">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> NEXT STEP </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Ready when you are.<br><span class="grad-text">Start the brief</span>
+        </h2>
+      </header>
+      <div class="hero__actions hero__actions--center" data-reveal="fade-up" style="--d:.12s">
+        <a href="contact.html" class="btn btn--primary magnetic">
+          <span>Talk to an engineer</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h16M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="process.html" class="btn btn--ghost">
+          <span>How we work</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer__top">
+    <div class="footer__brand">
+      <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo__mark">
+          <img src="assets/images/logo.webp" alt="" width="88" height="38" loading="lazy" decoding="async">
+        </span>
+      </a>
+      <p>AI &amp; robotics engineering for teams that need machines to actually work.</p>
+
+      <ul class="footer__social" aria-label="Social media">
+        <li>
+          <a href="404.html" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0zM3.4 8.5h3.1V21H3.4zM9.1 8.5h2.96v1.71h.04c.41-.78 1.42-1.6 2.93-1.6 3.13 0 3.71 2.06 3.71 4.74V21h-3.1v-5.3c0-1.26-.02-2.89-1.76-2.89-1.76 0-2.03 1.37-2.03 2.8V21H9.1z" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="404.html" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="404.html" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.53 3h3.02l-6.6 7.54L21.75 21h-5.9l-4.62-6.04L5.94 21H2.92l7.06-8.07L2.5 3h6.05l4.18 5.52zm-1.06 16.15h1.67L7.6 4.74H5.81z" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="404.html" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.28 5 12 5 12 5s-6.28 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.72 19 12 19 12 19s6.28 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15.02V8.98L15.2 12z" fill="currentColor"/></svg>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+    <nav class="footer__cols" aria-label="Footer">
+      <div>
+        <h4>Capabilities</h4>
+        <ul>
+          <li><a href="capabilities.html">Machine Vision</a></li>
+          <li><a href="capabilities.html">Robotic Arms</a></li>
+          <li><a href="capabilities.html">Embodied AI</a></li>
+          <li><a href="technology.html">Fleet Ops</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="solutions.html">Manufacturing</a></li>
+          <li><a href="solutions.html">Logistics</a></li>
+          <li><a href="solutions.html">Agri-Tech</a></li>
+          <li><a href="solutions.html">Healthcare</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="process.html">Process</a></li>
+          <li><a href="voices.html">Voices</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer__contact">
+          <li>
+            <span>Mail</span>
+            <a href="404.html">build@stackly.io</a>
+          </li>
+          <li>
+            <span>Phone</span>
+            <a href="404.html">+31 10 284 0120</a>
+          </li>
+          <li>
+            <span>HQ</span>
+            <p>27 Foundry Lane, Rotterdam</p>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container footer__bot">
+    <p>&copy; <span id="year">2026</span> Stackly Industries B.V. &mdash; All systems nominal.</p>
+    <a href="#main" class="to-top" id="toTop" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Stackly client console &mdash; live signals, latency and stream health for your fleet.">
+<title>Telemetry &mdash; Stackly client</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body class="page-bare">
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--c"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<main id="main" class="dash">
+
+  <!-- ============ RAIL ============ -->
+  <aside class="dash__rail">
+    <div class="dash-mobile-head">
+      <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo__mark">
+          <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+        </span>
+      </a>
+      <button class="dash-mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="dashboardNavigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="dash__nav" id="dashboardNavigation" aria-label="Your fleet">
+      <span class="dash__nav-label">Your fleet</span>
+      <ul class="dash__nav-list">
+        <li>
+          <a class="dash__link" href="client-dashboard.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="11" width="7" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-units.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.4-3 8-7.5 9-4.5-1-7.5-4.6-7.5-9V6z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            My units
+            <b>44</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link is-active" href="client-telemetry.html" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16l4-6 4 3 4-7 6 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Telemetry
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-reports.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            Reports
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="client-support.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.2.9c0 1.8-2.6 2.3-2.6 3.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 17.2v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Support
+            <b>2</b>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="dash__rail-foot">
+      <a href="admin-dashboard.html" class="btn btn--ghost btn--sm">
+        <span>View as admin</span>
+      </a>
+      <a href="index.html" class="link-quiet">Back to site</a>
+    </div>
+  </aside>
+
+  <!-- ============ BODY ============ -->
+  <div class="dash__body">
+
+    <header class="dash__top">
+      <div>
+        <p class="dash__crumb">Helios Manufacturing / Telemetry</p>
+        <h1 class="dash__title">Telemetry</h1>
+      </div>
+
+      <div class="dash__tools">
+        <label class="dash__search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.2-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search signals, units, streams" aria-label="Search telemetry">
+        </label>
+        <span class="pill pill--info">Streaming</span>
+        <span class="dash__who">
+          <span class="avatar" aria-hidden="true">EV</span>
+          <span class="dash__who-txt"><b>Elin Vikstr&ouml;m</b><span>Client</span></span>
+        </span>
+      </div>
+    </header>
+
+    <div class="dash__content">
+
+      <!-- ============ KPI ============ -->
+      <section class="kpis" aria-label="Key figures">
+        <div class="kpi" data-reveal="fade-up">
+          <span class="kpi__label">Signals ingested, 60 s</span>
+          <span class="kpi__val"><span class="count" data-count="12840">0</span> <small>/ min</small></span>
+          <span class="kpi__delta is-up">+4.2% vs yesterday</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.06s">
+          <span class="kpi__label">Median latency</span>
+          <span class="kpi__val"><span class="count" data-count="42">0</span> <small>ms</small></span>
+          <span class="kpi__delta is-flat">Target under 50 ms</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.12s">
+          <span class="kpi__label">Stream uptime, 30 days</span>
+          <span class="kpi__val"><span class="count" data-count="99.4" data-decimals="1">0</span> <small>%</small></span>
+          <span class="kpi__delta is-up">+0.3 vs September</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.18s">
+          <span class="kpi__label">Dropped packets, 24 h</span>
+          <span class="kpi__val"><span class="count" data-count="118">0</span> <small>packets</small></span>
+          <span class="kpi__delta is-down">23 more than yesterday</span>
+        </div>
+      </section>
+
+      <!-- ============ LIVE SIGNALS + STREAM QUALITY ============ -->
+      <div class="dash__grid dash__grid--2">
+
+        <section class="panel" id="live-signals">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Live signals</h2>
+              <span class="panel__sub">Latest value per signal</span>
+            </div>
+            <span class="pill pill--ok pill--live">Live</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row row--head" style="--cols:1.5fr 1fr 1fr 1.2fr auto" aria-hidden="true">
+                <span class="row__cell">Signal</span>
+                <span class="row__cell">Unit</span>
+                <span class="row__cell">Value</span>
+                <span class="row__cell">Trend</span>
+                <span class="row__cell">Updated</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Signal"><b>Cycle time</b><small>grip &rarr; release</small></span>
+                <span class="row__cell" data-label="Unit">HL-114</span>
+                <span class="row__cell" data-label="Value">4.1 s</span>
+                <span class="row__cell" data-label="Trend"><span class="meter__track"><i class="meter__fill" data-fill="78"></i></span></span>
+                <span class="row__cell" data-label="Updated">12 s ago</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Signal"><b>Gripper torque</b><small>jaw closing force</small></span>
+                <span class="row__cell" data-label="Unit">HL-117</span>
+                <span class="row__cell" data-label="Value">42 N&middot;m</span>
+                <span class="row__cell" data-label="Trend"><span class="meter__track"><i class="meter__fill" data-fill="64"></i></span></span>
+                <span class="row__cell" data-label="Updated">18 s ago</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Signal"><b>Battery level</b><small>state of charge</small></span>
+                <span class="row__cell" data-label="Unit">HL-121</span>
+                <span class="row__cell" data-label="Value">64%</span>
+                <span class="row__cell" data-label="Trend"><span class="meter__track"><i class="meter__fill" data-fill="64"></i></span></span>
+                <span class="row__cell" data-label="Updated">21 s ago</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Signal"><b>Wheel torque</b><small>drive current</small></span>
+                <span class="row__cell" data-label="Unit">HL-138</span>
+                <span class="row__cell" data-label="Value">118 N&middot;m</span>
+                <span class="row__cell" data-label="Trend"><span class="meter__track"><i class="meter__fill" data-fill="47"></i></span></span>
+                <span class="row__cell" data-label="Updated">27 s ago</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Signal"><b>Motor temperature</b><small>joint 3 housing</small></span>
+                <span class="row__cell" data-label="Unit">HL-142</span>
+                <span class="row__cell" data-label="Value">41 &deg;C</span>
+                <span class="row__cell" data-label="Trend"><span class="meter__track"><i class="meter__fill" data-fill="58"></i></span></span>
+                <span class="row__cell" data-label="Updated">31 s ago</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1fr 1.2fr auto">
+                <span class="row__cell" data-label="Signal"><b>Path deviation</b><small>from planned lane</small></span>
+                <span class="row__cell" data-label="Unit">HL-126</span>
+                <span class="row__cell" data-label="Value">12 mm</span>
+                <span class="row__cell" data-label="Trend"><span class="meter__track"><i class="meter__fill" data-fill="36"></i></span></span>
+                <span class="row__cell" data-label="Updated">44 s ago</span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>6 of 212 signals shown &middot; sampled every 2 s</span>
+            <a href="#live-signals" class="link-quiet">Open live view</a>
+          </footer>
+        </section>
+
+        <section class="panel" id="stream-quality">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Stream quality</h2>
+              <span class="panel__sub">Streams up vs provisioned</span>
+            </div>
+            <span class="pill pill--ok">Healthy</span>
+          </header>
+
+          <div class="panel__body">
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Line 1 camera wall</span>
+                <span class="meter__val">12 / 12</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="99"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Line 2 camera wall</span>
+                <span class="meter__val">11 / 12</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="92"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Line 3 camera wall</span>
+                <span class="meter__val">10 / 12</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="84"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Bay A scanners</span>
+                <span class="meter__val">6 / 8</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="75"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Outbound handhelds</span>
+                <span class="meter__val">8 / 8</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="100"></i></span>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>47 streams &middot; 1 reconnecting</span>
+            <a href="#stream-quality" class="link-quiet">Stream detail</a>
+          </footer>
+        </section>
+
+      </div>
+
+      <!-- ============ HISTORY + LOG ============ -->
+      <div class="dash__grid dash__grid--2">
+
+        <section class="panel" id="signal-history">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Signal history</h2>
+              <span class="panel__sub">Last 24 hours</span>
+            </div>
+            <span class="pill pill--warn">1 critical</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Event"><b>Gap detected</b><small>aggregator &middot; Line 1</small></span>
+                <span class="row__cell" data-label="Unit">HL-114</span>
+                <span class="row__cell" data-label="Signal">Cycle time</span>
+                <span class="row__cell" data-label="Duration">4.2 s</span>
+                <span class="row__cell" data-label="Severity"><span class="pill pill--warn">Warning</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Event"><b>Stream reconnect</b><small>edge node &middot; Bay A</small></span>
+                <span class="row__cell" data-label="Unit">HL-138</span>
+                <span class="row__cell" data-label="Signal">Wheel torque</span>
+                <span class="row__cell" data-label="Duration">12 s</span>
+                <span class="row__cell" data-label="Severity"><span class="pill pill--info">Info</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Event"><b>Threshold crossed</b><small>battery service limit</small></span>
+                <span class="row__cell" data-label="Unit">HL-121</span>
+                <span class="row__cell" data-label="Signal">Battery level</span>
+                <span class="row__cell" data-label="Duration">1.1 min</span>
+                <span class="row__cell" data-label="Severity"><span class="pill pill--warn">Warning</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Event"><b>Stream resumed</b><small>after planned failover</small></span>
+                <span class="row__cell" data-label="Unit">HL-126</span>
+                <span class="row__cell" data-label="Signal">Path deviation</span>
+                <span class="row__cell" data-label="Duration">8 s</span>
+                <span class="row__cell" data-label="Severity"><span class="pill pill--ok">Recovered</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Event"><b>Echo mismatch</b><small>firmware handshake</small></span>
+                <span class="row__cell" data-label="Unit">HL-142</span>
+                <span class="row__cell" data-label="Signal">Firmware</span>
+                <span class="row__cell" data-label="Duration">26 s</span>
+                <span class="row__cell" data-label="Severity"><span class="pill pill--bad">Critical</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Event"><b>Sensor recalibrated</b><small>technician on site</small></span>
+                <span class="row__cell" data-label="Unit">HL-117</span>
+                <span class="row__cell" data-label="Signal">Gripper torque</span>
+                <span class="row__cell" data-label="Duration">3.4 s</span>
+                <span class="row__cell" data-label="Severity"><span class="pill pill--ok">Recovered</span></span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>6 events retained for 30 days</span>
+            <a href="#signal-history" class="link-quiet">Full history</a>
+          </footer>
+        </section>
+
+        <section class="panel" id="telemetry-log">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Telemetry log</h2>
+              <span class="panel__sub">Collector messages</span>
+            </div>
+          </header>
+
+          <div class="panel__body">
+            <ul class="feed">
+              <li>
+                <span class="feed__dot feed__dot--lime" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Rolling buffer rotated on all 44 units. No gaps in the last 24 hours of signal.</p>
+                  <time datetime="2026-10-02T09:41">3 min ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--violet" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Latency probe at <b>Bay A</b> averaged 38 ms across the shift, inside the 50 ms target.</p>
+                  <time datetime="2026-10-02T08:12">1 h ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--magenta" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Packet loss on <b>HL-138</b> exceeded the 0.5% threshold for 40 seconds before recovering.</p>
+                  <time datetime="2026-10-01T16:28">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Aggregator scaled to 12.8k signals per minute without dropping a single batch.</p>
+                  <time datetime="2026-10-01T13:05">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--lime" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Firmware 4.2.1 telemetry schema applied to Line 1 and confirmed on all 11 units.</p>
+                  <time datetime="2026-10-01T06:20">Yesterday</time>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Log retained for 30 days &middot; read-only</span>
+            <a href="#telemetry-log" class="link-quiet">Export log</a>
+          </footer>
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

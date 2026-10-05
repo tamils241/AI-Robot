@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Page not found — Stackly.">
+<title>404 — Signal lost | Stackly</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body class="page-bare">
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--b"></div>
+  <div class="fx__orb fx__orb--c"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+  <div class="fx__cursor" id="cursor"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__core">
+    <div class="loader__hex"></div>
+    <span class="loader__pct" id="loaderPct">00</span>
+  </div>
+  <p class="loader__txt">INITIALISING STACKLY CORE</p>
+</div>
+
+<main id="main">
+
+  <!-- ============ 404 ============ -->
+  <section class="err">
+    <div class="container">
+      <p class="sec-head__kicker err__kicker" data-reveal="fade-up"> SIGNAL LOST </p>
+      <p class="err__code" data-reveal="zoom-in" style="--d:.04s"><span data-d="404">404</span></p>
+      <h1 class="sec-head__title err__title" data-reveal="fade-up" style="--d:.08s">
+        This coordinate doesn't <span class="grad-text">exist</span>
+      </h1>
+      <p class="err__sub" data-reveal="fade-up" style="--d:.14s">
+        The page you're after has been moved, renamed, or never deployed.
+        Our robots are already re-planning a route back to something useful.
+      </p>
+
+      <div class="err__actions" data-reveal="fade-up" style="--d:.2s">
+        <a href="index.html" class="btn btn--primary magnetic">
+          <span>Back to home</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <button type="button" class="btn btn--ghost" id="backBtn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H8M12 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Go Back</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

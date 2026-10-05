@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Stackly capabilities — machine vision, robotic arms, embodied AI, autonomous navigation, digital twins and fleet operations under one roof.">
+<title>Capabilities — Stackly</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--b"></div>
+  <div class="fx__orb fx__orb--c"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+  <div class="fx__cursor" id="cursor"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__core">
+    <div class="loader__hex"></div>
+    <span class="loader__pct" id="loaderPct">00</span>
+  </div>
+  <p class="loader__txt">INITIALISING STACKLY CORE</p>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo" aria-label="Stackly home">
+      <span class="logo__mark">
+        <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html"><span>01</span>Home</a></li>
+        <li><a class="nav__link is-active" href="capabilities.html"><span>02</span>Capabilities</a></li>
+        <li><a class="nav__link" href="solutions.html"><span>03</span>Solutions</a></li>
+        <li><a class="nav__link" href="technology.html"><span>04</span>Technology</a></li>
+        <li><a class="nav__link" href="process.html"><span>05</span>Process</a></li>
+        <li><a class="nav__link" href="voices.html"><span>06</span>Voices</a></li>
+        <li><a class="nav__link" href="contact.html"><span>07</span>Contact</a></li>
+      </ul>
+      <div class="header__auth">
+        <a href="login.html" class="header__auth-link">Log in</a>
+        <a href="register.html" class="btn btn--sm btn--primary header__auth-cta">Register</a>
+      </div>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <span class="header__beam" aria-hidden="true"></span>
+</header>
+
+<main id="main">
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero page-hero--photo">
+    <div class="container page-hero__inner">
+      <nav class="crumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> / <span aria-current="page">Capabilities</span>
+      </nav>
+      <p class="sec-head__kicker" data-reveal="fade-up"> CORE CAPABILITIES </p>
+      <h1 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+        Everything a machine needs<br>to <span class="grad-text">think and move</span>
+      </h1>
+      <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+        Six in-house disciplines, one integrated stack. We own the full path from
+        sensor fusion to end-effector control — so nothing gets lost in a handover.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ CAPABILITIES ============ -->
+  <section class="section" id="capability-grid">
+    <div class="container">
+      <div class="grid grid--3">
+
+        <article class="card tilt" data-reveal="fade-up" style="--d:.05s">
+          <div class="card__shine" aria-hidden="true"></div>
+          <figure class="card__media">
+            <img src="assets/images/vision-800.webp" srcset="assets/images/vision-400.webp 400w, assets/images/vision-800.webp 800w, assets/images/vision-1200.webp 1200w" sizes="(min-width:1080px) 31vw, (min-width:680px) 46vw, 90vw" width="1200" height="675" alt="Components moving along an automated production line" loading="lazy" decoding="async">
+          </figure>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.8-7 10-7 10 7 10 7-3.8 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+          </div>
+          <h3>Machine Vision</h3>
+          <p>Multi-camera perception, 3D reconstruction and defect detection at 120&nbsp;fps on edge silicon.</p>
+          <ul class="card__list"><li>LiDAR + stereo fusion</li><li>Depth estimation</li><li>Defect &amp; anomaly detection</li></ul>
+        </article>
+
+        <article class="card tilt" data-reveal="fade-up" style="--d:.12s">
+          <div class="card__shine" aria-hidden="true"></div>
+          <figure class="card__media">
+            <img src="assets/images/arm-800.webp" srcset="assets/images/arm-400.webp 400w, assets/images/arm-800.webp 800w, assets/images/arm-1200.webp 1200w" sizes="(min-width:1080px) 31vw, (min-width:680px) 46vw, 90vw" width="1200" height="675" alt="Robotic arm picking up a small component in a laboratory" loading="lazy" decoding="async">
+          </figure>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 12h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Robotic Arms</h3>
+          <p>7-axis manipulators with dynamic collision avoidance and sub-millimetre repeatability.</p>
+          <ul class="card__list"><li>Force / torque control</li><li>Whole-body motion planning</li><li>Adaptive grippers</li></ul>
+        </article>
+
+        <article class="card tilt" data-reveal="fade-up" style="--d:.19s">
+          <div class="card__shine" aria-hidden="true"></div>
+          <figure class="card__media">
+            <img src="assets/images/ai-800.webp" srcset="assets/images/ai-400.webp 400w, assets/images/ai-800.webp 800w, assets/images/ai-1200.webp 1200w" sizes="(min-width:1080px) 31vw, (min-width:680px) 46vw, 90vw" width="1200" height="675" alt="Bipedal humanoid robot developed for embodied AI research" loading="lazy" decoding="async">
+          </figure>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="currentColor"/><circle cx="12" cy="4" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="19" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v2M14.4 13.6l2.6 1.9M9.6 13.6 7 15.5" stroke="currentColor" stroke-width="1.6"/></svg>
+          </div>
+          <h3>Embodied AI</h3>
+          <p>Vision-language-action models that translate natural language into motor primitives.</p>
+          <ul class="card__list"><li>VLA policy training</li><li>Simulation → sim-to-real</li><li>Few-shot task transfer</li></ul>
+        </article>
+
+        <article class="card tilt" data-reveal="fade-up" style="--d:.05s">
+          <div class="card__shine" aria-hidden="true"></div>
+          <figure class="card__media">
+            <img src="assets/images/nav-800.webp" srcset="assets/images/nav-400.webp 400w, assets/images/nav-800.webp 800w, assets/images/nav-1200.webp 1200w" sizes="(min-width:1080px) 31vw, (min-width:680px) 46vw, 90vw" width="1200" height="675" alt="Research vehicles in a self-driving navigation test lab" loading="lazy" decoding="async">
+          </figure>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 16l4-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="3" y="18" width="18" height="2.5" rx="1" fill="currentColor"/></svg>
+          </div>
+          <h3>Autonomous Navigation</h3>
+          <p>GPS-denied SLAM with dynamic obstacle prediction across warehouses, farms and cities.</p>
+          <ul class="card__list"><li>3D occupancy mapping</li><li>Crowd-aware planning</li><li>Fleet coordination</li></ul>
+        </article>
+
+        <article class="card tilt" data-reveal="fade-up" style="--d:.12s">
+          <div class="card__shine" aria-hidden="true"></div>
+          <figure class="card__media">
+            <img src="assets/images/twin-800.webp" srcset="assets/images/twin-400.webp 400w, assets/images/twin-800.webp 800w, assets/images/twin-1200.webp 1200w" sizes="(min-width:1080px) 31vw, (min-width:680px) 46vw, 90vw" width="1200" height="675" alt="Computer-generated flow simulation model of an industrial process" loading="lazy" decoding="async">
+          </figure>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 20h10M9 16v4M15 16v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 12l2.5-3 2 2 3-4 2.5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Digital Twins</h3>
+          <p>Photoreal digital replicas for line balancing, safety certification and virtual commissioning.</p>
+          <ul class="card__list"><li>Real-time sync</li><li>Process simulation</li><li>What-if analysis</li></ul>
+        </article>
+
+        <article class="card tilt" data-reveal="fade-up" style="--d:.19s">
+          <div class="card__shine" aria-hidden="true"></div>
+          <figure class="card__media">
+            <img src="assets/images/fleet-800.webp" srcset="assets/images/fleet-400.webp 400w, assets/images/fleet-800.webp 800w, assets/images/fleet-1200.webp 1200w" sizes="(min-width:1080px) 31vw, (min-width:680px) 46vw, 90vw" width="1200" height="675" alt="Grid of warehouse robots moving goods in a fulfilment centre" loading="lazy" decoding="async">
+          </figure>
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.4-3 8-7.5 9-4.5-1-7.5-4.6-7.5-9V6z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 12l2.2 2.2L15.5 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Fleet Operations</h3>
+          <p>Mission control for hundreds of units — telemetry, OTA updates and predictive maintenance.</p>
+          <ul class="card__list"><li>Live telemetry</li><li>OTA rollout</li><li>Predictive service</li></ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NUMBERS ============ -->
+  <section class="band">
+    <div class="container band__grid">
+      <div class="band__item" data-reveal="zoom-in"><b class="count" data-count="112">0</b><span>Robotics engineers</span></div>
+      <div class="band__item" data-reveal="zoom-in" style="--d:.08s"><b class="count" data-count="19">0</b><span>Active patents</span></div>
+      <div class="band__item" data-reveal="zoom-in" style="--d:.16s"><b class="count" data-count="38">0</b><span>Countries served</span></div>
+      <div class="band__item" data-reveal="zoom-in" style="--d:.24s"><b class="count" data-count="6">0</b><span>In-house disciplines</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section section--cta">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> NEXT STEP </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Pick a discipline.<br><span class="grad-text">We'll scope the rest</span>
+        </h2>
+      </header>
+      <div class="hero__actions hero__actions--center" data-reveal="fade-up" style="--d:.12s">
+        <a href="contact.html" class="btn btn--primary magnetic">
+          <span>Talk to an engineer</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h16M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="solutions.html" class="btn btn--ghost">
+          <span>See it deployed</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer__top">
+    <div class="footer__brand">
+      <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo__mark">
+          <img src="assets/images/logo.webp" alt="" width="88" height="38" loading="lazy" decoding="async">
+        </span>
+      </a>
+      <p>AI &amp; robotics engineering for teams that need machines to actually work.</p>
+
+      <ul class="footer__social" aria-label="Social media">
+        <li>
+          <a href="404.html" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0zM3.4 8.5h3.1V21H3.4zM9.1 8.5h2.96v1.71h.04c.41-.78 1.42-1.6 2.93-1.6 3.13 0 3.71 2.06 3.71 4.74V21h-3.1v-5.3c0-1.26-.02-2.89-1.76-2.89-1.76 0-2.03 1.37-2.03 2.8V21H9.1z" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="404.html" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="404.html" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.53 3h3.02l-6.6 7.54L21.75 21h-5.9l-4.62-6.04L5.94 21H2.92l7.06-8.07L2.5 3h6.05l4.18 5.52zm-1.06 16.15h1.67L7.6 4.74H5.81z" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="404.html" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.28 5 12 5 12 5s-6.28 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.72 19 12 19 12 19s6.28 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15.02V8.98L15.2 12z" fill="currentColor"/></svg>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+    <nav class="footer__cols" aria-label="Footer">
+      <div>
+        <h4>Capabilities</h4>
+        <ul>
+          <li><a href="capabilities.html">Machine Vision</a></li>
+          <li><a href="capabilities.html">Robotic Arms</a></li>
+          <li><a href="capabilities.html">Embodied AI</a></li>
+          <li><a href="technology.html">Fleet Ops</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="solutions.html">Manufacturing</a></li>
+          <li><a href="solutions.html">Logistics</a></li>
+          <li><a href="solutions.html">Agri-Tech</a></li>
+          <li><a href="solutions.html">Healthcare</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="process.html">Process</a></li>
+          <li><a href="voices.html">Voices</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer__contact">
+          <li>
+            <span>Mail</span>
+            <a href="404.html">build@stackly.io</a>
+          </li>
+          <li>
+            <span>Phone</span>
+            <a href="404.html">+31 10 284 0120</a>
+          </li>
+          <li>
+            <span>HQ</span>
+            <p>27 Foundry Lane, Rotterdam</p>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container footer__bot">
+    <p>&copy; <span id="year">2026</span> Stackly Industries B.V. &mdash; All systems nominal.</p>
+    <a href="#" class="to-top" id="toTop" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

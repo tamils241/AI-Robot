@@ -1,0 +1,104 @@
+{
+  "flip-cell": {
+    "slot": "cell",
+    "card": "Assembly Cells",
+    "alt": "Conveyor production line in an assembly hall",
+    "files": {
+      "400": "flip-cell-400.webp",
+      "800": "flip-cell-800.webp"
+    },
+    "width": 800,
+    "height": 533,
+    "source": {
+      "name": "File:Конвейерные линии.jpg",
+      "author": "Алексей Четверухин",
+      "license": "CC BY 4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:%D0%9A%D0%BE%D0%BD%D0%B2%D0%B5%D0%B9%D0%B5%D1%80%D0%BD%D1%8B%D0%B5_%D0%BB%D0%B8%D0%BD%D0%B8%D0%B8.jpg"
+    }
+  },
+  "flip-fleet": {
+    "slot": "fleet",
+    "card": "Warehouse Fleets",
+    "alt": "Automated storage and retrieval shelving in a library",
+    "files": {
+      "400": "flip-fleet-400.webp",
+      "800": "flip-fleet-800.webp"
+    },
+    "width": 800,
+    "height": 533,
+    "source": {
+      "name": "File:Library (156458389).jpeg",
+      "author": "From81",
+      "license": "CC BY 3.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Library_(156458389).jpeg"
+    }
+  },
+  "flip-agri": {
+    "slot": "agri",
+    "card": "Field Robotics",
+    "alt": "Autonomous machine working a field",
+    "files": {
+      "400": "flip-agri-400.webp",
+      "800": "flip-agri-800.webp"
+    },
+    "width": 800,
+    "height": 533,
+    "source": {
+      "name": "File:New agriculture 5.jpg",
+      "author": "Helena.Chorzewska",
+      "license": "CC BY 4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:New_agriculture_5.jpg"
+    }
+  },
+  "flip-med": {
+    "slot": "med",
+    "card": "Surgical Assist",
+    "alt": "Medical robot system used for procedure assistance",
+    "files": {
+      "400": "flip-med-400.webp",
+      "800": "flip-med-800.webp"
+    },
+    "width": 800,
+    "height": 533,
+    "source": {
+      "name": "File:MEDICIS Robot.jpg",
+      "author": "Brice, Maximilien",
+      "license": "CC BY 4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:MEDICIS_Robot.jpg"
+    }
+  },
+  "flip-drone": {
+    "slot": "drone",
+    "card": "Inspection Drones",
+    "alt": "Wind turbine being inspected from the air",
+    "files": {
+      "400": "flip-drone-400.webp",
+      "800": "flip-drone-800.webp"
+    },
+    "width": 800,
+    "height": 533,
+    "source": {
+      "name": "File:Koushik C 2017 (Unsplash).jpg",
+      "author": "Koushik C  koushikc",
+      "license": "CC0",
+      "url": "https://commons.wikimedia.org/wiki/File:Koushik_C_2017_(Unsplash).jpg"
+    }
+  },
+  "flip-lab": {
+    "slot": "lab",
+    "card": "Lab Automation",
+    "alt": "Robotic liquid handling system in a genomics laboratory",
+    "files": {
+      "400": "flip-lab-400.webp",
+      "800": "flip-lab-800.webp"
+    },
+    "width": 800,
+    "height": 533,
+    "source": {
+      "name": "File:Chemical Genomics Robot.jpg",
+      "author": "Maggie Bartlett, National Human Genome Research Institute",
+      "license": "Public domain",
+      "url": "https://commons.wikimedia.org/wiki/File:Chemical_Genomics_Robot.jpg"
+    }
+  }
+}

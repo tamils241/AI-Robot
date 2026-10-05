@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Stackly admin console â€” fleet overview, deployments, model releases and user management.">
+<title>Admin console &mdash; Stackly</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body class="page-bare">
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--b"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<main id="main" class="dash">
+
+  <!-- ============ RAIL ============ -->
+  <aside class="dash__rail">
+    <div class="dash-mobile-head">
+      <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo__mark">
+          <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+        </span>
+      </a>
+      <button class="dash-mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="dashboardNavigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="dash__nav" id="dashboardNavigation" aria-label="Console">
+      <span class="dash__nav-label">Console</span>
+      <ul class="dash__nav-list">
+        <li>
+          <a class="dash__link is-active" href="admin-dashboard.html" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="11" width="7" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-fleets.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.4-3 8-7.5 9-4.5-1-7.5-4.6-7.5-9V6z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Fleets
+            <b>38</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-deployments.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M12 15l-4-4M12 15l4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 19h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            Deployments
+            <b>3</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-models.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="currentColor"/><circle cx="12" cy="4" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="19" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Model releases
+            <b>2</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-users.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 20a6 6 0 0 1 12 0M16 11a3 3 0 1 0 0-6M17 20a5 5 0 0 1 4-4.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            Users
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-billing.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.6"/></svg>
+            Billing
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-settings.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M17.7 6.3l-1.4 1.4M7.7 16.3l-1.4 1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="dash__rail-foot">
+      <a href="client-dashboard.html" class="btn btn--ghost btn--sm">
+        <span>View as client</span>
+      </a>
+      <a href="index.html" class="link-quiet">Back to site</a>
+    </div>
+  </aside>
+
+  <!-- ============ BODY ============ -->
+  <div class="dash__body">
+
+    <header class="dash__top">
+      <div>
+        <p class="dash__crumb">Console / Overview</p>
+        <h1 class="dash__title">Fleet overview</h1>
+      </div>
+
+      <div class="dash__tools">
+        <label class="dash__search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.2-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search units, sites, users" aria-label="Search the console">
+        </label>
+        <span class="pill pill--ok pill--live">All systems nominal</span>
+        <span class="dash__who">
+          <span class="avatar" aria-hidden="true">AR</span>
+          <span class="dash__who-txt"><b>Amara Reyes</b><span>Administrator</span></span>
+        </span>
+      </div>
+    </header>
+
+    <div class="dash__content">
+
+      <!-- ============ KPI ============ -->
+      <section class="kpis" aria-label="Key figures">
+        <div class="kpi" data-reveal="fade-up">
+          <span class="kpi__label">Units in field</span>
+          <span class="kpi__val"><span class="count" data-count="240">0</span></span>
+          <span class="kpi__delta is-up">+18 this quarter</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.06s">
+          <span class="kpi__label">Deployments</span>
+          <span class="kpi__val"><span class="count" data-count="18">0</span> <small>Q3</small></span>
+          <span class="kpi__delta is-flat">3 in progress</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.12s">
+          <span class="kpi__label">Model releases</span>
+          <span class="kpi__val"><span class="count" data-count="12">0</span></span>
+          <span class="kpi__delta is-flat">2 pending rollout</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.18s">
+          <span class="kpi__label">Console users</span>
+          <span class="kpi__val"><span class="count" data-count="64">0</span></span>
+          <span class="kpi__delta is-up">9 invited, 7 pending</span>
+        </div>
+      </section>
+
+      <div class="dash__grid dash__grid--2">
+
+        <!-- ============ FLEET TABLE ============ -->
+        <section class="panel" id="fleet">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Fleet status</h2>
+              <span class="panel__sub">Live Â· polled every 30s</span>
+            </div>
+            <span class="pill pill--info">240 units</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row row--head" aria-hidden="true">
+                <span class="row__cell">Unit</span>
+                <span class="row__cell">Site</span>
+                <span class="row__cell">Status</span>
+                <span class="row__cell">Uptime 30d</span>
+                <span class="row__cell">Check-in</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1.1fr 1fr .8fr auto">
+                <span class="row__cell" data-label="Unit"><b>HL-114</b><small>6-axis picker</small></span>
+                <span class="row__cell" data-label="Site">Helios Manufacturing Â· Line 3</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Operational</span></span>
+                <span class="row__cell" data-label="Uptime">99.4%</span>
+                <span class="row__cell" data-label="Check-in">4 min ago</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1.1fr 1fr .8fr auto">
+                <span class="row__cell" data-label="Unit"><b>KL-082</b><small>AMR Â· 900kg</small></span>
+                <span class="row__cell" data-label="Site">Kanto Logistics Â· Bay 2</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Operational</span></span>
+                <span class="row__cell" data-label="Uptime">98.9%</span>
+                <span class="row__cell" data-label="Check-in">1 min ago</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1.1fr 1fr .8fr auto">
+                <span class="row__cell" data-label="Unit"><b>VA-207</b><small>Harvest manipulator</small></span>
+                <span class="row__cell" data-label="Site">Verdant Agritech Â· Block C</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--info">Charging</span></span>
+                <span class="row__cell" data-label="Uptime">97.6%</span>
+                <span class="row__cell" data-label="Check-in">Just now</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1.1fr 1fr .8fr auto">
+                <span class="row__cell" data-label="Unit"><b>NK-051</b><small>Sub-sea ROV</small></span>
+                <span class="row__cell" data-label="Site">Nordkapp Energy Â· Field 4</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--warn">Maintenance</span></span>
+                <span class="row__cell" data-label="Uptime">94.1%</span>
+                <span class="row__cell" data-label="Check-in">2 h ago</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1.1fr 1fr .8fr auto">
+                <span class="row__cell" data-label="Unit"><b>DF-330</b><small>Palletiser</small></span>
+                <span class="row__cell" data-label="Site">Delta Foods Â· Pack 1</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--bad">Offline</span></span>
+                <span class="row__cell" data-label="Uptime">91.2%</span>
+                <span class="row__cell" data-label="Check-in">3 h ago</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr 1.1fr 1fr .8fr auto">
+                <span class="row__cell" data-label="Unit"><b>MP-019</b><small>Yard transporter</small></span>
+                <span class="row__cell" data-label="Site">Meridian Ports Â· Yard B</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Operational</span></span>
+                <span class="row__cell" data-label="Uptime">99.8%</span>
+                <span class="row__cell" data-label="Check-in">Just now</span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Showing 6 of 240 units</span>
+            <a href="#fleet" class="link-quiet">Open fleet manager</a>
+          </footer>
+        </section>
+
+        <!-- ============ ALERTS ============ -->
+        <section class="panel" id="deployments">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Needs attention</h2>
+              <span class="panel__sub">4 open items</span>
+            </div>
+          </header>
+
+          <div class="panel__body">
+            <ul class="feed">
+              <li>
+                <span class="feed__dot feed__dot--magenta" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>DF-330</b> has missed four check-ins. Field engineer dispatched to Delta Foods.</p>
+                  <time datetime="2026-10-02T09:14">12 min ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--violet" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Model release <b>v4.2.1-rc3</b> staged for 44 units at Kanto Logistics, pending sign-off.</p>
+                  <time datetime="2026-10-02T07:40">2 h ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>Nordklinik safety certificate expires in 21 days. Renewal pack auto-generated.</p>
+                  <time datetime="2026-10-01T16:02">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--lime" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p>9 console invitations accepted. Role mix: 3 administrators, 6 clients.</p>
+                  <time datetime="2026-10-01T11:25">Yesterday</time>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Oldest open item Â· 3 h</span>
+            <a href="#deployments" class="link-quiet">View all</a>
+          </footer>
+        </section>
+
+      </div>
+
+      <!-- ============ UTILISATION + USERS ============ -->
+      <div class="dash__grid dash__grid--2">
+
+        <section class="panel" id="models">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Utilisation by site</h2>
+              <span class="panel__sub">Rolling 30 days</span>
+            </div>
+          </header>
+
+          <div class="panel__body">
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Helios Manufacturing</span>
+                <span class="meter__val">92%</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="92"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Kanto Logistics</span>
+                <span class="meter__val">87%</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="87"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Verdant Agritech</span>
+                <span class="meter__val">74%</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="74"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Nordkapp Energy</span>
+                <span class="meter__val">68%</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="68"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Delta Foods</span>
+                <span class="meter__val">61%</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill is-warn" data-fill="61"></i></span>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Below 70% triggers a commercial review</span>
+          </footer>
+        </section>
+
+        <section class="panel" id="users">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Recent console activity</h2>
+              <span class="panel__sub">Last 24 hours</span>
+            </div>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row" style="--cols:1.3fr 1fr auto">
+                <span class="row__cell" data-label="User"><b>Marta Kowalczyk</b><small>Vantage Pharma Â· administrator</small></span>
+                <span class="row__cell" data-label="Action">Exported deployment history</span>
+                <span class="row__cell" data-label="When">08:51</span>
+              </div>
+              <div class="row" style="--cols:1.3fr 1fr auto">
+                <span class="row__cell" data-label="User"><b>Tom Okonkwo</b><small>Meridian Ports Â· client</small></span>
+                <span class="row__cell" data-label="Action">Ran a fleet simulation</span>
+                <span class="row__cell" data-label="When">08:12</span>
+              </div>
+              <div class="row" style="--cols:1.3fr 1fr auto">
+                <span class="row__cell" data-label="User"><b>Kenji Watanabe</b><small>Kanto Logistics Â· administrator</small></span>
+                <span class="row__cell" data-label="Action">Approved rollout v4.2.1-rc3</span>
+                <span class="row__cell" data-label="When">07:44</span>
+              </div>
+              <div class="row" style="--cols:1.3fr 1fr auto">
+                <span class="row__cell" data-label="User"><b>Priya Raghavan</b><small>Delta Foods Â· client</small></span>
+                <span class="row__cell" data-label="Action">Downloaded Q3 uptime report</span>
+                <span class="row__cell" data-label="When">06:30</span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>64 users Â· 7 invitations pending</span>
+            <a href="#users" class="link-quiet">Manage users</a>
+          </footer>
+        </section>
+
+      </div>
+
+      <div class="dash__grid dash__grid--2" id="billing">
+        <section class="panel" id="settings">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Console capacity</h2>
+              <span class="panel__sub">Q3 allocation</span>
+            </div>
+          </header>
+          <div class="panel__body">
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Telemetry ingest</span>
+                <span class="meter__val">18.2 / 25 TB</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="73"></i></span>
+            </div>
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Simulation hours</span>
+                <span class="meter__val">412 / 600 h</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="69"></i></span>
+            </div>
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Model storage</span>
+                <span class="meter__val">2.9 / 5 TB</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill is-warn" data-fill="88"></i></span>
+            </div>
+          </div>
+          <footer class="panel__foot">
+            <span>Allocation resets 01 Oct</span>
+            <a href="#billing" class="link-quiet">Adjust plan</a>
+          </footer>
+        </section>
+
+        <section class="panel">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Deployments in progress</h2>
+              <span class="panel__sub">Stage 03 / 04</span>
+            </div>
+          </header>
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row" style="--cols:1.4fr 1fr auto">
+                <span class="row__cell" data-label="Programme"><b>Kanto Logistics</b><small>44 units Â· rollout</small></span>
+                <span class="row__cell" data-label="Stage"><span class="pill pill--info">Deploying</span></span>
+                <span class="row__cell" data-label="Progress">62%</span>
+              </div>
+              <div class="row" style="--cols:1.4fr 1fr auto">
+                <span class="row__cell" data-label="Programme"><b>Nordkapp Energy</b><small>200 units Â· commissioning</small></span>
+                <span class="row__cell" data-label="Stage"><span class="pill pill--ok">On track</span></span>
+                <span class="row__cell" data-label="Progress">88%</span>
+              </div>
+              <div class="row" style="--cols:1.4fr 1fr auto">
+                <span class="row__cell" data-label="Programme"><b>Aster Metals</b><small>12 cells Â· discovery</small></span>
+                <span class="row__cell" data-label="Stage"><span class="pill pill--warn">At risk</span></span>
+                <span class="row__cell" data-label="Progress">24%</span>
+              </div>
+            </div>
+          </div>
+          <footer class="panel__foot">
+            <span>3 of 18 Q3 deployments active</span>
+            <a href="#deployments" class="link-quiet">Open deployments</a>
+          </footer>
+        </section>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

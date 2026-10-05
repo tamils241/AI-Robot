@@ -1,0 +1,110 @@
+{
+  "vision": {
+    "card": "Machine Vision",
+    "alt": "Production line where multi-camera inspection runs",
+    "files": {
+      "400": "vision-400.webp",
+      "800": "vision-800.webp",
+      "1200": "vision-1200.webp"
+    },
+    "lqip": "vision-lqip.webp",
+    "width": 1200,
+    "height": 675,
+    "source": {
+      "name": "File:Assembly Line (Unsplash).jpg",
+      "author": "Samuel Zeller  samuelzeller",
+      "license": "CC0",
+      "url": "https://commons.wikimedia.org/wiki/File:Assembly_Line_(Unsplash).jpg"
+    }
+  },
+  "arm": {
+    "card": "Robotic Arms",
+    "alt": "Robotic arm handling a component in a lab",
+    "files": {
+      "400": "arm-400.webp",
+      "800": "arm-800.webp",
+      "1200": "arm-1200.webp"
+    },
+    "lqip": "arm-lqip.webp",
+    "width": 1200,
+    "height": 675,
+    "source": {
+      "name": "File:Robot arm works on a small component in a lab setting.jpg",
+      "author": "Shixart1985",
+      "license": "CC BY 2.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Robot_arm_works_on_a_small_component_in_a_lab_setting.jpg"
+    }
+  },
+  "ai": {
+    "card": "Embodied AI",
+    "alt": "Humanoid robot developed for embodied AI research",
+    "files": {
+      "400": "ai-400.webp",
+      "800": "ai-800.webp",
+      "1200": "ai-1200.webp"
+    },
+    "lqip": "ai-lqip.webp",
+    "width": 1200,
+    "height": 675,
+    "source": {
+      "name": "File:AGIBOT-X2- by JxFile MWC26.jpg",
+      "author": "JJxFile",
+      "license": "CC BY 4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:AGIBOT-X2-_by_JxFile_MWC26.jpg"
+    }
+  },
+  "nav": {
+    "card": "Autonomous Navigation",
+    "alt": "Autonomous driving and navigation lab",
+    "files": {
+      "400": "nav-400.webp",
+      "800": "nav-800.webp",
+      "1200": "nav-1200.webp"
+    },
+    "lqip": "nav-lqip.webp",
+    "width": 1200,
+    "height": 675,
+    "source": {
+      "name": "File:ISEAUTO, the Lab for Self-Driving Vehicles in TalTech.jpg",
+      "author": "Lauri Veerde",
+      "license": "CC BY 4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:ISEAUTO,_the_Lab_for_Self-Driving_Vehicles_in_TalTech.jpg"
+    }
+  },
+  "twin": {
+    "card": "Digital Twins",
+    "alt": "Engineering simulation model used for virtual commissioning",
+    "files": {
+      "400": "twin-400.webp",
+      "800": "twin-800.webp",
+      "1200": "twin-1200.webp"
+    },
+    "lqip": "twin-lqip.webp",
+    "width": 1200,
+    "height": 675,
+    "source": {
+      "name": "File:Computergestützte Strömungssimulation.jpg",
+      "author": "DLR",
+      "license": "CC BY 3.0 de",
+      "url": "https://commons.wikimedia.org/wiki/File:Computergest%C3%BCtzte_Str%C3%B6mungssimulation.jpg"
+    }
+  },
+  "fleet": {
+    "card": "Fleet Operations",
+    "alt": "Grid of warehouse robots under fleet management",
+    "files": {
+      "400": "fleet-400.webp",
+      "800": "fleet-800.webp",
+      "1200": "fleet-1200.webp"
+    },
+    "lqip": "fleet-lqip.webp",
+    "width": 1200,
+    "height": 675,
+    "source": {
+      "name": "File:Ocado warehouse bots.jpg",
+      "author": "Techwords",
+      "license": "CC BY-SA 4.0",
+      "url": "https://commons.wikimedia.org/wiki/File:Ocado_warehouse_bots.jpg"
+    }
+  }
+}

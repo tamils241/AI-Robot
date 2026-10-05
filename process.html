@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="How Stackly works &mdash; discover, prototype, build, deploy and evolve, with a defined exit criterion at every stage.">
+<title>Process &mdash; Stackly</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--b"></div>
+  <div class="fx__orb fx__orb--c"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+  <div class="fx__cursor" id="cursor"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__core">
+    <div class="loader__hex"></div>
+    <span class="loader__pct" id="loaderPct">00</span>
+  </div>
+  <p class="loader__txt">INITIALISING STACKLY CORE</p>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo" aria-label="Stackly home">
+      <span class="logo__mark">
+        <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html"><span>01</span>Home</a></li>
+        <li><a class="nav__link" href="capabilities.html"><span>02</span>Capabilities</a></li>
+        <li><a class="nav__link" href="solutions.html"><span>03</span>Solutions</a></li>
+        <li><a class="nav__link" href="technology.html"><span>04</span>Technology</a></li>
+        <li><a class="nav__link is-active" href="process.html"><span>05</span>Process</a></li>
+        <li><a class="nav__link" href="voices.html"><span>06</span>Voices</a></li>
+        <li><a class="nav__link" href="contact.html"><span>07</span>Contact</a></li>
+      </ul>
+      <div class="header__auth">
+        <a href="login.html" class="header__auth-link">Log in</a>
+        <a href="register.html" class="btn btn--sm btn--primary header__auth-cta">Register</a>
+      </div>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <span class="header__beam" aria-hidden="true"></span>
+</header>
+
+<main id="main">
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero page-hero--photo">
+    <div class="container page-hero__inner">
+      <nav class="crumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> / <span aria-current="page">Process</span>
+      </nav>
+      <p class="sec-head__kicker" data-reveal="fade-up"> PROCESS </p>
+      <h1 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+        From brief to<br><span class="grad-text">production line</span>
+      </h1>
+      <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+        Five stages, each with a defined exit criterion. You always know what is
+        running, what it costs and what happens next.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ STEPS ============ -->
+  <section class="section" id="steps-section">
+    <div class="container">
+      <ol class="steps steps--center" id="steps">
+        <li class="step" data-reveal="fade-left">
+          <span class="step__no">01</span>
+          <div class="step__body">
+            <h3>Discover</h3>
+            <p>Workshops, site audits and feasibility modelling. We quantify the value and the risk before writing a line of code.</p>
+            <span class="step__line"></span>
+          </div>
+        </li>
+        <li class="step" data-reveal="fade-left" style="--d:.1s">
+          <span class="step__no">02</span>
+          <div class="step__body">
+            <h3>Prototype</h3>
+            <p>Digital twin first, hardware second. A working demo in weeks &mdash; not a slide deck in quarters.</p>
+            <span class="step__line"></span>
+          </div>
+        </li>
+        <li class="step" data-reveal="fade-left" style="--d:.2s">
+          <span class="step__no">03</span>
+          <div class="step__body">
+            <h3>Build</h3>
+            <p>Modular hardware, versioned software, continuous integration and a simulation suite that runs on every commit.</p>
+            <span class="step__line"></span>
+          </div>
+        </li>
+        <li class="step" data-reveal="fade-left" style="--d:.3s">
+          <span class="step__no">04</span>
+          <div class="step__body">
+            <h3>Deploy</h3>
+            <p>On-site commissioning, operator training, safety certification and a hypercare window with our field engineers.</p>
+            <span class="step__line"></span>
+          </div>
+        </li>
+        <li class="step" data-reveal="fade-left" style="--d:.4s">
+          <span class="step__no">05</span>
+          <div class="step__body">
+            <h3>Evolve</h3>
+            <p>Fleet analytics feed the next model release. Your system compounds in capability every quarter.</p>
+            <span class="step__line"></span>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ DELIVERABLES ============ -->
+  <section class="section section--alt" id="deliverables">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> WHAT YOU GET </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Every stage leaves<br><span class="grad-text">something behind</span>
+        </h2>
+        <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+          No black-box retainers. Each phase produces an artefact your team owns,
+          documents and can keep even if we part ways.
+        </p>
+      </header>
+
+      <div class="grid grid--3">
+
+        <article class="card" data-reveal="fade-up" style="--d:.05s">
+          <span class="chip chip--sm">STAGE 01</span>
+          <h3>Feasibility pack</h3>
+          <p>A two-week discovery that turns a vague ambition into a costed, risk-scored programme.</p>
+          <ul class="card__list">
+            <li>Value model &amp; ROI baseline</li>
+            <li>Technical feasibility study</li>
+            <li>Risk register with mitigations</li>
+            <li>Indicative budget &amp; timeline</li>
+          </ul>
+        </article>
+
+        <article class="card" data-reveal="fade-up" style="--d:.12s">
+          <span class="chip chip--sm">STAGE 02</span>
+          <h3>Live prototype</h3>
+          <p>A working demonstration in simulation and on bench hardware, with the numbers to back it.</p>
+          <ul class="card__list">
+            <li>Digital twin of your process</li>
+            <li>Benchtop cell, repeatable</li>
+            <li>Measured cycle-time data</li>
+            <li>Go / no-go recommendation</li>
+          </ul>
+        </article>
+
+        <article class="card" data-reveal="fade-up" style="--d:.19s">
+          <span class="chip chip--sm">STAGE 03</span>
+          <h3>Production codebase</h3>
+          <p>Versioned, tested, documented and yours outright — built to be handed over, not held hostage.</p>
+          <ul class="card__list">
+            <li>CI pipeline &amp; test suite</li>
+            <li>Simulation regression harness</li>
+            <li>Architecture &amp; API documentation</li>
+            <li>Full IP transfer on delivery</li>
+          </ul>
+        </article>
+
+        <article class="card" data-reveal="fade-up" style="--d:.05s">
+          <span class="chip chip--sm">STAGE 04</span>
+          <h3>Commissioned site</h3>
+          <p>Hardware installed, certified and signed off with your operators trained on it.</p>
+          <ul class="card__list">
+            <li>CE / PL-d documentation pack</li>
+            <li>Operator &amp; maintenance training</li>
+            <li>Runbook and spare-parts plan</li>
+            <li>Two-week hypercare on site</li>
+          </ul>
+        </article>
+
+        <article class="card" data-reveal="fade-up" style="--d:.12s">
+          <span class="chip chip--sm">STAGE 05</span>
+          <h3>Living dashboard</h3>
+          <p>Telemetry, alerts and predictive service from day one of production.</p>
+          <ul class="card__list">
+            <li>Fleet telemetry &amp; alerting</li>
+            <li>Quarterly model releases</li>
+            <li>Predictive maintenance</li>
+            <li>Named field engineer</li>
+          </ul>
+        </article>
+
+        <article class="card" data-reveal="fade-up" style="--d:.19s">
+          <span class="chip chip--sm">ALWAYS</span>
+          <h3>A named engineer</h3>
+          <p>One accountable technical lead from first workshop to handover, reachable throughout.</p>
+          <ul class="card__list">
+            <li>Single point of contact</li>
+            <li>Weekly written status</li>
+            <li>No handover churn mid-build</li>
+            <li>Escalation to the engineering lead</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENGAGEMENT ============ -->
+  <section class="section" id="engagement">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> ENGAGEMENT MODELS </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Three ways to <span class="grad-text">start</span>
+        </h2>
+        <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+          Most programmes begin with a paid discovery. A couple need something smaller first.
+        </p>
+      </header>
+
+      <div class="grid grid--3">
+
+        <article class="card" data-reveal="fade-up" style="--d:.05s">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Discovery sprint</h3>
+          <p>Two to three weeks, fixed fee. The right entry point when the problem is real but the scope is not yet sharp.</p>
+          <ul class="card__list">
+            <li>Feasibility &amp; ROI study</li>
+            <li>Fixed price, fixed dates</li>
+            <li>Creditable against a build</li>
+          </ul>
+        </article>
+
+        <article class="card" data-reveal="fade-up" style="--d:.12s">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18M8 4v5" stroke="currentColor" stroke-width="1.6"/></svg>
+          </div>
+          <h3>Milestone programme</h3>
+          <p>Our default. Scope is agreed stage by stage, so spend is always approved against a working result.</p>
+          <ul class="card__list">
+            <li>Hardware &amp; software quoted</li>
+            <li>Exit criterion per stage</li>
+            <li>Pause or pivot at any gate</li>
+          </ul>
+        </article>
+
+        <article class="card" data-reveal="fade-up" style="--d:.19s">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Embedded team</h3>
+          <p>Stackly engineers inside your organisation, working your backlog alongside your people.</p>
+          <ul class="card__list">
+            <li>Monthly or quarterly</li>
+            <li>Your tools, your standups</li>
+            <li>Knowledge left in-house</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRINCIPLES ============ -->
+  <section class="section section--alt" id="principles">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> HOW WE WORK </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Rules we don't <span class="grad-text">bend</span>
+        </h2>
+      </header>
+
+      <div class="grid grid--4">
+
+        <article class="card" data-reveal="fade-up" style="--d:.05s">
+          <h3>Written, always</h3>
+          <p>Every decision, risk and change is in writing. If it isn't documented, it didn't happen.</p>
+        </article>
+
+        <article class="card" data-reveal="fade-up" style="--d:.1s">
+          <h3>No lock-in</h3>
+          <p>Standard protocols, portable models and your code from day one. Leaving is your right, not a threat.</p>
+        </article>
+
+        <article class="card" data-reveal="fade-up" style="--d:.15s">
+          <h3>Bad news early</h3>
+          <p>We would rather kill a doomed programme in week two than defend it through two quarters.</p>
+        </article>
+
+        <article class="card" data-reveal="fade-up" style="--d:.2s">
+          <h3>Safety is not negotiable</h3>
+          <p>No schedule, deadline or demo is worth a near miss. We stop the line instead.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> FAQ </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Before you <span class="grad-text">brief us</span>
+        </h2>
+        <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+          The questions procurement and engineering ask us most often.
+        </p>
+      </header>
+
+      <div class="faq faq--center" data-reveal="fade-up" style="--d:.18s">
+
+        <details>
+          <summary>Do we have to commit to all five stages?</summary>
+          <p>No. Discovery is a standalone fixed-fee engagement, and plenty of clients start with a single capability pilot. Stages two to five only follow once the previous exit criterion is met.</p>
+        </details>
+
+        <details>
+          <summary>What do you need from us to start?</summary>
+          <p>A named technical contact, access to the site or process data, and roughly two days of stakeholder time in the first week. We handle everything else, including measurement and safety paperwork.</p>
+        </details>
+
+        <details>
+          <summary>Can you work alongside our existing integrators?</summary>
+          <p>Regularly. We are comfortable being one supplier in a larger programme, and we hand over cleanly to in-house teams or to a local maintenance partner at the end.</p>
+        </details>
+
+        <details>
+          <summary>How do you price the hardware?</summary>
+          <p>Transparent, itemised and quoted before any purchase order. We do not take a margin on third-party components, so the number we quote is the number you pay.</p>
+        </details>
+
+        <details>
+          <summary>What if the pilot fails?</summary>
+          <p>You keep every artefact produced in that stage, including the code, the simulation and the data. Discovery fees are not refundable, but nothing else is owed.</p>
+        </details>
+
+        <details>
+          <summary>How fast can we get started?</summary>
+          <p>Discovery usually begins within two to three weeks of a signed NDA. If your programme has a hard date, tell us at enquiry and we will tell you honestly whether it is reachable.</p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NUMBERS ============ -->
+  <section class="band">
+    <div class="container band__grid">
+      <div class="band__item" data-reveal="zoom-in"><b class="count" data-count="240">0</b><span>Robots in the field</span></div>
+      <div class="band__item" data-reveal="zoom-in" style="--d:.08s"><b class="count" data-count="38">0</b><span>Countries served</span></div>
+      <div class="band__item" data-reveal="zoom-in" style="--d:.16s"><b class="count" data-count="112">0</b><span>Robotics engineers</span></div>
+      <div class="band__item" data-reveal="zoom-in" style="--d:.24s"><b class="count" data-count="19">0</b><span>Active patents</span></div>
+    </div>
+  </section>
+  <!-- ============ CTA ============ -->
+  <section class="section section--cta">
+    <div class="container">
+      <header class="sec-head sec-head--center">
+        <p class="sec-head__kicker" data-reveal="fade-up"> NEXT STEP </p>
+        <h2 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+          Ready when you are.<br><span class="grad-text">Start the brief</span>
+        </h2>
+      </header>
+      <div class="hero__actions hero__actions--center" data-reveal="fade-up" style="--d:.12s">
+        <a href="contact.html" class="btn btn--primary magnetic">
+          <span>Talk to an engineer</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h16M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="process.html" class="btn btn--ghost">
+          <span>How we work</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer__top">
+    <div class="footer__brand">
+      <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo__mark">
+          <img src="assets/images/logo.webp" alt="" width="88" height="38" loading="lazy" decoding="async">
+        </span>
+      </a>
+      <p>AI &amp; robotics engineering for teams that need machines to actually work.</p>
+
+      <ul class="footer__social" aria-label="Social media">
+        <li>
+          <a href="404.html" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0zM3.4 8.5h3.1V21H3.4zM9.1 8.5h2.96v1.71h.04c.41-.78 1.42-1.6 2.93-1.6 3.13 0 3.71 2.06 3.71 4.74V21h-3.1v-5.3c0-1.26-.02-2.89-1.76-2.89-1.76 0-2.03 1.37-2.03 2.8V21H9.1z" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="404.html" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="404.html" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.53 3h3.02l-6.6 7.54L21.75 21h-5.9l-4.62-6.04L5.94 21H2.92l7.06-8.07L2.5 3h6.05l4.18 5.52zm-1.06 16.15h1.67L7.6 4.74H5.81z" fill="currentColor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="404.html" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.28 5 12 5 12 5s-6.28 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.72 19 12 19 12 19s6.28 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15.02V8.98L15.2 12z" fill="currentColor"/></svg>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+    <nav class="footer__cols" aria-label="Footer">
+      <div>
+        <h4>Capabilities</h4>
+        <ul>
+          <li><a href="capabilities.html">Machine Vision</a></li>
+          <li><a href="capabilities.html">Robotic Arms</a></li>
+          <li><a href="capabilities.html">Embodied AI</a></li>
+          <li><a href="technology.html">Fleet Ops</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="solutions.html">Manufacturing</a></li>
+          <li><a href="solutions.html">Logistics</a></li>
+          <li><a href="solutions.html">Agri-Tech</a></li>
+          <li><a href="solutions.html">Healthcare</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="process.html">Process</a></li>
+          <li><a href="voices.html">Voices</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer__contact">
+          <li>
+            <span>Mail</span>
+            <a href="404.html">build@stackly.io</a>
+          </li>
+          <li>
+            <span>Phone</span>
+            <a href="404.html">+31 10 284 0120</a>
+          </li>
+          <li>
+            <span>HQ</span>
+            <p>27 Foundry Lane, Rotterdam</p>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container footer__bot">
+    <p>&copy; <span id="year">2026</span> Stackly Industries B.V. &mdash; All systems nominal.</p>
+    <a href="#main" class="to-top" id="toTop" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

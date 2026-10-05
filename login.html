@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Sign in to the Stackly fleet console.">
+<title>Log in &mdash; Stackly</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body class="page-bare">
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--b"></div>
+  <div class="fx__orb fx__orb--c"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+  <div class="fx__cursor" id="cursor"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__core">
+    <div class="loader__hex"></div>
+    <span class="loader__pct" id="loaderPct">00</span>
+  </div>
+  <p class="loader__txt">INITIALISING STACKLY CORE</p>
+</div>
+
+<main id="main">
+  <section class="auth auth--split">
+    <div class="container">
+      <div class="auth__grid">
+
+        <div class="auth__intro">
+          <a href="index.html" class="logo auth__mark" aria-label="Stackly home">
+            <span class="logo__mark">
+              <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+            </span>
+          </a>
+
+          <nav class="crumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a> / <span aria-current="page">Log in</span>
+          </nav>
+
+          <p class="sec-head__kicker" data-reveal="fade-up"> STACKLY CONSOLE </p>
+          <h1 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+            Welcome <span class="grad-text">back</span>
+          </h1>
+          <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+            One console for every fleet you own &mdash; simulation, deployments,
+            telemetry and the paperwork your auditor asks for.
+          </p>
+
+          <ul class="auth__list" data-reveal="fade-up" style="--d:.18s">
+            <li>Run the same digital twin our engineers use, without installing anything.</li>
+            <li>Live telemetry down to the joint, on every unit in the field.</li>
+            <li>Model versions, safety certificates and deployment history in one place.</li>
+          </ul>
+
+          <div class="chips chips--start" data-reveal="fade-up" style="--d:.24s">
+            <span class="chip chip--sm">ISO 27001</span>
+            <span class="chip chip--sm">SOC 2 Type II</span>
+            <span class="chip chip--sm">99.98% uptime</span>
+          </div>
+
+          <a href="index.html" class="link-quiet auth__back" data-reveal="fade-up" style="--d:.3s">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back to stackly.io
+          </a>
+        </div>
+
+        <div class="auth__panel">
+          <header class="auth__head">
+            <h2 class="sec-head__title" style="font-size:1.3rem">Log in</h2>
+          </header>
+
+          <form class="form tilt" data-auth="login" novalidate data-reveal="fade-up" style="--d:.12s">
+            <div class="card__shine" aria-hidden="true"></div>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" name="email" id="loginEmail" placeholder="ada@company.com" autocomplete="email" maxlength="64" pattern="[A-Za-z0-9][A-Za-z0-9._+-]*@[A-Za-z][A-Za-z0-9.-]*\.[A-Za-z]{2,}" title="A real domain is required — digits cannot start a domain, e.g. sun@gmail.com" required>
+              <i class="field__line"></i>
+            </label>
+            <label class="field pw">
+              <span>Password</span>
+              <input type="password" name="password" id="loginPassword" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password" required>
+              <i class="field__line"></i>
+              <button type="button" class="pw__toggle" data-for="loginPassword" aria-label="Show password">Show</button>
+              <div class="pw__meter" data-pw-meter hidden aria-hidden="true">
+                <span class="pw__bars"><i></i><i></i><i></i><i></i></span>
+                <span class="pw__label" data-pw-label></span>
+              </div>
+            </label>
+
+            <div class="field">
+              <label for="loginRole">Role</label>
+              <select name="role" id="loginRole" data-role required>
+                <option value="" selected disabled>Select role…</option>
+                <option value="admin">Administrator</option>
+                <option value="client">Client</option>
+              </select>
+              <span class="field__hint" data-role-hint></span>
+              <i class="field__line"></i>
+            </div>
+
+            <div class="auth__foot">
+              <label class="check">
+                <input type="checkbox" name="remember" required>
+                <span>Keep me signed in</span>
+              </label>
+              <a href="404.html" class="link-quiet">Forgot?</a>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--block magnetic">
+              <span>Log in</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <p class="form__note" role="status"></p>
+          </form>
+
+          <p class="auth__alt">No console yet? <a href="register.html">Create an account</a></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

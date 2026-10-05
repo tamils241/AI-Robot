@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Stackly admin console â€” user directory, role distribution, pending invitations and access audit.">
+<title>Users &mdash; Stackly admin</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body class="page-bare">
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--b"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<main id="main" class="dash">
+
+  <!-- ============ RAIL ============ -->
+  <aside class="dash__rail">
+    <div class="dash-mobile-head">
+      <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo__mark">
+          <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+        </span>
+      </a>
+      <button class="dash-mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="dashboardNavigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="dash__nav" id="dashboardNavigation" aria-label="Console">
+      <span class="dash__nav-label">Console</span>
+      <ul class="dash__nav-list">
+        <li>
+          <a class="dash__link" href="admin-dashboard.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="11" width="7" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-fleets.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.4-3 8-7.5 9-4.5-1-7.5-4.6-7.5-9V6z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Fleets
+            <b>38</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-deployments.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M12 15l-4-4M12 15l4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 19h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            Deployments
+            <b>3</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-models.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="currentColor"/><circle cx="12" cy="4" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="19" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Model releases
+            <b>2</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link is-active" href="admin-users.html" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 20a6 6 0 0 1 12 0M16 11a3 3 0 1 0 0-6M17 20a5 5 0 0 1 4-4.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            Users
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-billing.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.6"/></svg>
+            Billing
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-settings.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M17.7 6.3l-1.4 1.4M7.7 16.3l-1.4 1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="dash__rail-foot">
+      <a href="client-dashboard.html" class="btn btn--ghost btn--sm">
+        <span>View as client</span>
+      </a>
+      <a href="index.html" class="link-quiet">Back to site</a>
+    </div>
+  </aside>
+
+  <!-- ============ BODY ============ -->
+  <div class="dash__body">
+
+    <header class="dash__top">
+      <div>
+        <p class="dash__crumb">Console / Users</p>
+        <h1 class="dash__title">Users</h1>
+      </div>
+
+      <div class="dash__tools">
+        <label class="dash__search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.2-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search people, roles, organisations" aria-label="Search users">
+        </label>
+        <span class="pill pill--info">1,284 accounts</span>
+        <span class="dash__who">
+          <span class="avatar" aria-hidden="true">AR</span>
+          <span class="dash__who-txt"><b>Amara Reyes</b><span>Administrator</span></span>
+        </span>
+      </div>
+    </header>
+
+    <div class="dash__content">
+
+      <!-- ============ KPI ============ -->
+      <section class="kpis" aria-label="Key figures">
+        <div class="kpi" data-reveal="fade-up">
+          <span class="kpi__label">Total accounts</span>
+          <span class="kpi__val"><span class="count" data-count="1284">0</span></span>
+          <span class="kpi__delta is-up">+96 this quarter</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.06s">
+          <span class="kpi__label">Active seats</span>
+          <span class="kpi__val"><span class="count" data-count="1106">0</span></span>
+          <span class="kpi__delta is-up">+4.2% month on month</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.12s">
+          <span class="kpi__label">Pending invites</span>
+          <span class="kpi__val"><span class="count" data-count="12">0</span></span>
+          <span class="kpi__delta is-down">4 expire this week</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.18s">
+          <span class="kpi__label">MFA coverage</span>
+          <span class="kpi__val"><span class="count" data-count="87">0</span><small>%</small></span>
+          <span class="kpi__delta is-up">+11 pts since January</span>
+        </div>
+      </section>
+
+      <div class="dash__grid dash__grid--2">
+
+        <!-- ============ DIRECTORY ============ -->
+        <section class="panel" id="directory">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">User directory</h2>
+              <span class="panel__sub">Every account across all sites</span>
+            </div>
+            <span class="pill pill--info">1,284 accounts</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row row--head" aria-hidden="true" style="--cols:1.5fr .9fr 1.2fr .8fr auto">
+                <span class="row__cell">Person</span>
+                <span class="row__cell">Role</span>
+                <span class="row__cell">Organisation</span>
+                <span class="row__cell">Last seen</span>
+                <span class="row__cell">Status</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr .9fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Person"><span class="avatar" aria-hidden="true">NO</span><b>Nadia Okonkwo</b><small>n.okonkwo@helios-mfg.com</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Fleet admin</span></span>
+                <span class="row__cell" data-label="Organisation">Helios Manufacturing</span>
+                <span class="row__cell" data-label="Last seen">4 min ago</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr .9fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Person"><span class="avatar" aria-hidden="true">TL</span><b>Tobias Lindqvist</b><small>t.lindqvist@kanto-logistics.jp</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Operator</span></span>
+                <span class="row__cell" data-label="Organisation">Kanto Logistics</span>
+                <span class="row__cell" data-label="Last seen">22 min ago</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr .9fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Person"><span class="avatar" aria-hidden="true">PR</span><b>Priya Raman</b><small>p.raman@verdantagritech.in</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Safety lead</span></span>
+                <span class="row__cell" data-label="Organisation">Verdant Agritech</span>
+                <span class="row__cell" data-label="Last seen">1 h ago</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--warn">Away</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr .9fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Person"><span class="avatar" aria-hidden="true">EB</span><b>Elias Berg</b><small>e.berg@nordkapp-energy.no</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Viewer</span></span>
+                <span class="row__cell" data-label="Organisation">Nordkapp Energy</span>
+                <span class="row__cell" data-label="Last seen">Yesterday</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr .9fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Person"><span class="avatar" aria-hidden="true">MV</span><b>Marisol Vega</b><small>m.vega@deltafoods.mx</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Billing admin</span></span>
+                <span class="row__cell" data-label="Organisation">Delta Foods</span>
+                <span class="row__cell" data-label="Last seen">2 days ago</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--bad">Suspended</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr .9fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Person"><span class="avatar" aria-hidden="true">HT</span><b>Hugo Tanaka</b><small>h.tanaka@meridianports.sg</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Operator</span></span>
+                <span class="row__cell" data-label="Organisation">Meridian Ports</span>
+                <span class="row__cell" data-label="Last seen">3 h ago</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Active</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr .9fr 1.2fr .8fr auto">
+                <span class="row__cell" data-label="Person"><span class="avatar" aria-hidden="true">ID</span><b>Ines Duarte</b><small>i.duarte@kanto-logistics.jp</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Viewer</span></span>
+                <span class="row__cell" data-label="Organisation">Kanto Logistics</span>
+                <span class="row__cell" data-label="Last seen">&mdash;</span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--idle">Never signed in</span></span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Showing 7 of 1,284 accounts</span>
+            <a href="#directory" class="link-quiet">Export CSV</a>
+          </footer>
+        </section>
+
+        <!-- ============ ROLE DISTRIBUTION ============ -->
+        <section class="panel" id="roles">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Role distribution</h2>
+              <span class="panel__sub">Assigned seats vs licensed limit</span>
+            </div>
+            <span class="pill pill--info">5 roles</span>
+          </header>
+
+          <div class="panel__body">
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Fleet admin</span>
+                <span class="meter__val">38 / 60</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="63"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Operator</span>
+                <span class="meter__val">604 / 700</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="86"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Safety lead</span>
+                <span class="meter__val">92 / 140</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="66"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Billing admin</span>
+                <span class="meter__val">24 / 40</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="60"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Viewer</span>
+                <span class="meter__val">348 / 500</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="70"></i></span>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>1,106 of 1,284 seats are in use</span>
+            <a href="#roles" class="link-quiet">Adjust seat limits</a>
+          </footer>
+        </section>
+
+      </div>
+
+      <div class="dash__grid dash__grid--2">
+
+        <!-- ============ PENDING INVITATIONS ============ -->
+        <section class="panel" id="invitations">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Pending invitations</h2>
+              <span class="panel__sub">Not yet accepted</span>
+            </div>
+            <span class="pill pill--warn">12 open</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row" style="--cols:1.5fr .9fr 1fr auto">
+                <span class="row__cell" data-label="Email"><b>s.arnaud@kanto-logistics.jp</b><small>invited 01 Oct</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Operator</span></span>
+                <span class="row__cell" data-label="Invited by">Amara Reyes</span>
+                <span class="row__cell" data-label="Expires"><span class="pill pill--warn">2 days left</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr .9fr 1fr auto">
+                <span class="row__cell" data-label="Email"><b>l.weiss@helios-mfg.com</b><small>invited 30 Sep</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Fleet admin</span></span>
+                <span class="row__cell" data-label="Invited by">Nadia Okonkwo</span>
+                <span class="row__cell" data-label="Expires">28 Oct 2026</span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr .9fr 1fr auto">
+                <span class="row__cell" data-label="Email"><b>k.oyelaran@verdantagritech.in</b><small>invited 02 Oct</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Safety lead</span></span>
+                <span class="row__cell" data-label="Invited by">Priya Raman</span>
+                <span class="row__cell" data-label="Expires"><span class="pill pill--warn">6 hours left</span></span>
+              </div>
+
+              <div class="row" style="--cols:1.5fr .9fr 1fr auto">
+                <span class="row__cell" data-label="Email"><b>b.novak@meridianports.sg</b><small>invited 29 Sep</small></span>
+                <span class="row__cell" data-label="Role"><span class="chip chip--sm">Viewer</span></span>
+                <span class="row__cell" data-label="Invited by">Hugo Tanaka</span>
+                <span class="row__cell" data-label="Expires">04 Nov 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>2 invitations expire within 48 hours</span>
+            <a href="#invitations" class="link-quiet">Resend invites</a>
+          </footer>
+        </section>
+
+        <!-- ============ ACCESS AUDIT ============ -->
+        <section class="panel" id="audit">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Access audit</h2>
+              <span class="panel__sub">Role changes and security events</span>
+            </div>
+            <span class="pill pill--ok">No anomalies</span>
+          </header>
+
+          <div class="panel__body">
+            <ul class="feed">
+              <li>
+                <span class="feed__dot feed__dot--violet" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>Nadia Okonkwo</b> was elevated to fleet admin for Helios Manufacturing. Just-in-time grant, expires 04 Oct.</p>
+                  <time datetime="2026-10-02T08:41">1 h ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--lime" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>Elias Berg</b> completed hardware-key enrolment. MFA is now enforced for every Nordkapp Energy account.</p>
+                  <time datetime="2026-10-02T07:58">2 h ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>Marisol Vega</b> was suspended after 30 days of failed sign-in attempts traced to a single region.</p>
+                  <time datetime="2026-10-01T17:33">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--magenta" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>Ines Duarte</b> exported the Kanto Logistics audit log. Export scope was limited to her own site.</p>
+                  <time datetime="2026-10-01T11:26">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--lime" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>Amara Reyes</b> rotated the console API key. The previous secret was revoked and logged.</p>
+                  <time datetime="2026-10-01T08:02">2 days ago</time>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <footer class="panel__foot">
+            <span>Retention &middot; 365 days</span>
+            <a href="#audit" class="link-quiet">Full audit log</a>
+          </footer>
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

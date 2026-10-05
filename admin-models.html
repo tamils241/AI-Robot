@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Stackly admin console &mdash; release channels, canary metrics, model registry and release notes.">
+<title>Model releases &mdash; Stackly admin</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body class="page-bare">
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--b"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<main id="main" class="dash">
+
+  <!-- ============ RAIL ============ -->
+  <aside class="dash__rail">
+    <div class="dash-mobile-head">
+      <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo__mark">
+          <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+        </span>
+      </a>
+      <button class="dash-mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="dashboardNavigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="dash__nav" id="dashboardNavigation" aria-label="Console">
+      <span class="dash__nav-label">Console</span>
+      <ul class="dash__nav-list">
+        <li>
+          <a class="dash__link" href="admin-dashboard.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="11" width="7" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-fleets.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.4-3 8-7.5 9-4.5-1-7.5-4.6-7.5-9V6z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Fleets
+            <b>38</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-deployments.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M12 15l-4-4M12 15l4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 19h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            Deployments
+            <b>3</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link is-active" href="admin-models.html" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="currentColor"/><circle cx="12" cy="4" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="19" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            Model releases
+            <b>2</b>
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-users.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 20a6 6 0 0 1 12 0M16 11a3 3 0 1 0 0-6M17 20a5 5 0 0 1 4-4.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            Users
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-billing.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.6"/></svg>
+            Billing
+          </a>
+        </li>
+        <li>
+          <a class="dash__link" href="admin-settings.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M17.7 6.3l-1.4 1.4M7.7 16.3l-1.4 1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="dash__rail-foot">
+      <a href="client-dashboard.html" class="btn btn--ghost btn--sm">
+        <span>View as client</span>
+      </a>
+      <a href="index.html" class="link-quiet">Back to site</a>
+    </div>
+  </aside>
+
+  <!-- ============ BODY ============ -->
+  <div class="dash__body">
+
+    <header class="dash__top">
+      <div>
+        <p class="dash__crumb">Console / Model releases</p>
+        <h1 class="dash__title">Model releases</h1>
+      </div>
+
+      <div class="dash__tools">
+        <label class="dash__search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.2-4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search releases, channels, models" aria-label="Search model releases">
+        </label>
+        <span class="pill pill--warn">2 pending review</span>
+        <span class="dash__who">
+          <span class="avatar" aria-hidden="true">AR</span>
+          <span class="dash__who-txt"><b>Amara Reyes</b><span>Administrator</span></span>
+        </span>
+      </div>
+    </header>
+
+    <div class="dash__content">
+
+      <!-- ============ KPI ============ -->
+      <section class="kpis" aria-label="Key figures">
+        <div class="kpi" data-reveal="fade-up">
+          <span class="kpi__label">Versions published</span>
+          <span class="kpi__val"><span class="count" data-count="240">0</span></span>
+          <span class="kpi__delta is-up">+12 this quarter</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.06s">
+          <span class="kpi__label">Pending review</span>
+          <span class="kpi__val"><span class="count" data-count="2">0</span></span>
+          <span class="kpi__delta is-flat">2 channels</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.12s">
+          <span class="kpi__label">Canary pass rate</span>
+          <span class="kpi__val"><span class="count" data-count="88">0</span><small>%</small></span>
+          <span class="kpi__delta is-up">+9 pts vs v4.1.8</span>
+        </div>
+        <div class="kpi" data-reveal="fade-up" style="--d:.18s">
+          <span class="kpi__label">Open regressions</span>
+          <span class="kpi__val"><span class="count" data-count="3">0</span></span>
+          <span class="kpi__delta is-down">1 blocks promotion</span>
+        </div>
+      </section>
+
+      <div class="dash__grid dash__grid--2">
+
+        <!-- ============ RELEASE CHANNELS ============ -->
+        <section class="panel" id="channels">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Release channels</h2>
+              <span class="panel__sub">Fleet coverage per channel</span>
+            </div>
+            <span class="pill pill--info">5 channels</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row" style="--cols:1.2fr .9fr 1.1fr .8fr .8fr">
+                <span class="row__cell" data-label="Channel"><b>stable</b><small>Production default</small></span>
+                <span class="row__cell" data-label="Version">v4.1.8</span>
+                <span class="row__cell" data-label="Coverage"><span class="meter__track"><i class="meter__fill" data-fill="84"></i></span></span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--ok">Live</span></span>
+                <span class="row__cell" data-label="Updated">02 Oct</span>
+              </div>
+              <div class="row" style="--cols:1.2fr .9fr 1.1fr .8fr .8fr">
+                <span class="row__cell" data-label="Channel"><b>canary</b><small>24 units</small></span>
+                <span class="row__cell" data-label="Version">v4.2.1</span>
+                <span class="row__cell" data-label="Coverage"><span class="meter__track"><i class="meter__fill" data-fill="9"></i></span></span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--info">Rolling</span></span>
+                <span class="row__cell" data-label="Updated">02 Oct</span>
+              </div>
+              <div class="row" style="--cols:1.2fr .9fr 1.1fr .8fr .8fr">
+                <span class="row__cell" data-label="Channel"><b>lts</b><small>Frozen 4.0.x</small></span>
+                <span class="row__cell" data-label="Version">v4.0.12</span>
+                <span class="row__cell" data-label="Coverage"><span class="meter__track"><i class="meter__fill" data-fill="6"></i></span></span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--idle">Frozen</span></span>
+                <span class="row__cell" data-label="Updated">28 Sep</span>
+              </div>
+              <div class="row" style="--cols:1.2fr .9fr 1.1fr .8fr .8fr">
+                <span class="row__cell" data-label="Channel"><b>edge-preview</b><small>Partner sandbox</small></span>
+                <span class="row__cell" data-label="Version">v4.3.0-rc2</span>
+                <span class="row__cell" data-label="Coverage"><span class="meter__track"><i class="meter__fill" data-fill="4"></i></span></span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--warn">In review</span></span>
+                <span class="row__cell" data-label="Updated">01 Oct</span>
+              </div>
+              <div class="row" style="--cols:1.2fr .9fr 1.1fr .8fr .8fr">
+                <span class="row__cell" data-label="Channel"><b>sandbox</b><small>Internal only</small></span>
+                <span class="row__cell" data-label="Version">v4.3.0-rc2</span>
+                <span class="row__cell" data-label="Coverage"><span class="meter__track"><i class="meter__fill" data-fill="1"></i></span></span>
+                <span class="row__cell" data-label="Status"><span class="pill pill--idle">Internal</span></span>
+                <span class="row__cell" data-label="Updated">30 Sep</span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>84% of 240 units sit on stable</span>
+            <a href="#channels" class="link-quiet">Channel settings</a>
+          </footer>
+        </section>
+
+        <!-- ============ CANARY METRICS ============ -->
+        <section class="panel" id="canary">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Canary metrics</h2>
+              <span class="panel__sub">v4.2.1 vs stable baseline</span>
+            </div>
+            <span class="pill pill--ok">Within tolerance</span>
+          </header>
+
+          <div class="panel__body">
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Task success rate</span>
+                <span class="meter__val">94.2%</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="94"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Grasp placement accuracy</span>
+                <span class="meter__val">88.1%</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="88"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Path deviation budget</span>
+                <span class="meter__val">2.4 cm</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="24"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">False-positive rate</span>
+                <span class="meter__val">1.2%</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="12"></i></span>
+            </div>
+
+            <div class="meter">
+              <div class="meter__top">
+                <span class="meter__name">Thermal headroom</span>
+                <span class="meter__val">62%</span>
+              </div>
+              <span class="meter__track"><i class="meter__fill" data-fill="62"></i></span>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>24 units on canary &middot; 6 days live</span>
+            <a href="#canary" class="link-quiet">Compare to stable</a>
+          </footer>
+        </section>
+
+      </div>
+
+      <div class="dash__grid dash__grid--2">
+
+        <!-- ============ MODEL REGISTRY ============ -->
+        <section class="panel" id="registry">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Model registry</h2>
+              <span class="panel__sub">Production weights</span>
+            </div>
+            <span class="pill pill--warn">2 pending review</span>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="rows">
+              <div class="row" style="--cols:1.3fr 1.2fr .8fr .8fr 1.1fr">
+                <span class="row__cell" data-label="Model"><b>grasp-net-7</b><small>Bin picking</small></span>
+                <span class="row__cell" data-label="Task">Rigid + deformable</span>
+                <span class="row__cell" data-label="Version">v3.4.0</span>
+                <span class="row__cell" data-label="Accuracy"><b>98.6%</b></span>
+                <span class="row__cell" data-label="Chips"><span class="chip chip--sm">Helios &middot; Delta</span></span>
+              </div>
+              <div class="row" style="--cols:1.3fr 1.2fr .8fr .8fr 1.1fr">
+                <span class="row__cell" data-label="Model"><b>nav-core-2</b><small>AMR navigation</small></span>
+                <span class="row__cell" data-label="Task">Fleet routing</span>
+                <span class="row__cell" data-label="Version">v5.1.2</span>
+                <span class="row__cell" data-label="Accuracy"><b>99.2%</b></span>
+                <span class="row__cell" data-label="Chips"><span class="chip chip--sm">Kanto &middot; Meridian</span></span>
+              </div>
+              <div class="row" style="--cols:1.3fr 1.2fr .8fr .8fr 1.1fr">
+                <span class="row__cell" data-label="Model"><b>harvest-rcv</b><small>Crop handling</small></span>
+                <span class="row__cell" data-label="Task">Stalk &amp; fruit</span>
+                <span class="row__cell" data-label="Version">v2.8.4</span>
+                <span class="row__cell" data-label="Accuracy"><b>94.7%</b></span>
+                <span class="row__cell" data-label="Chips">Verdant Agritech</span>
+              </div>
+              <div class="row" style="--cols:1.3fr 1.2fr .8fr .8fr 1.1fr">
+                <span class="row__cell" data-label="Model"><b>inspect-vis</b><small>Visual inspection</small></span>
+                <span class="row__cell" data-label="Task">Defect triage</span>
+                <span class="row__cell" data-label="Version">v1.9.1</span>
+                <span class="row__cell" data-label="Accuracy"><b>97.3%</b></span>
+                <span class="row__cell" data-label="Chips">Delta Foods</span>
+              </div>
+              <div class="row" style="--cols:1.3fr 1.2fr .8fr .8fr 1.1fr">
+                <span class="row__cell" data-label="Model"><b>cable-route</b><small>Sub-sea routing</small></span>
+                <span class="row__cell" data-label="Task">Obstacle avoidance</span>
+                <span class="row__cell" data-label="Version">v4.0.3</span>
+                <span class="row__cell" data-label="Accuracy"><b>92.1%</b></span>
+                <span class="row__cell" data-label="Chips">Nordkapp Energy</span>
+              </div>
+              <div class="row" style="--cols:1.3fr 1.2fr .8fr .8fr 1.1fr">
+                <span class="row__cell" data-label="Model"><b>yard-slot</b><small>Slot allocation</small></span>
+                <span class="row__cell" data-label="Task">Container matching</span>
+                <span class="row__cell" data-label="Version">v2.2.0</span>
+                <span class="row__cell" data-label="Accuracy"><b>96.8%</b></span>
+                <span class="row__cell" data-label="Chips"><span class="chip chip--sm">Meridian Ports</span></span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__foot">
+            <span>6 production models &middot; 41 retired</span>
+            <a href="#registry" class="link-quiet">Open registry</a>
+          </footer>
+        </section>
+
+        <!-- ============ RELEASE NOTES ============ -->
+        <section class="panel" id="notes">
+          <header class="panel__head">
+            <div>
+              <h2 class="panel__title">Release notes</h2>
+              <span class="panel__sub">Latest published entries</span>
+            </div>
+            <span class="pill pill--live">Synced</span>
+          </header>
+
+          <div class="panel__body">
+            <ul class="feed">
+              <li>
+                <span class="feed__dot feed__dot--lime" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>v4.2.1</b> promoted to canary &middot; grip planner retuned, cycle time down 6%.</p>
+                  <time datetime="2026-10-02T08:10">1 h ago</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--violet" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>v4.3.0-rc2</b> uploaded to sandbox &middot; awaiting safety review before preview.</p>
+                  <time datetime="2026-10-01T15:48">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot feed__dot--magenta" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>v4.2.0</b> promotion held &middot; yard-slot regression open at Meridian Ports.</p>
+                  <time datetime="2026-10-01T11:32">Yesterday</time>
+                </span>
+              </li>
+              <li>
+                <span class="feed__dot" aria-hidden="true"></span>
+                <span class="feed__body">
+                  <p><b>v4.1.8</b> published to stable &middot; notes appended for 3 client sites.</p>
+                  <time datetime="2026-09-30T16:04">30 Sep</time>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <footer class="panel__foot">
+            <span>4 of 118 entries shown</span>
+            <a href="#notes" class="link-quiet">All release notes</a>
+          </footer>
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

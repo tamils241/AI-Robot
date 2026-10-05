@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="Create a Stackly console for your team.">
+<title>Register &mdash; Stackly</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 36 11v18L20 38 4 29V11z' fill='%2300e5ff'/%3E%3C/svg%3E">
+</head>
+<body class="page-bare">
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grid"></div>
+  <canvas class="fx__net" id="network"></canvas>
+  <div class="fx__orb fx__orb--a"></div>
+  <div class="fx__orb fx__orb--b"></div>
+  <div class="fx__orb fx__orb--c"></div>
+  <div class="fx__noise"></div>
+  <div class="fx__scan"></div>
+  <div class="fx__cursor" id="cursor"></div>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__core">
+    <div class="loader__hex"></div>
+    <span class="loader__pct" id="loaderPct">00</span>
+  </div>
+  <p class="loader__txt">INITIALISING STACKLY CORE</p>
+</div>
+
+<main id="main">
+  <section class="auth auth--split">
+    <div class="container">
+      <div class="auth__grid">
+
+        <div class="auth__intro">
+          <a href="index.html" class="logo auth__mark" aria-label="Stackly home">
+            <span class="logo__mark">
+              <img src="assets/images/logo.webp" alt="" width="112" height="48" decoding="async">
+            </span>
+          </a>
+
+          <nav class="crumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a> / <span aria-current="page">Register</span>
+          </nav>
+
+          <p class="sec-head__kicker" data-reveal="fade-up"> STACKLY CONSOLE </p>
+          <h1 class="sec-head__title" data-reveal="fade-up" style="--d:.06s">
+            Create your <span class="grad-text">console</span>
+          </h1>
+          <p class="sec-head__sub" data-reveal="fade-up" style="--d:.12s">
+            Start in the sandbox this week. When a pilot turns into a programme, the
+            simulations, models and telemetry you built here come with you.
+          </p>
+
+          <ul class="auth__list" data-reveal="fade-up" style="--d:.18s">
+            <li>Full Stackly toolchain in the browser &mdash; no robot, no hardware, no cost.</li>
+            <li>Invite engineers and plant managers with role-based access from day one.</li>
+            <li>Export your simulation, models and deployment history whenever you like.</li>
+          </ul>
+
+          <div class="chips chips--start" data-reveal="fade-up" style="--d:.24s">
+            <span class="chip chip--sm">No card required</span>
+            <span class="chip chip--sm">14-day pilot</span>
+            <span class="chip chip--sm">Cancel anytime</span>
+          </div>
+
+          <a href="index.html" class="link-quiet auth__back" data-reveal="fade-up" style="--d:.3s">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back to stackly.io
+          </a>
+        </div>
+
+        <div class="auth__panel">
+          <header class="auth__head">
+            <h2 class="sec-head__title" style="font-size:1.3rem">Create account</h2>
+          </header>
+
+          <form class="form tilt" data-auth="register" novalidate data-reveal="fade-up" style="--d:.12s">
+            <div class="card__shine" aria-hidden="true"></div>
+            <div class="form__row">
+              <label class="field">
+                <span>Name</span>
+                <input type="text" name="name" placeholder="Ada" maxlength="16" pattern="[A-Za-z]{1,16}" autocomplete="name" title="Letters only, up to 16 characters. No numbers, spaces or symbols." required>
+                <i class="field__line"></i>
+              </label>
+              <label class="field">
+                <span>Company</span>
+                <input type="text" name="company" placeholder="Company name" autocomplete="organization">
+                <i class="field__line"></i>
+              </label>
+            </div>
+            <div class="field">
+              <label for="regRole">Role</label>
+              <select name="role" id="regRole" data-role required>
+                <option value="" selected disabled>Select role…</option>
+                <option value="admin">Administrator</option>
+                <option value="client">Client</option>
+              </select>
+              <span class="field__hint" data-role-hint></span>
+              <i class="field__line"></i>
+            </div>
+            <label class="field">
+              <span>Work email</span>
+              <input type="email" name="email" id="regEmail" placeholder="ada@company.com" autocomplete="email" maxlength="64" pattern="[A-Za-z0-9][A-Za-z0-9._+-]*@[A-Za-z][A-Za-z0-9.-]*\.[A-Za-z]{2,}" title="A real domain is required — digits cannot start a domain, e.g. sun@gmail.com" required>
+              <i class="field__line"></i>
+            </label>
+<label class="field pw">
+               <span>Password</span>
+                <input type="password" name="password" id="regPassword" placeholder="At least 8 characters" autocomplete="new-password" required>
+                <i class="field__line"></i>
+                <button type="button" class="pw__toggle" data-for="regPassword" aria-label="Show password">Show</button>
+                <div class="pw__meter" data-pw-meter hidden aria-hidden="true">
+                  <span class="pw__bars"><i></i><i></i><i></i><i></i></span>
+                  <span class="pw__label" data-pw-label></span>
+                </div>
+              </label>
+              <p class="pw__hint">Strong = 8+ characters with a lowercase letter, an uppercase letter, a number and a symbol.</p>
+<label class="field pw">
+                <span>Confirm password</span>
+                <input type="password" name="password2" id="regPassword2" placeholder="Repeat password" autocomplete="new-password" required>
+                <i class="field__line"></i>
+                <span class="pw__match" data-pw-match hidden role="status"></span>
+              </label>
+
+            <label class="check">
+              <input type="checkbox" name="terms" required>
+              <span>I agree to the deployment terms and data policy</span>
+            </label>
+
+            <button type="submit" class="btn btn--primary btn--block magnetic">
+              <span>Create account</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <p class="form__note" role="status"></p>
+          </form>
+
+          <p class="auth__alt">Already have an account? <a href="login.html">Log in</a></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
