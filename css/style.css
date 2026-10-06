@@ -1604,6 +1604,58 @@ body.nav-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-
 }
 .fleet-status-rows .row__cell[data-label="Site"]{ line-height:1.45; }
 
+/* =========================================================
+   UNIT REGISTRY — COLUMN ALIGNMENT FIX (client-units.html)
+   ========================================================= */
+
+#unit-registry .rows {
+  width: 100%;
+  min-width: 0;
+}
+
+#unit-registry .row {
+  min-width: 0;
+}
+
+#unit-registry .row__cell {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Keep status pill inside its own column */
+#unit-registry .row__cell[data-label="Status"] {
+  min-width: 0;
+  overflow: visible;
+}
+
+#unit-registry .row__cell[data-label="Status"] .pill {
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+/* Uptime stays completely inside its column */
+#unit-registry .row__cell[data-label="Uptime 30d"] {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+/* Desktop alignment */
+@media (min-width: 860px) {
+  #unit-registry .row {
+    column-gap: 1rem;
+  }
+
+  #unit-registry .row__cell[data-label="Status"] {
+    display: flex;
+    align-items: center;
+  }
+
+  #unit-registry .row__cell[data-label="Uptime 30d"] {
+    text-align: right;
+  }
+}
+
 /* ---- Settings (admin-settings.html) ----
    All four tables on this page were moved out of .dash__grid--2 and
    .dash__grid--3 into single-column grids, because their nowrap columns need
@@ -2092,5 +2144,777 @@ body.nav-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-
   #directory .rows .row__cell[data-label="Person"] b,
   #directory .rows .row__cell[data-label="Person"] small{
     display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+}
+
+/* =========================================================
+   REPORTS + SUPPORT TABLE ALIGNMENT FIX
+   Prevent text and status pills from entering neighboring columns
+   ========================================================= */
+
+@media (min-width: 860px) {
+
+  /* All dashboard table cells */
+  #report-library .row__cell,
+  #scheduled-reports .row__cell,
+  #open-tickets .row__cell {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* Keep status inside its own grid track */
+  #report-library .row__cell[data-label="Status"],
+  #scheduled-reports .row__cell[data-label="Status"],
+  #open-tickets .row__cell[data-label="Status"] {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    overflow: visible;
+  }
+
+  /* Status pills must never push the next column */
+  #report-library .row__cell[data-label="Status"] .pill,
+  #scheduled-reports .row__cell[data-label="Status"] .pill,
+  #open-tickets .row__cell[data-label="Status"] .pill {
+    flex: 0 0 auto;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  /* Keep dates and small numeric values together */
+  #report-library .row__cell[data-label="Generated"],
+  #report-library .row__cell[data-label="Size"],
+  #scheduled-reports .row__cell[data-label="Next run"],
+  #open-tickets .row__cell[data-label="Opened"],
+  #open-tickets .row__cell[data-label="Unit"] {
+    white-space: nowrap;
+  }
+
+  /* Allow long descriptive text to wrap INSIDE its own column */
+  #report-library .row__cell[data-label="Report"],
+  #report-library .row__cell[data-label="Period"],
+  #scheduled-reports .row__cell[data-label="Report"],
+  #scheduled-reports .row__cell[data-label="Recipients"],
+  #open-tickets .row__cell[data-label="Subject"] {
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: normal;
+    line-height: 1.45;
+  }
+
+  /* Do not let chips stretch the grid */
+  #report-library .chip,
+  #scheduled-reports .chip,
+  #open-tickets .chip {
+    max-width: 100%;
+    white-space: nowrap;
+  }
+}
+
+/* The topbar becomes sticky from 1120px, so anchored panels and the content
+   column need clearance or the sticky bar covers their first row. */
+@media (min-width: 1120px) {
+  .dash__content {
+    scroll-margin-top: 150px;
+  }
+
+  .panel {
+    scroll-margin-top: 150px;
+  }
+}
+
+/* =========================================================
+   SUPPORT TICKET TABLE - OVERLAP FIX
+   ========================================================= */
+
+#open-tickets {
+  min-width: 0;
+  overflow: hidden;
+}
+
+#open-tickets .panel__body {
+  min-width: 0;
+  overflow: hidden;
+}
+
+#open-tickets .rows {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Keep every ticket row inside the panel */
+#open-tickets .row {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Every cell must be allowed to shrink */
+#open-tickets .row__cell {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Subject text wraps INSIDE its column */
+#open-tickets .row__cell[data-label="Subject"] {
+  min-width: 0;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Ticket number */
+#open-tickets .row__cell[data-label="Ticket"] {
+  min-width: 0;
+}
+
+/* Unit and date stay together */
+#open-tickets .row__cell[data-label="Unit"],
+#open-tickets .row__cell[data-label="Opened"] {
+  white-space: nowrap;
+}
+
+/* Priority stays inside its column */
+#open-tickets .row__cell[data-label="Priority"] {
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* =========================================================
+   STATUS COLUMN
+   ========================================================= */
+
+#open-tickets .row__cell[data-label="Status"] {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: visible;
+  padding-right: .25rem;
+}
+
+/* Prevent status pill from pushing into another column */
+#open-tickets .row__cell[data-label="Status"] .pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 1 auto;
+  width: max-content;
+  max-width: 100%;
+
+  min-width: 0;
+  white-space: nowrap;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   REDUCE GRID GAP ONLY FOR SUPPORT TABLE
+   This gives the Status column extra breathing room.
+   ========================================================= */
+
+@media (min-width: 860px) {
+
+  #open-tickets .row {
+    column-gap: .65rem;
+  }
+
+  #open-tickets .row--head {
+    column-gap: .65rem;
+  }
+
+  #open-tickets .row__cell[data-label="Status"] .pill {
+    font-size: .55rem;
+    letter-spacing: .13em;
+    padding-left: .65rem;
+    padding-right: .65rem;
+  }
+}
+
+
+/* =========================================================
+   MEDIUM DESKTOP
+   ========================================================= */
+
+@media (min-width: 860px) and (max-width: 1250px) {
+
+  #open-tickets .rows {
+    --cols: 1.2fr 1.3fr .6fr .8fr .6fr 1.3fr !important;
+  }
+
+  #open-tickets .row {
+    column-gap: .55rem;
+  }
+}
+
+
+/* =========================================================
+   SMALLER SCREEN
+   ========================================================= */
+
+@media (max-width: 859px) {
+
+  #open-tickets .row__cell {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #open-tickets .row__cell[data-label="Subject"] {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  #open-tickets .row__cell[data-label="Status"] {
+    overflow: visible;
+  }
+
+  #open-tickets .row__cell[data-label="Status"] .pill {
+    max-width: 100%;
+  }
+}
+
+/* =========================================================
+   EXPORT HISTORY - STATUS ALIGNMENT FIX
+   ========================================================= */
+
+#export-history {
+  min-width: 0;
+  overflow: hidden;
+}
+
+#export-history .panel__body {
+  min-width: 0;
+  overflow: hidden;
+}
+
+#export-history .rows {
+  width: 100%;
+  min-width: 0;
+}
+
+#export-history .row {
+  min-width: 0;
+  box-sizing: border-box;
+  column-gap: .75rem;
+}
+
+#export-history .row__cell {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Export name */
+#export-history .row__cell[data-label="Export"] {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+  line-height: 1.45;
+}
+
+/* Requested by */
+#export-history .row__cell[data-label="Requested by"] {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+/* Format */
+#export-history .row__cell[data-label="Format"] {
+  min-width: 0;
+}
+
+/* Delivered date */
+#export-history .row__cell[data-label="Delivered"] {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+/* Status */
+#export-history .row__cell[data-label="Status"] {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: visible;
+  padding-right: .35rem;
+}
+
+/* Status pill */
+#export-history .row__cell[data-label="Status"] .pill {
+  flex: 0 0 auto;
+  width: max-content;
+  max-width: 100%;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   NARROWER SCREEN - EXPORT HISTORY
+   ========================================================= */
+
+@media (min-width: 860px) and (max-width: 1250px) {
+
+  #export-history .rows {
+    --cols: 1.4fr .95fr .65fr .95fr 1.15fr !important;
+  }
+
+  #export-history .row {
+    column-gap: .55rem;
+  }
+
+  #export-history .row__cell[data-label="Status"] .pill {
+    font-size: .55rem;
+    letter-spacing: .12em;
+    padding-left: .6rem;
+    padding-right: .6rem;
+  }
+}
+
+/* =========================================================
+   SCHEDULED REPORTS - ALIGNMENT FIX
+   ========================================================= */
+
+#scheduled-reports {
+  min-width: 0;
+  overflow: hidden;
+}
+
+#scheduled-reports .panel__body {
+  min-width: 0;
+  overflow: hidden;
+}
+
+#scheduled-reports .rows {
+  width: 100%;
+  min-width: 0;
+}
+
+#scheduled-reports .row {
+  min-width: 0;
+  box-sizing: border-box;
+  column-gap: .75rem;
+}
+
+#scheduled-reports .row__cell {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------
+   REPORT
+   --------------------------------------------------------- */
+
+#scheduled-reports .row__cell[data-label="Report"] {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+  line-height: 1.45;
+}
+
+
+/* ---------------------------------------------------------
+   FREQUENCY
+   --------------------------------------------------------- */
+
+#scheduled-reports .row__cell[data-label="Frequency"] {
+  min-width: 0;
+}
+
+
+/* ---------------------------------------------------------
+   NEXT RUN
+   --------------------------------------------------------- */
+
+#scheduled-reports .row__cell[data-label="Next run"] {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+
+/* ---------------------------------------------------------
+   RECIPIENTS
+   --------------------------------------------------------- */
+
+#scheduled-reports .row__cell[data-label="Recipients"] {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.45;
+}
+
+
+/* ---------------------------------------------------------
+   STATUS
+   --------------------------------------------------------- */
+
+#scheduled-reports .row__cell[data-label="Status"] {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  overflow: visible;
+  padding-right: .35rem;
+}
+
+#scheduled-reports .row__cell[data-label="Status"] .pill {
+  flex: 0 0 auto;
+
+  width: max-content;
+  max-width: 100%;
+
+  min-width: 0;
+  white-space: nowrap;
+
+  box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------
+   CHIPS
+   --------------------------------------------------------- */
+
+#scheduled-reports .row__cell[data-label="Frequency"] .chip {
+  flex: 0 0 auto;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+
+/* ---------------------------------------------------------
+   MEDIUM DESKTOP
+   --------------------------------------------------------- */
+
+@media (min-width: 860px) and (max-width: 1250px) {
+
+  #scheduled-reports .rows {
+    --cols:1.3fr .7fr .9fr 1.2fr 1.15fr !important;
+  }
+
+  #scheduled-reports .row {
+    column-gap: .55rem;
+  }
+
+  #scheduled-reports .row__cell[data-label="Status"] .pill {
+    font-size: .55rem;
+    letter-spacing: .12em;
+    padding-left: .6rem;
+    padding-right: .6rem;
+  }
+}
+
+/* =========================================================
+   SCHEDULED REPORTS
+   FINAL COLUMN ALIGNMENT / OVERFLOW FIX
+   ========================================================= */
+
+#scheduled-reports {
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+#scheduled-reports .panel__body {
+  min-width: 0;
+  overflow: hidden;
+}
+
+#scheduled-reports .rows {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#scheduled-reports .row {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* smaller gap gives the five columns more usable space */
+  column-gap: .55rem;
+}
+
+#scheduled-reports .row__cell {
+  min-width: 0 !important;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   REPORT
+   ========================================================= */
+
+#scheduled-reports .row__cell[data-label="Report"] {
+  min-width: 0 !important;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-height: 1.35;
+}
+
+
+/* =========================================================
+   FREQUENCY
+   ========================================================= */
+
+#scheduled-reports .row__cell[data-label="Frequency"] {
+  min-width: 0 !important;
+  overflow: hidden;
+}
+
+#scheduled-reports .row__cell[data-label="Frequency"] .chip {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   NEXT RUN
+   ========================================================= */
+
+#scheduled-reports .row__cell[data-label="Next run"] {
+  min-width: 0 !important;
+
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   RECIPIENTS
+   ========================================================= */
+
+#scheduled-reports .row__cell[data-label="Recipients"] {
+  min-width: 0 !important;
+  max-width: 100%;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+#scheduled-reports .row__cell[data-label="Status"] {
+  min-width: 0 !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  overflow: hidden;
+}
+
+#scheduled-reports .row__cell[data-label="Status"] .pill {
+  flex: 0 1 auto;
+
+  min-width: 0;
+  max-width: 100%;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 860px) {
+
+  #scheduled-reports .row {
+    column-gap: .5rem;
+  }
+
+  #scheduled-reports .row__cell[data-label="Status"] .pill {
+    font-size: .52rem;
+    letter-spacing: .11em;
+    padding-left: .55rem;
+    padding-right: .55rem;
+  }
+}
+
+
+/* =========================================================
+   MEDIUM DESKTOP
+   ========================================================= */
+
+@media (min-width: 860px) and (max-width: 1250px) {
+
+  #scheduled-reports .rows {
+    --cols:
+      minmax(0,1.15fr)
+      minmax(0,.65fr)
+      minmax(0,.85fr)
+      minmax(0,1fr)
+      minmax(0,.85fr) !important;
+  }
+
+  #scheduled-reports .row {
+    column-gap: .4rem;
+  }
+
+  #scheduled-reports .row__cell[data-label="Status"] .pill {
+    font-size: .5rem;
+    letter-spacing: .09em;
+    padding-left: .45rem;
+    padding-right: .45rem;
+  }
+}
+
+/* =========================================================
+   PLAN MIX - CHIP ALIGNMENT
+   ========================================================= */
+
+#plans .plan-chips {
+  width: 100%;
+  max-width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: .65rem;
+
+  margin-top: 1rem;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+
+/* Every chip stays as one complete item */
+#plans .plan-chips .chip {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+
+  min-width: max-content;
+  max-width: 100%;
+
+  box-sizing: border-box;
+}
+
+
+/* Dot alignment — .chip already carries a .6rem gap, so no extra margin */
+#plans .plan-chips .chip__dot {
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   METER ALIGNMENT
+   ========================================================= */
+
+#plans .meter {
+  width: 100%;
+  min-width: 0;
+}
+
+#plans .meter__top {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  min-width: 0;
+}
+
+#plans .meter__name {
+  min-width: 0;
+}
+
+#plans .meter__val {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+#plans .meter__track {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   DESKTOP - fixed 3-column chip grid so "Purchase order"
+   always sits as a complete chip on the first row
+   ========================================================= */
+
+@media (min-width: 860px) {
+
+  #plans .plan-chips {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: start;
+    gap: .65rem;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 859px) {
+
+  #plans .plan-chips {
+    gap: .55rem;
+  }
+
+  #plans .plan-chips .chip {
+    max-width: calc(50% - .3rem);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+  #plans .plan-chips {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .55rem;
+  }
+
+  #plans .plan-chips .chip {
+    width: 100%;
+    max-width: 100%;
+
+    justify-content: flex-start;
   }
 }

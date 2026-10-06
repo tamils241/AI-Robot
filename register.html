@@ -114,30 +114,25 @@
             </div>
             <label class="field">
               <span>Work email</span>
-              <input type="email" name="email" id="regEmail" placeholder="ada@company.com" autocomplete="email" maxlength="64" pattern="[A-Za-z0-9][A-Za-z0-9._+-]*@[A-Za-z][A-Za-z0-9.-]*\.[A-Za-z]{2,}" title="A real domain is required — digits cannot start a domain, e.g. sun@gmail.com" required>
+              <input type="email" name="email" id="regEmail" placeholder="ada@company.com" autocomplete="email" required>
               <i class="field__line"></i>
             </label>
-            <label class="field pw">
-              <span>Password</span>
-              <span class="pw__box">
+<label class="field pw">
+                <span>Password</span>
                 <input type="password" name="password" id="regPassword" placeholder="At least 8 characters" autocomplete="new-password" required>
                 <i class="field__line"></i>
                 <button type="button" class="pw__toggle" data-for="regPassword" aria-label="Show password">Show</button>
-              </span>
-              <div class="pw__meter" data-pw-meter hidden aria-hidden="true">
-                <span class="pw__bars"><i></i><i></i><i></i><i></i></span>
-                <span class="pw__label" data-pw-label></span>
-              </div>
-            </label>
-            <p class="pw__hint">Strong = 8+ characters with a lowercase letter, an uppercase letter, a number and a symbol.</p>
+                <div class="pw__meter" data-pw-meter hidden aria-hidden="true">
+                  <span class="pw__bars"><i></i><i></i><i></i><i></i></span>
+                  <span class="pw__label" data-pw-label></span>
+                </div>
+              </label>
+              <p class="pw__hint">Strong = 8+ characters with a lowercase letter, an uppercase letter, a number and a symbol.</p>
             <label class="field pw">
               <span>Confirm password</span>
-              <span class="pw__box">
-                <input type="password" name="password2" id="regPassword2" placeholder="Repeat password" autocomplete="new-password" required>
-                <i class="field__line"></i>
-                <button type="button" class="pw__toggle" data-for="regPassword2" aria-label="Show password">Show</button>
-              </span>
-              <span class="pw__match" data-pw-match hidden role="status"></span>
+              <input type="password" name="password2" id="regPassword2" placeholder="Repeat password" autocomplete="new-password" required>
+              <i class="field__line"></i>
+              <button type="button" class="pw__toggle" data-for="regPassword2" aria-label="Show password">Show</button>
             </label>
 
             <label class="check">
