@@ -1775,6 +1775,32 @@ body.nav-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-
 .page-bare .page-hero{ margin-top:0; }
 .page-bare .err{ min-height:calc(100svh - 2 * var(--hdr-h)); display:grid; align-content:center; }
 
+/* Brightness lift — contact / login / register.
+   These three pages carry no hero artwork, so the bare canvas read a shade
+   darker than the rest of the site. Base tones move up a couple of levels, a
+   soft light wash sits behind the copy, and the ambient layers open slightly.
+   No filter on <body>: it would become the containing block for the fixed
+   .fx / loader / scroll-progress layers and unpin them from the viewport. */
+.page-lift{
+  --bg:#070a13;
+  --bg-2:#0a0e1a;
+  background:
+    radial-gradient(110% 70% at 50% -10%,rgba(0,229,255,.06),transparent 62%),
+    radial-gradient(80% 60% at 88% 100%,rgba(124,92,255,.055),transparent 65%),
+    var(--bg);
+}
+.page-lift .fx__grid{
+  background-image:
+    linear-gradient(rgba(0,229,255,.075) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,255,.075) 1px,transparent 1px);
+}
+.page-lift .fx__net{ opacity:.68; }
+.page-lift .fx__orb{ opacity:.62; }
+.page-lift .form{
+  background:linear-gradient(160deg,rgba(255,255,255,.075),transparent 55%),rgba(13,18,32,.78);
+}
+
+
 /* Oversized code + a scanline drift, so the error page still feels like the
    rest of the site rather than a browser default. */
 .err{ padding-block:clamp(2.5rem,6vw,4rem) clamp(4rem,9vw,7rem); text-align:center; }
